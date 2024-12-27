@@ -5,3 +5,5 @@ firebaseConfig.js
 .firebaserc
 firebase.json
 public
+vite.config.js
+dist
