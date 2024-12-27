@@ -1,0 +1,56 @@
+import React, { useState } from "react";
+import { Link } from "react-router"; // Importera Link från React Router
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebaseConfig";
+
+const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            alert("Successfully logged in!");
+        } catch (err) {
+            //Lägg till error logik
+            setError(err.message);
+        }
+    };
+
+    return (
+        <div className="startform">
+            <h2>Login</h2>
+            <form onSubmit={handleLogin}>
+                <div className="inputcontainer">
+                    <label>Email:</label>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="inputcontainer">
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button className="submitbutton" type="submit">Login</button>
+            </form>
+
+            <p>
+                Don't have an account? <Link to="/register">Register here</Link>
+            </p> {/* Link till register */}
+
+            {error && <p style={{ color: "red" }}>{error}</p>}
+        </div>
+    );
+};
+
+export default Login;
