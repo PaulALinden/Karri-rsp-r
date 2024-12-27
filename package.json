@@ -1,5 +1,19 @@
 {
   "dependencies": {
-    "firebase": "^11.1.0"
+    "@vitejs/plugin-react": "^4.3.4",
+    "firebase": "^11.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.1.1",
+    "vite": "^6.0.6"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.3"
   }
 }
