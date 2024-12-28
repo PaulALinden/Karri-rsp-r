@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router"; // Importera Link från React Router
+import { Link } from "react-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 
@@ -46,7 +46,7 @@ const Login = () => {
 
             <p>
                 Don't have an account? <Link to="/register">Register here</Link>
-            </p> {/* Link till register */}
+            </p> 
 
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>

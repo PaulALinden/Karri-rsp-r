@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router"; // Importera useNavigate
+import { Link, useNavigate } from "react-router"; 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 
@@ -7,7 +7,7 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate(); // Hook för navigation
+    const navigate = useNavigate(); 
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -18,7 +18,7 @@ const Register = () => {
             }
             await createUserWithEmailAndPassword(auth, email, password);
             alert("Account created successfully!");
-            navigate("/login"); // Navigera till login efter lyckad registrering
+            navigate("/login"); 
         } catch (err) {
             setError(err.message);
         }
@@ -51,7 +51,7 @@ const Register = () => {
 
             <p>
                 Already have an account? <Link to="/login">Login here</Link>
-            </p> {/* Länk till login */}
+            </p> 
 
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
