@@ -3,6 +3,9 @@ import { db } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
 import { collection, addDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 
+import { MdDelete } from "react-icons/md";
+import { FaPencilAlt } from "react-icons/fa";
+
 const Home = () => {
     const { user, loading } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
     const [jobTitle, setJobTitle] = useState(""); // Jobbtitel
@@ -58,60 +61,78 @@ const Home = () => {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div id="home">
             {loading ? (
                 <p>Laddar...</p>
             ) : user ? (
                 <>
-                    <h1 style={{ marginBottom: "20px" }}>Jobbsökningar</h1>
+                    <div id="addjob">
 
-                    <form onSubmit={addJobApplication} style={{ marginBottom: "20px" }}>
-                        <div>
-                            <label>Jobbtitel:</label>
-                            <input
-                                type="text"
-                                value={jobTitle}
-                                onChange={(e) => setJobTitle(e.target.value)}
-                                placeholder="Ex: Frontend Developer"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Företag:</label>
-                            <input
-                                type="text"
-                                value={company}
-                                onChange={(e) => setCompany(e.target.value)}
-                                placeholder="Ex: Spotify"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Status:</label>
-                            <select
-                                value={status}
-                                onChange={(e) => setStatus(e.target.value)}
-                                required
-                            >
-                                <option value="">Välj status</option>
-                                <option value="Ansökt">Ansökt</option>
-                                <option value="Intervju">Intervju</option>
-                                <option value="Avslag">Avslag</option>
-                            </select>
-                        </div>
-                        <button type="submit">Lägg till</button>
-                    </form>
+                        <h1 className="headerspace">Jobbsökningar</h1>
 
-                    <div>
-                        <h2>Sparade jobbsökningar</h2>
+                        <form onSubmit={addJobApplication}>
+                                <div className="addjobform-group">
+                                    <label className="addjobform-label">Jobbtitel:</label>
+                                <input
+                                    type="text"
+                                    value={jobTitle}
+                                    onChange={(e) => setJobTitle(e.target.value)}
+                                    placeholder="Ex: Frontend Developer"
+                                        required
+                                        className="addjobform-input"
+                                />
+                            </div>
+                                <div className="addjobform-group">
+                                    <label className="addjobform-label">Företag:</label>
+                                <input
+                                    type="text"
+                                    value={company}
+                                    onChange={(e) => setCompany(e.target.value)}
+                                    placeholder="Ex: Spotify"
+                                        required
+                                        className="addjobform-input"
+                                />
+                            </div>
+                                <div className="addjobform-group">
+                                    <label className="addjobform-label">Status:</label>
+                                <select
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                    required
+                                        className="addjobform-select"
+                                >
+                                    <option value="">Välj status</option>
+                                    <option value="Ansökt">Ansökt</option>
+                                    <option value="Intervju">Intervju</option>
+                                    <option value="Avslag">Avslag</option>
+                                </select>
+                            </div>
+                            <button className="addButton" type="submit">Lägg till</button>
+                        </form>
+                    </div>
+
+                    <span className="spacer" />
+
+                    <div id="savedjobs">
+                        <h2 className="headerspace">Sparade jobbsökningar</h2>
                         {jobApplications.length === 0 ? (
                             <p>Inga jobbsökningar ännu.</p>
                         ) : (
-                            <ul>
+                            <ul id="savedjoblist">
                                 {jobApplications.map((job) => (
-                                    <li key={job.id}>
-                                        <strong>{job.jobTitle}</strong> på {job.company} - Status:{" "}
-                                        {job.status}
+                                    <li className="savedjoblistitem" key={job.id}>
+                                        <div>
+                                            <strong>{job.jobTitle}</strong> på {job.company}
+                                        </div>
+                                        <span>Status: {job.status}</span>
+                                        <div className="listbuttons">
+                                            <button id="change" onClick={() => console.log("Change")} aria-label="Change">
+                                                <FaPencilAlt />
+                                            </button>
+                                            <button id="delete" onClick={() => console.log("Delete")} aria-label="Remove">
+                                                <MdDelete />
+                                            </button>
+                                        </div>
                                     </li>
                                 ))}
                             </ul>

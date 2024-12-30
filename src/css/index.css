@@ -61,6 +61,161 @@ button {
     margin-bottom: 20px;
 }
 
+.addButton{
+    margin-top: 20px;
+}
+
 button:hover {
     background-color: #0056b3;
+}
+
+/*Home styles*/
+#home{
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+/*Style fo saved jobs*/
+#savedjobs{
+    flex-basis: 55%;
+}
+
+#savedjoblist{
+   list-style:none
+}
+
+.savedjoblistitem{
+    background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.savedjoblistitem:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling för jobbtitel */
+.savedjoblistitem strong {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Styling för status */
+.savedjoblistitem span {
+    font-size: 0.9rem;
+    color: #555;
+    font-style: italic;
+}
+
+/* Styling för knappar */
+.savedjoblistitem button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.savedjoblistitem #delete {
+    background-color: #f70404;
+}
+
+.savedjoblistitem #delete:hover {
+    background-color: #b30000;
+}
+
+.savedjoblistitem button:hover {
+    background-color: #0056b3;
+}
+
+/*Styling for add form*/
+#addjob {
+    flex-basis: 30%;
+}
+
+.addjobform-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.addjobform-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.addjobform-select {
+    padding: 10px 12px;
+    font-size: 16px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.addjobform-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.addjobform-select:hover {
+    border-color: #888;
+}
+
+.addjobform-select option {
+    color: #333;
+    font-size: 16px;
+}
+
+.addjobform-input {
+    padding: 10px 12px;
+    font-size: 16px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.addjobform-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.addjobform-input:hover {
+    border-color: #888;
+}
+
+.addjobform-input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+
+/*Spacers*/
+.spacer {
+    flex-basis: 1%;
+    border-left: rgb(171, 170, 170) 2px solid;
+}
+
+.headerspace {
+    margin-bottom: 20px;
 }
