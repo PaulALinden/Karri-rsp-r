@@ -57,11 +57,11 @@ button {
     cursor: pointer;
 }
 
-.submitbutton{
+.submitbutton {
     margin-bottom: 20px;
 }
 
-.addButton{
+.addButton {
     margin-top: 20px;
 }
 
@@ -70,7 +70,7 @@ button:hover {
 }
 
 /*Home styles*/
-#home{
+#home {
     width: 100%;
     min-height: 90vh;
     display: flex;
@@ -78,24 +78,27 @@ button:hover {
 }
 
 /*Style fo saved jobs*/
-#savedjobs{
+#savedjobs {
     flex-basis: 55%;
 }
 
-#savedjoblist{
-   list-style:none
+#savedjoblist {
+    list-style: none;
+    max-height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
-.savedjoblistitem{
+.savedjoblistitem {
     background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .savedjoblistitem:hover {

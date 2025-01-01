@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
-import { collection, addDoc, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, doc, addDoc, deleteDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
@@ -10,6 +10,7 @@ const Home = () => {
     const { user, loading } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
     const [jobTitle, setJobTitle] = useState(""); // Jobbtitel
     const [company, setCompany] = useState(""); // Företagsnamn
+    const [url, setUrl] = useState(""); // Url
     const [status, setStatus] = useState(""); // Status
     const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
 
@@ -49,14 +50,28 @@ const Home = () => {
             await addDoc(userCollection, {
                 jobTitle,
                 company,
+                url,
                 status,
                 createdAt: new Date(),
             });
             setJobTitle("");
             setCompany("");
+            setUrl("");
             setStatus("");
         } catch (error) {
             console.error("Kunde inte spara jobbsökning:", error);
+        }
+    };
+    //Tabort befintlig jobbsökning
+    const deleteJobApplication = async (docId) => {
+        try {
+            // Skapa referens till det specifika dokumentet
+            const docRef = doc(db, userCollectionPath, docId);
+            // Radera dokumentet
+            await deleteDoc(docRef);
+            console.log("Dokumentet har raderats framgångsrikt.");
+        } catch (error) {
+            console.error("Kunde inte radera jobbsökning:", error);
         }
     };
 
@@ -71,35 +86,46 @@ const Home = () => {
                         <h1 className="headerspace">Jobbsökningar</h1>
 
                         <form onSubmit={addJobApplication}>
-                                <div className="addjobform-group">
-                                    <label className="addjobform-label">Jobbtitel:</label>
+                            <div className="addjobform-group">
+                                <label className="addjobform-label">Jobbtitel:</label>
                                 <input
                                     type="text"
                                     value={jobTitle}
                                     onChange={(e) => setJobTitle(e.target.value)}
                                     placeholder="Ex: Frontend Developer"
-                                        required
-                                        className="addjobform-input"
+                                    required
+                                    className="addjobform-input"
                                 />
                             </div>
-                                <div className="addjobform-group">
-                                    <label className="addjobform-label">Företag:</label>
+                            <div className="addjobform-group">
+                                <label className="addjobform-label">Företag:</label>
                                 <input
                                     type="text"
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
                                     placeholder="Ex: Spotify"
-                                        required
-                                        className="addjobform-input"
+                                    required
+                                    className="addjobform-input"
                                 />
                             </div>
-                                <div className="addjobform-group">
-                                    <label className="addjobform-label">Status:</label>
+                            <div className="addjobform-group">
+                                <label className="addjobform-label">Url:</label>
+                                <input
+                                    type="text"
+                                    value={url}
+                                    onChange={(e) => setUrl(e.target.value)}
+                                    placeholder="Ex: www.exempel.com"
+                                    required
+                                    className="addjobform-input"
+                                />
+                            </div>
+                            <div className="addjobform-group">
+                                <label className="addjobform-label">Status:</label>
                                 <select
                                     value={status}
                                     onChange={(e) => setStatus(e.target.value)}
                                     required
-                                        className="addjobform-select"
+                                    className="addjobform-select"
                                 >
                                     <option value="">Välj status</option>
                                     <option value="Ansökt">Ansökt</option>
@@ -120,7 +146,7 @@ const Home = () => {
                         ) : (
                             <ul id="savedjoblist">
                                 {jobApplications.map((job) => (
-                                    <li className="savedjoblistitem" key={job.id}>
+                                    <li className="savedjoblistitem" key={job.id} onClick={() => window.open(job.url, '_blank')}>
                                         <div>
                                             <strong>{job.jobTitle}</strong> på {job.company}
                                         </div>
@@ -129,7 +155,7 @@ const Home = () => {
                                             <button id="change" onClick={() => console.log("Change")} aria-label="Change">
                                                 <FaPencilAlt />
                                             </button>
-                                            <button id="delete" onClick={() => console.log("Delete")} aria-label="Remove">
+                                            <button id="delete" onClick={() => deleteJobApplication(job.id)} aria-label="Remove">
                                                 <MdDelete />
                                             </button>
                                         </div>
