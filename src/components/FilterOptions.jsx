@@ -1,6 +1,6 @@
 import React from "react";
 
-const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder }) => {
+const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder, searchValue, setSearchValue }) => {
     return (
         <div className="filter-options">
             <div className="filter-jobs">
@@ -29,6 +29,15 @@ const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder 
                     <option value="newest">Nyast först</option>
                     <option value="oldest">Äldst först</option>
                 </select>
+            </div>
+
+            <div>
+                <input type="text"
+                    className="searchbar"
+                    placeholder="search..."
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                />
             </div>
         </div>
     );
