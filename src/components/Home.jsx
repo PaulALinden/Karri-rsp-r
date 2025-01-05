@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router";
 
 import { db } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
@@ -8,17 +9,24 @@ import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
 
 const Home = () => {
-    const { user, loading } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
+    const { user, loading, handleSignOut } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
     const [jobTitle, setJobTitle] = useState(""); // Jobbtitel
     const [company, setCompany] = useState(""); // Företagsnamn
     const [url, setUrl] = useState(""); // Url
     const [status, setStatus] = useState(""); // Status
     const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
     const [editJobId, setEditJobId] = useState(null); // För att hantera redigeringsläge
+    const navigate = useNavigate(); 
 
     // Firestore-referens
     const userCollectionPath = user ? `users/${user.uid}/jobApplications` : null;
-
+    useEffect(() => {
+        if (!user & !loading){
+            console.log("No user");
+            navigate("/");
+        }
+    }, [user])
+    
     // Realtidsuppdatering
     useEffect(() => {
         if (!userCollectionPath) return;
@@ -36,7 +44,6 @@ const Home = () => {
 
         return () => unsubscribe();
     }, [userCollectionPath]);
-
     // Lägga till ny jobbsökning
     const addJobApplication = async (e) => {
         e.preventDefault();
@@ -73,7 +80,21 @@ const Home = () => {
             console.error("Kunde inte spara jobbsökning:", error);
         }
     };
-
+    const startEditingJob = (job) => {
+        setJobTitle(job.jobTitle);
+        setCompany(job.company);
+        setUrl(job.url);
+        setStatus(job.status);
+        setEditJobId(job.id); // Spara ID:t på jobbet som redigeras
+    };
+    const cancelEdit = () => {
+        // Återställ formuläret och avsluta redigeringsläge
+        setJobTitle("");
+        setCompany("");
+        setUrl("");
+        setStatus("");
+        setEditJobId(null);
+    };
     //Tabort befintlig jobbsökning
     const deleteJobApplication = async (docId) => {
         try {
@@ -85,23 +106,6 @@ const Home = () => {
         } catch (error) {
             console.error("Kunde inte radera jobbsökning:", error);
         }
-    };
-
-    const startEditingJob = (job) => {
-        setJobTitle(job.jobTitle);
-        setCompany(job.company);
-        setUrl(job.url);
-        setStatus(job.status);
-        setEditJobId(job.id); // Spara ID:t på jobbet som redigeras
-    };
-
-    const cancelEdit = () => {
-        // Återställ formuläret och avsluta redigeringsläge
-        setJobTitle("");
-        setCompany("");
-        setUrl("");
-        setStatus("");
-        setEditJobId(null);
     };
 
     return (
@@ -124,16 +128,18 @@ const Home = () => {
                         cancelEdit={cancelEdit}
                     />
 
-                    <div className="spacer"/>
+                    <div className="spacer" />
 
                     <SavedJobs
                         jobApplications={jobApplications}
                         deleteJobApplication={deleteJobApplication}
                         startEditingJob={startEditingJob}
                     />
+
+                    <button onClick={handleSignOut} id="signout">Sign out</button>
                 </>
             ) : (
-                <p>Du måste vara inloggad för att visa denna sida.</p>
+                        <p >Du måste vara inloggad för att visa denna sida. <Link to="/login">login</Link></p>
             )}
         </div>
     );

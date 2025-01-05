@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
 
 const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) => {
-
+    const [searchValue, setSearchValue] = useState("");
     const [filterStatus, setFilterStatus] = useState("");
     const [sortOrder, setSortOrder] = useState("newest");
 
@@ -16,7 +16,13 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) =
     });
 
     // Filtrera jobben baserat på status
-    const filteredJobs = sortedJobs.filter((job) => !filterStatus || job.status === filterStatus);
+    const statusFilteredJobs = sortedJobs.filter((job) => !filterStatus || job.status === filterStatus);
+
+    // Filtrera jobben baserat på sökvärde
+    const filteredJobs = statusFilteredJobs.filter((job) =>
+        job.jobTitle.toLowerCase().includes(searchValue.toLowerCase()) ||
+        job.company.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
     function setStatusColor(status) {
         let statusColor;
@@ -36,8 +42,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) =
 
         return statusColor;
     }
-
-
+    
 
     return (
         <div id="savedjobs">
@@ -49,6 +54,8 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) =
                 setFilterStatus={setFilterStatus}
                 sortOrder={sortOrder}
                 setSortOrder={setSortOrder}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
             />
 
             {jobApplications.length === 0 ? (

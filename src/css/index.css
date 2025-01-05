@@ -251,3 +251,9 @@ button:hover {
 .headerspace {
     margin-bottom: 20px;
 }
+/*Sign out button*/
+#signout{
+    position: fixed;
+    right: 40px;
+    top: 20px;
+}

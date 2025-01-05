@@ -12,10 +12,11 @@ const Login = () => {
     const navigate = useNavigate(); 
 
     useEffect(() => {
+        console.log("login useEffect")
         if (user) {
             navigate("/home");
         }
-    }, [loading])
+    }, [user,loading])
     
 
     const handleLogin = async (e) => {
