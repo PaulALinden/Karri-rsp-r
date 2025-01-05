@@ -69,4 +69,6 @@ const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, stat
     );
 };
 
+export default AddJobs;
+
 
