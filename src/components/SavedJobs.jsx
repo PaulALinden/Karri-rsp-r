@@ -1,16 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import FilterOptions from "./FilterOptions";
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
 
 const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) => {
+
+    const [filterStatus, setFilterStatus] = useState("");
+    const [sortOrder, setSortOrder] = useState("newest");
+
+    // Sortera jobben baserat på valt sorteringsordning
+    const sortedJobs = [...jobApplications].sort((a, b) => {
+        const dateA = new Date(a.createdAt.toDate());
+        const dateB = new Date(b.createdAt.toDate());
+        return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+    });
+
+    // Filtrera jobben baserat på status
+    const filteredJobs = sortedJobs.filter((job) => !filterStatus || job.status === filterStatus);
+
+    function setStatusColor(status) {
+        let statusColor;
+
+        switch (status) {
+            case "Avslag":
+                statusColor = "rejection";
+                break;
+
+            case "Intervju":
+                statusColor = "interview";
+                break;
+            default:
+                statusColor = "applied"
+                break;
+        }
+
+        return statusColor;
+    }
+
+
+
     return (
         <div id="savedjobs">
             <h2 className="headerspace">Sparade jobbsökningar</h2>
+
+            <h3>Sortera efter:</h3>
+            <FilterOptions
+                filterStatus={filterStatus}
+                setFilterStatus={setFilterStatus}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
+            />
+
             {jobApplications.length === 0 ? (
                 <p>Inga jobbsökningar ännu.</p>
             ) : (
                 <ul id="savedjoblist">
-                    {jobApplications.map((job) => (
+                    {filteredJobs.map((job) => (
                         <li
                             className="savedjoblistitem"
                             key={job.id}
@@ -23,7 +68,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) =
                             <div>
                                 <strong>{job.jobTitle}</strong> på {job.company}
                             </div>
-                            <span>Status: {job.status}</span>
+                            <p className={setStatusColor(job.status)}>Status: {job.status}</p>
                             <div className="listbuttons">
                                 <button id="change" onClick={() => startEditingJob(job)} aria-label="Change">
                                     <FaPencilAlt />

@@ -50,19 +50,17 @@ const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, stat
                         <option value="Avslag">Avslag</option>
                     </select>
                 </div>
-                <div className="form-buttons">
+                <div className="addjobform-buttons">
                     <button className="addButton" type="submit">
                         {isEditing ? "Uppdatera" : "Lägg till"}
                     </button>
-                    {isEditing && (
-                        <button
-                            type="button"
-                            className="cancelButton"
-                            onClick={cancelEdit}
-                        >
-                            Avbryt
-                        </button>
-                    )}
+                    <button
+                        type="button"
+                        className="cancelButton"
+                        onClick={cancelEdit}
+                    >
+                        Avbryt
+                    </button>
                 </div>
             </form>
         </div>

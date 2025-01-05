@@ -123,6 +123,9 @@ const Home = () => {
                         isEditing={!!editJobId}
                         cancelEdit={cancelEdit}
                     />
+
+                    <div className="spacer"/>
+
                     <SavedJobs
                         jobApplications={jobApplications}
                         deleteJobApplication={deleteJobApplication}
