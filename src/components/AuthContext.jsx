@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
             setUser(user);
             setLoading(false); // Indikerar att autentiseringsstatus har laddats
 
-            if (user) {
+            if (user.uid) {
                 console.log(user.email + " is logged in!");
             } else {
                 console.log('User is logged out!');

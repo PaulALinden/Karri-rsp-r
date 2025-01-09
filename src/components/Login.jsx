@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
+
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
+
+import { sanitizeInput, validateEmail, validatePassword } from "../utils/validators";
 
 const Login = () => {
     const { user, loading } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
@@ -12,7 +15,6 @@ const Login = () => {
     const navigate = useNavigate(); 
 
     useEffect(() => {
-        console.log("login useEffect")
         if (user) {
             navigate("/home");
         }
@@ -22,6 +24,16 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+
+           /* if (!validateEmail(email)) {
+                throw new Error("Ogiltig email-adress.");
+            }
+
+            if (!validatePassword(password)) {
+                throw new Error("Ogiltig Lösenord.");
+            }
+            */
+
             await signInWithEmailAndPassword(auth, email, password);
             alert("Successfully logged in!");
         } catch (err) {
@@ -39,7 +51,7 @@ const Login = () => {
                     <input
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(sanitizeInput(e.target.value))}
                         required
                     />
                 </div>
@@ -48,7 +60,7 @@ const Login = () => {
                     <input
                         type="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(sanitizeInput(e.target.value))}
                         required
                     />
                 </div>

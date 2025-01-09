@@ -1,26 +1,40 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router"; 
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
+
+import { sanitizeInput, validateEmail, validatePassword } from "../utils/validators";
 
 const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            // Enforce strong password
-            if (password.length < 8) {
-                throw new Error("Password must be at least 8 characters long.");
+            
+            if (password.length < 12) {
+                throw new Error("Password must be at least 12 characters long.");
             }
+
+            if (!validateEmail(email)) {
+                throw new Error("Ogiltig email-adress.");
+            }
+
+            if (!validatePassword(password)) {
+                throw new Error("Ogiltig Lösenord.");
+            }
+
             await createUserWithEmailAndPassword(auth, email, password);
             alert("Account created successfully!");
-            navigate("/login"); 
+            navigate("/login");
         } catch (err) {
-            setError(err.message);
+                setError(err.message); 
+                console.log(err.message)
+           
         }
     };
 
@@ -33,7 +47,7 @@ const Register = () => {
                     <input
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(sanitizeInput(e.target.value))}
                         required
                     />
                 </div>
@@ -42,7 +56,7 @@ const Register = () => {
                     <input
                         type="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(sanitizeInput(e.target.value))}
                         required
                     />
                 </div>
@@ -51,7 +65,7 @@ const Register = () => {
 
             <p>
                 Already have an account? <Link to="/login">Login here</Link>
-            </p> 
+            </p>
 
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>

@@ -1,8 +1,8 @@
-import React from "react";
-
 const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder, searchValue, setSearchValue }) => {
     return (
         <div className="filter-options">
+
+            <h3>Filtrera:</h3>
             <div className="filter-jobs">
                 <label htmlFor="filterStatus">Status:</label>
                 <select
@@ -18,6 +18,8 @@ const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder,
                 </select>
             </div>
 
+
+            <h3>Sortera:</h3>
             <div className="sort-dates">
                 <label htmlFor="sortOrder">Datum:</label>
                 <select

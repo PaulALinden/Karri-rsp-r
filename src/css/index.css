@@ -6,6 +6,10 @@
     outline: 0;
 }
 
+html{
+    background-color: #f1f1f4;
+}
+
 #root {
     font-family: Arial, sans-serif;
     height: 100vh;
@@ -256,4 +260,23 @@ button:hover {
     position: fixed;
     right: 40px;
     top: 20px;
+}
+
+/*Statistics*/
+.statistics {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.statistics h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+}
+
+.statistics p {
+    margin: 5px 0;
+    font-size: 1.2rem;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import FilterOptions from "./FilterOptions";
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
@@ -7,6 +7,21 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) =
     const [searchValue, setSearchValue] = useState("");
     const [filterStatus, setFilterStatus] = useState("");
     const [sortOrder, setSortOrder] = useState("newest");
+
+    const [appliedCount, setAppliedCount] = useState(0);
+    const [interviewCount, setInterviewCount] = useState(0);
+    const [rejectedCount, setRejectedCount] = useState(0);
+
+    // Uppdatera statistik
+    useEffect(() => {
+        const applied = jobApplications.filter((job) => job.status === "Ansökt").length;
+        const interview = jobApplications.filter((job) => job.status === "Intervju").length;
+        const rejected = jobApplications.filter((job) => job.status === "Avslag").length;
+        setAppliedCount(applied);
+        setInterviewCount(interview);
+        setRejectedCount(rejected);
+    }, [jobApplications])
+
 
     // Sortera jobben baserat på valt sorteringsordning
     const sortedJobs = [...jobApplications].sort((a, b) => {
@@ -42,13 +57,19 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) =
 
         return statusColor;
     }
-    
+
 
     return (
         <div id="savedjobs">
             <h2 className="headerspace">Sparade jobbsökningar</h2>
 
-            <h3>Sortera efter:</h3>
+            <div className="statistics">
+                <h2>Statistik</h2>
+                <p>Ansökningar: {appliedCount}</p>
+                <p>Intervjuer: {interviewCount}</p>
+                <p>Avslag: {rejectedCount}</p>
+            </div>
+
             <FilterOptions
                 filterStatus={filterStatus}
                 setFilterStatus={setFilterStatus}
