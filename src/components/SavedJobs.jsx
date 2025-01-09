@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import FilterOptions from "./FilterOptions";
-import { MdDelete } from "react-icons/md";
-import { FaPencilAlt } from "react-icons/fa";
 
-const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) => {
+import { MdDelete } from "react-icons/md";
+import { FaPencilAlt, FaArchive } from "react-icons/fa";
+
+const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, archiveJobApplication }) => {
     const [searchValue, setSearchValue] = useState("");
     const [filterStatus, setFilterStatus] = useState("");
     const [sortOrder, setSortOrder] = useState("newest");
@@ -83,30 +84,35 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob }) =
                 <p>Inga jobbsökningar ännu.</p>
             ) : (
                 <ul id="savedjoblist">
-                    {filteredJobs.map((job) => (
-                        <li
-                            className="savedjoblistitem"
-                            key={job.id}
-                            onClick={(e) => {
-                                if (!e.target.closest("button")) {
-                                    window.open(job.url, '_blank');
-                                }
-                            }}
-                        >
-                            <div>
-                                <strong>{job.jobTitle}</strong> på {job.company}
-                            </div>
-                            <p className={setStatusColor(job.status)}>Status: {job.status}</p>
-                            <div className="listbuttons">
-                                <button id="change" onClick={() => startEditingJob(job)} aria-label="Change">
-                                    <FaPencilAlt />
-                                </button>
-                                <button id="delete" onClick={() => deleteJobApplication(job.id)} aria-label="Remove">
-                                    <MdDelete />
-                                </button>
-                            </div>
-                        </li>
-                    ))}
+                    {filteredJobs
+                        .filter((job) => job.status !== "Arkiverad")
+                        .map((job) => (
+                            <li
+                                className="savedjoblistitem"
+                                key={job.id}
+                                onClick={(e) => {
+                                    if (!e.target.closest("button")) {
+                                        window.open(job.url, '_blank');
+                                    }
+                                }}
+                            >
+                                <div>
+                                    <strong>{job.jobTitle}</strong> på {job.company}
+                                </div>
+                                <p className={setStatusColor(job.status)}>Status: {job.status}</p>
+                                <div className="listbuttons">
+                                    <button id="change" onClick={() => startEditingJob(job)} aria-label="Change">
+                                        <FaPencilAlt />
+                                    </button>
+                                    <button id="archive" onClick={() => archiveJobApplication(job.id)} aria-label="Remove">
+                                        <FaArchive />
+                                    </button>
+                                    <button id="delete" onClick={() => deleteJobApplication(job.id)} aria-label="Remove">
+                                        <MdDelete />
+                                    </button>
+                                </div>
+                            </li>
+                        ))}
                 </ul>
             )}
         </div>

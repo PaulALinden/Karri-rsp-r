@@ -134,6 +134,10 @@ button:hover {
     transition: background-color 0.2s ease;
 }
 
+.savedjoblistitem #archive {
+    background-color: #00b306;
+}
+
 .savedjoblistitem #delete {
     background-color: #f70404;
 }
@@ -144,6 +148,10 @@ button:hover {
 
 .savedjoblistitem button:hover {
     background-color: #0056b3;
+}
+
+.savedjoblistitem #archive:hover {
+    background-color: #019006;
 }
 
 .rejection{

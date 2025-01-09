@@ -16,17 +16,17 @@ const Home = () => {
     const [status, setStatus] = useState(""); // Status
     const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
     const [editJobId, setEditJobId] = useState(null); // För att hantera redigeringsläge
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     // Firestore-referens
     const userCollectionPath = user ? `users/${user.uid}/jobApplications` : null;
     useEffect(() => {
-        if (!user & !loading){
+        if (!user & !loading) {
             console.log("No user");
             navigate("/");
         }
     }, [user])
-    
+
     // Realtidsuppdatering
     useEffect(() => {
         if (!userCollectionPath) return;
@@ -108,6 +108,19 @@ const Home = () => {
         }
     };
 
+    const archiveJobApplication = async (docId) => {
+        try {
+            // Skapa referens till det specifika dokumentet
+            const docRef = doc(db, userCollectionPath, docId);
+            // Uppdatera status till "Arkiverad"
+            await updateDoc(docRef, { status: "Arkiverad" });
+            console.log("Status uppdaterad till Arkiverad.");
+        } catch (error) {
+            console.error("Kunde inte uppdatera status:", error);
+        }
+    };
+
+
     return (
         <div id="home">
             {loading ? (
@@ -134,12 +147,13 @@ const Home = () => {
                         jobApplications={jobApplications}
                         deleteJobApplication={deleteJobApplication}
                         startEditingJob={startEditingJob}
+                        archiveJobApplication={archiveJobApplication}
                     />
 
                     <button onClick={handleSignOut} id="signout">Sign out</button>
                 </>
             ) : (
-                        <p >Du måste vara inloggad för att visa denna sida. <Link to="/login">login</Link></p>
+                <p >Du måste vara inloggad för att visa denna sida. <Link to="/login">login</Link></p>
             )}
         </div>
     );
