@@ -6,7 +6,7 @@
     outline: 0;
 }
 
-html{
+html {
     background-color: #f1f1f4;
 }
 
@@ -97,9 +97,11 @@ button:hover {
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 10px;
+    height: 120px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
@@ -154,15 +156,15 @@ button:hover {
     background-color: #019006;
 }
 
-.rejection{
+.rejection {
     color: #b30000;
 }
 
-.interview{
+.interview {
     color: green;
 }
 
-.applied{
+.applied {
     color: #555;
 }
 
@@ -234,18 +236,22 @@ button:hover {
     font-style: italic;
 }
 
-.addjobform-buttons{
+.addjobform-buttons {
     display: flex;
     justify-content: space-between;
 }
 
-.cancelButton{
-   background-color: #b30000;
+.cancelButton {
+    background-color: #f70404;
+}
+
+.cancelButton:hover {
+    background-color: #b30000;
 }
 
 /*Filter*/
 
-.filter-options{
+.filter-options {
     display: flex;
 }
 
@@ -263,8 +269,9 @@ button:hover {
 .headerspace {
     margin-bottom: 20px;
 }
+
 /*Sign out button*/
-#signout{
+#signout {
     position: fixed;
     right: 40px;
     top: 20px;
