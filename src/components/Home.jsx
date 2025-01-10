@@ -7,6 +7,7 @@ import { collection, doc, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, que
 
 import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 const Home = () => {
     const { user, loading, handleSignOut } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
@@ -44,12 +45,12 @@ const Home = () => {
             setJobApplications(jobs);
         });
 
-       
+
 
         // Cleanup
         return () => {
             unsubscribeJobs();
-            
+
         };
     }, [userCollectionPath]);
 
