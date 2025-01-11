@@ -1,13 +1,13 @@
+//React
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
-
+//DB & Auth
 import { db } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
-import { collection, doc, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, where } from "firebase/firestore";
-
+import { collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "firebase/firestore";
+//Components
 import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
-import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 const Home = () => {
     const { user, loading, handleSignOut } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
@@ -24,149 +24,71 @@ const Home = () => {
     const userCollectionPath = user ? `users/${user.uid}/jobApplications` : null;
 
     useEffect(() => {
-        if (!user & !loading) {
+        if (!user && !loading) {
             console.log("No user");
             navigate("/");
         }
-    }, [user])
+    }, [user]);
 
-    // Realtidsuppdatering
     useEffect(() => {
         if (!userCollectionPath) return;
 
-        const userCollection = collection(db, userCollectionPath);
-        const jobsQuery = query(userCollection, orderBy("createdAt", "desc"));
+        const unsubscribeJobs = onSnapshot(
+            query(collection(db, userCollectionPath), orderBy("createdAt", "desc")),
+            (snapshot) => {
+                const jobs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setJobApplications(jobs);
+                let count = { applied: jobs.length, interview: jobs.filter(j => j.status === "Intervju").length, rejected: jobs.filter(j => j.status === "Avslag").length };
+                setStats(count);
+            });
 
-        const unsubscribeJobs = onSnapshot(jobsQuery, (snapshot) => {
-            const jobs = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setJobApplications(jobs);
-        });
-
-
-
-        // Cleanup
-        return () => {
-            unsubscribeJobs();
-
-        };
+        return unsubscribeJobs;
     }, [userCollectionPath]);
 
-    // Uppdatera statistik baserat på de jobb som hämtats (andra useEffect)
-    useEffect(() => {
-        const updateStats = async () => {
-            const counts = {};
-
-            // Räkna alla jobbansökningar (alla statusar)
-            const allJobsQuery = query(collection(db, userCollectionPath));
-            const allJobsSnapshot = await getDocs(allJobsQuery);
-            counts["applied"] = allJobsSnapshot.size; // Totalt antal jobbansökningar
-
-            // Räkna specifika statusar
-            const statuses = ["Intervju", "Avslag"];
-            for (const status of statuses) {
-                const q = query(
-                    collection(db, userCollectionPath),
-                    where("status", "==", status)
-                );
-                const querySnapshot = await getDocs(q);
-                counts[status] = querySnapshot.size; // Firestore returnerar antalet träffar
-            }
-
-            // Uppdatera statistik
-            setStats({
-                applied: counts["applied"] || 0,
-                interview: counts["Intervju"] || 0,
-                rejected: counts["Avslag"] || 0,
-            });
-        };
-
-        updateStats(jobApplications);  // Anropa för att räkna om statistiken varje gång jobben ändras
-    }, [jobApplications]);  // Denna effect triggas när jobben ändras
-
-    // Lägga till ny jobbsökning
     const addJobApplication = async (e) => {
         e.preventDefault();
-        if (!userCollectionPath) return;
-
-        if (!jobTitle || !company || !status) {
-            alert("Fyll i alla fält.");
-            return;
-        }
+        if (!userCollectionPath || !jobTitle || !company || !status) return alert("Fyll i alla fält.");
 
         try {
             const userCollection = collection(db, userCollectionPath);
             if (editJobId) {
-                // Uppdatera jobb
-                const docRef = doc(db, userCollectionPath, editJobId);
-                await updateDoc(docRef, { jobTitle, company, url, status });
-                setEditJobId(null); // Avsluta redigeringsläge
+                await updateDoc(doc(db, userCollectionPath, editJobId), { jobTitle, company, url, status });
+                setEditJobId(null);
             } else {
-                // Lägg till nytt jobb
-                await addDoc(userCollection, {
-                    jobTitle,
-                    company,
-                    url,
-                    status,
-                    createdAt: new Date(),
-                });
+                await addDoc(userCollection, { jobTitle, company, url, status, createdAt: new Date() });
             }
-
-            setJobTitle("");
-            setCompany("");
-            setUrl("");
-            setStatus("");
+            setJobTitle(""); setCompany(""); setUrl(""); setStatus("");
         } catch (error) {
             console.error("Kunde inte spara jobbsökning:", error);
         }
     };
 
-    //För uppdatering
-    const startEditingJob = (job) => {
-        setJobTitle(job.jobTitle);
-        setCompany(job.company);
-        setUrl(job.url);
-        setStatus(job.status);
-        setEditJobId(job.id); // Spara ID:t på jobbet som redigeras
-    };
-
-    //Avbryt
-    const cancelEdit = () => {
-        // Återställ formuläret och avsluta redigeringsläge
-        setJobTitle("");
-        setCompany("");
-        setUrl("");
-        setStatus("");
-        setEditJobId(null);
-    };
-
-    //Tabort befintlig jobbsökning
     const deleteJobApplication = async (docId) => {
         try {
-            // Skapa referens till det specifika dokumentet
-            const docRef = doc(db, userCollectionPath, docId);
-            // Radera dokumentet
-            await deleteDoc(docRef);
+            await deleteDoc(doc(db, userCollectionPath, docId));
             console.log("Dokumentet har raderats framgångsrikt.");
         } catch (error) {
             console.error("Kunde inte radera jobbsökning:", error);
         }
     };
 
-    //Arkivering av ansökan
     const archiveJobApplication = async (docId) => {
         try {
-            // Skapa referens till det specifika dokumentet
-            const docRef = doc(db, userCollectionPath, docId);
-            // Uppdatera status till "Arkiverad"
-            await updateDoc(docRef, { status: "Arkiverad" });
+            await updateDoc(doc(db, userCollectionPath, docId), { status: "Arkiverad" });
             console.log("Status uppdaterad till Arkiverad.");
         } catch (error) {
             console.error("Kunde inte uppdatera status:", error);
         }
     };
+
+    const startEditingJob = (job) => {
+        setJobTitle(job.jobTitle); setCompany(job.company); setUrl(job.url); setStatus(job.status); setEditJobId(job.id);
+    };
+
+    const cancelEdit = () => {
+        setJobTitle(""); setCompany(""); setUrl(""); setStatus(""); setEditJobId(null);
+    };
+
 
     return (
         <div id="home">
