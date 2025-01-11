@@ -9,9 +9,18 @@ import { sanitizeInput, validateEmail, validatePassword } from "../utils/validat
 const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordValidations, setPasswordValidations] = useState({
+        length: false,
+        lowercase: false,
+        uppercase: false,
+        number: false,
+        special: false,
+    });
     const [error, setError] = useState("");
     const navigate = useNavigate();
-
+    /*
+        kanske onödigt med dubble check!!!!!!
+    */
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
@@ -38,6 +47,17 @@ const Register = () => {
         }
     };
 
+    // Funktion för att validera lösenordet mot kraven
+    const validatePasswordChecks = (password) => {
+        setPasswordValidations({
+            length: password.length >= 12,
+            lowercase: /[a-z]/.test(password),
+            uppercase: /[A-Z]/.test(password),
+            number: /\d/.test(password),
+            special: /[\W_]/.test(password),
+        });
+    };
+
     return (
         <div className="startform">
             <h2>Register</h2>
@@ -56,9 +76,35 @@ const Register = () => {
                     <input
                         type="password"
                         value={password}
-                        onChange={(e) => setPassword(sanitizeInput(e.target.value))}
+                        onChange={(e) => {
+                            setPassword(sanitizeInput(e.target.value));
+                            validatePasswordChecks(e.target.value);
+                        }
+                        }
                         required
                     />
+                    
+                    <div style={{ marginTop: '10px' }}>
+                        <p><strong>Lösenordet måste uppfylla följande krav:</strong></p>
+                        <ul>
+                            <li style={{ color: passwordValidations.length ? 'green' : 'red' }}>
+                                {passwordValidations.length ? '✔' : '❌'} Minst 12 tecken långt
+                            </li>
+                            <li style={{ color: passwordValidations.lowercase ? 'green' : 'red' }}>
+                                {passwordValidations.lowercase ? '✔' : '❌'} Minst en liten bokstav (a-z)
+                            </li>
+                            <li style={{ color: passwordValidations.uppercase ? 'green' : 'red' }}>
+                                {passwordValidations.uppercase ? '✔' : '❌'} Minst en stor bokstav (A-Z)
+                            </li>
+                            <li style={{ color: passwordValidations.number ? 'green' : 'red' }}>
+                                {passwordValidations.number ? '✔' : '❌'} Minst en siffra (0-9)
+                            </li>
+                            <li style={{ color: passwordValidations.special ? 'green' : 'red' }}>
+                                {passwordValidations.special ? '✔' : '❌'} Minst ett specialtecken (t.ex. !, @, #, $, %, &amp;, etc.)
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
                 <button className="submitbutton" type="submit">Register</button>
             </form>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';  //
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
@@ -12,6 +13,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const navigate = useNavigate(); 
 
     useEffect(() => {
@@ -25,14 +27,13 @@ const Login = () => {
         e.preventDefault();
         try {
 
-           /* if (!validateEmail(email)) {
+            if (!validateEmail(email)) {
                 throw new Error("Ogiltig email-adress.");
             }
 
             if (!validatePassword(password)) {
                 throw new Error("Ogiltig Lösenord.");
             }
-            */
 
             await signInWithEmailAndPassword(auth, email, password);
             alert("Successfully logged in!");
@@ -42,9 +43,16 @@ const Login = () => {
         }
     };
 
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    };
+
     return (
         <div className="startform">
             <h2>Login</h2>
+            <button onClick={togglePasswordVisibility}>
+                {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+            </button>
             <form onSubmit={handleLogin}>
                 <div className="inputcontainer">
                     <label>Email:</label>
@@ -58,7 +66,7 @@ const Login = () => {
                 <div className="inputcontainer">
                     <label>Password:</label>
                     <input
-                        type="password"
+                        type={isPasswordVisible ? 'text' : 'password'}
                         value={password}
                         onChange={(e) => setPassword(sanitizeInput(e.target.value))}
                         required
