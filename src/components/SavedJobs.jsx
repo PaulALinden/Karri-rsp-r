@@ -105,6 +105,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                         >
                             <div>
                                 <strong>{job.jobTitle}</strong> på {job.company}
+                                <strong>{job.comment}</strong>
                             </div>
                             <p className={setStatusColor(job.status)}>Status: {job.status}</p>
                             <div className="listbuttons">

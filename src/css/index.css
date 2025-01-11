@@ -343,23 +343,6 @@ button:hover {
     border: none;
     cursor: pointer;
     margin-right: 10px;
-    background-color: #00b306;
-}
-
-.confirm-delete-confirm-btn:hover {
-    background-color: #019006;
-}
-
-.confirm-delete-cancel-btn {
-    background-color: #f70404;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-.confirm-delete-cancel-btn:hover {
-    background-color: #b30000;
 }
 
 .confirm-delete-p {

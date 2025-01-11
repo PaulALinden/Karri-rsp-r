@@ -1,4 +1,4 @@
-const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, status, setStatus, addJobApplication, isEditing, cancelEdit }) => {
+const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, status, setStatus, comment,setComment, addJobApplication, isEditing, cancelEdit }) => {
     return (
         <div id="addjob">
             <h1 className="headerspace">{isEditing ? "Uppdatera jobbsökning" : "Lägg till jobbsökning"}</h1>
@@ -50,6 +50,19 @@ const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, stat
                         <option value="Avslag">Avslag</option>
                     </select>
                 </div>
+
+                <div className="addjobform-group">
+                    <label className="addjobform-label">Kommentar:</label>
+                    <input
+                        type="text"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        placeholder="Ex: Utfört tester"
+                        required
+                        className="addjobform-input"
+                    />
+                </div>
+
                 <div className="addjobform-buttons">
                     <button className="addButton" type="submit">
                         {isEditing ? "Uppdatera" : "Lägg till"}

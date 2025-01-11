@@ -10,14 +10,19 @@ import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
 
 const Home = () => {
+    //Auth
     const { user, loading, handleSignOut } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
+    //Form
     const [jobTitle, setJobTitle] = useState(""); // Jobbtitel
     const [company, setCompany] = useState(""); // Företagsnamn
     const [url, setUrl] = useState(""); // Url
     const [status, setStatus] = useState(""); // Status
-    const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
+    const [comment, setComment] = useState(""); // Kommentar
     const [editJobId, setEditJobId] = useState(null); // För att hantera redigeringsläge
+    //Applications
+    const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
     const [stats, setStats] = useState({ applied: 0, interview: 0, rejected: 0 });
+    //Navigation
     const navigate = useNavigate();
 
     // Firestore-referens
@@ -52,12 +57,12 @@ const Home = () => {
         try {
             const userCollection = collection(db, userCollectionPath);
             if (editJobId) {
-                await updateDoc(doc(db, userCollectionPath, editJobId), { jobTitle, company, url, status });
+                await updateDoc(doc(db, userCollectionPath, editJobId), { jobTitle, company, url, status, comment });
                 setEditJobId(null);
             } else {
-                await addDoc(userCollection, { jobTitle, company, url, status, createdAt: new Date() });
+                await addDoc(userCollection, { jobTitle, company, url, status, createdAt: new Date(), comment });
             }
-            setJobTitle(""); setCompany(""); setUrl(""); setStatus("");
+            cancelEdit();
         } catch (error) {
             console.error("Kunde inte spara jobbsökning:", error);
         }
@@ -82,11 +87,11 @@ const Home = () => {
     };
 
     const startEditingJob = (job) => {
-        setJobTitle(job.jobTitle); setCompany(job.company); setUrl(job.url); setStatus(job.status); setEditJobId(job.id);
+        setJobTitle(job.jobTitle); setCompany(job.company); setUrl(job.url); setStatus(job.status); setEditJobId(job.id); setComment(job.comment)
     };
 
     const cancelEdit = () => {
-        setJobTitle(""); setCompany(""); setUrl(""); setStatus(""); setEditJobId(null);
+        setJobTitle(""); setCompany(""); setUrl(""); setStatus("");setComment("");setEditJobId(null); 
     };
 
     return (
@@ -104,6 +109,8 @@ const Home = () => {
                         setUrl={setUrl}
                         status={status}
                         setStatus={setStatus}
+                        comment={comment}
+                        setComment={setComment}
                         addJobApplication={addJobApplication}
                         isEditing={!!editJobId}
                         cancelEdit={cancelEdit}
