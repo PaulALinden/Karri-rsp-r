@@ -32,7 +32,7 @@ const Home = () => {
 
     useEffect(() => {
         if (!userCollectionPath) return;
-
+        console.log("hämtar");
         const unsubscribeJobs = onSnapshot(
             query(collection(db, userCollectionPath), orderBy("createdAt", "desc")),
             (snapshot) => {
@@ -88,7 +88,6 @@ const Home = () => {
     const cancelEdit = () => {
         setJobTitle(""); setCompany(""); setUrl(""); setStatus(""); setEditJobId(null);
     };
-
 
     return (
         <div id="home">

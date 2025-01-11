@@ -295,3 +295,85 @@ button:hover {
     margin: 5px 0;
     font-size: 1.2rem;
 }
+
+/*Modal*/
+.confirm-delete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-delete-modal {
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+    width: 400px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.confirm-delete-close-btn {
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: black;
+    padding: 0;
+    margin-left: 15px;
+}
+
+.confirm-delete-close-btn:hover {
+    background: none;
+}
+
+.confirm-delete-confirm-btn {
+    background-color: 00b306;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: #00b306;
+}
+
+.confirm-delete-confirm-btn:hover {
+    background-color: #019006;
+}
+
+.confirm-delete-cancel-btn {
+    background-color: #f70404;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.confirm-delete-cancel-btn:hover {
+    background-color: #b30000;
+}
+
+.confirm-delete-p {
+    margin-bottom: 5px;
+}
+
+.confirm-delete-divider {
+    display: flex;
+    align-items: flex-start;
+}
+
+.confirm-delete-section {
+    margin-top: 20px;
+    text-align: center;
+    margin-left: 20px;
+}
+
