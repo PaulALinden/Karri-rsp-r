@@ -79,7 +79,7 @@ const Home = () => {
 
     const archiveJobApplication = async (docId) => {
         try {
-            await updateDoc(doc(db, userCollectionPath, docId), { status: "Arkiverad" });
+            await updateDoc(doc(db, userCollectionPath, docId), { archived: true });
             console.log("Status uppdaterad till Arkiverad.");
         } catch (error) {
             console.error("Kunde inte uppdatera status:", error);

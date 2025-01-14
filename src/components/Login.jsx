@@ -50,9 +50,6 @@ const Login = () => {
     return (
         <div className="startform">
             <h2>Login</h2>
-            <button onClick={togglePasswordVisibility}>
-                {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-            </button>
             <form onSubmit={handleLogin}>
                 <div className="inputcontainer">
                     <label>Email:</label>
@@ -71,6 +68,9 @@ const Login = () => {
                         onChange={(e) => setPassword(sanitizeInput(e.target.value))}
                         required
                     />
+                
+                    {isPasswordVisible ? <FaEyeSlash className="eyeIcon" onClick={togglePasswordVisibility} /> : <FaEye className="eyeIcon" onClick={togglePasswordVisibility} />}
+                  
                 </div>
                 <button className="submitbutton" type="submit">Login</button>
             </form>

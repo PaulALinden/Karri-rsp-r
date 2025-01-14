@@ -24,10 +24,12 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
     // Filtrera jobben baserat på status
     const statusFilteredJobs = sortedJobs.filter((job) => {
         if (filterStatus === "") {
-            return job.status !== "Arkiverad"; // Visa alla jobb utom arkiverade
+            return job.status && !job.archived; // Visa alla jobb utom arkiverade
+        } else if (filterStatus === "Arkiverad") {
+            return job.archived
         }
         // Annars filtrera på den valda specifika statusen
-        return job.status === filterStatus;
+        return job.status === filterStatus && !job.archived;;
     });
 
     // Filtrera jobben baserat på sökvärde

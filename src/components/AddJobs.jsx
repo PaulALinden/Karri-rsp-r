@@ -58,7 +58,6 @@ const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, stat
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         placeholder="Ex: Utfört tester"
-                        required
                         className="addjobform-input"
                     />
                 </div>
