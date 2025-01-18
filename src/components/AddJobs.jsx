@@ -1,10 +1,22 @@
-const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, status, setStatus, comment,setComment, addJobApplication, isEditing, cancelEdit }) => {
+const AddJobs = ({
+    jobTitle, setJobTitle,
+    company, setCompany,
+    url, setUrl,
+    location, setLocation,
+    position, setPosition,
+    jobType, setJobType,
+    status, setStatus,
+    comment, setComment,
+    addJobApplication,
+    isEditing,
+    cancelEdit
+}) => {
     return (
         <div id="addjob">
             <h1 className="headerspace">{isEditing ? "Uppdatera jobbsökning" : "Lägg till jobbsökning"}</h1>
             <form onSubmit={addJobApplication}>
                 <div className="addjobform-group">
-                    <label className="addjobform-label">Jobbtitel:</label>
+                    <label className="addjobform-label">Jobbtitel:*</label>
                     <input
                         type="text"
                         value={jobTitle}
@@ -15,7 +27,7 @@ const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, stat
                     />
                 </div>
                 <div className="addjobform-group">
-                    <label className="addjobform-label">Företag:</label>
+                    <label className="addjobform-label">Företag:*</label>
                     <input
                         type="text"
                         value={company}
@@ -32,12 +44,50 @@ const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, stat
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         placeholder="Ex: www.exempel.com"
-                        required
                         className="addjobform-input"
                     />
                 </div>
                 <div className="addjobform-group">
-                    <label className="addjobform-label">Status:</label>
+                    <label className="addjobform-label">Plats:</label>
+                    <input
+                        type="text"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        placeholder="Ex: Stockholm"
+                        className="addjobform-input"
+                    />
+                </div>
+                <div className="addjobform-group">
+                    <label className="addjobform-label">Position:*</label>
+                    <select
+                        value={position}
+                        onChange={(e) => setPosition(e.target.value)}
+                        required
+                        className="addjobform-select"
+                    >
+                        <option value="">Välj position</option>
+                        <option value="Onsite">På plats</option>
+                        <option value="Hybrid">Hybrid</option>
+                        <option value="Remote">Distans</option>
+                    </select>
+                </div>
+                <div className="addjobform-group">
+                    <label className="addjobform-label">Typ av jobb:*</label>
+                    <select
+                        value={jobType}
+                        onChange={(e) => setJobType(e.target.value)}
+                        required
+                        className="addjobform-select"
+                    >
+                        <option value="">Välj typ</option>
+                        <option value="Full-time">Heltid</option>
+                        <option value="Part-time">Deltid</option>
+                        <option value="Contract">Kontrakt</option>
+                        <option value="Internship">Praktik</option>
+                    </select>
+                </div>
+                <div className="addjobform-group">
+                    <label className="addjobform-label">Status:*</label>
                     <select
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
@@ -50,7 +100,6 @@ const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, stat
                         <option value="Avslag">Avslag</option>
                     </select>
                 </div>
-
                 <div className="addjobform-group">
                     <label className="addjobform-label">Kommentar:</label>
                     <input
@@ -61,7 +110,6 @@ const AddJobs = ({ jobTitle, setJobTitle, company, setCompany, url, setUrl, stat
                         className="addjobform-input"
                     />
                 </div>
-
                 <div className="addjobform-buttons">
                     <button className="addButton" type="submit">
                         {isEditing ? "Uppdatera" : "Lägg till"}

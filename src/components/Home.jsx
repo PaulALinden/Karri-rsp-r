@@ -16,6 +16,9 @@ const Home = () => {
     const [jobTitle, setJobTitle] = useState(""); // Jobbtitel
     const [company, setCompany] = useState(""); // Företagsnamn
     const [url, setUrl] = useState(""); // Url
+    const [location, setLocation] = useState("");//City and so on/ integrera med API?
+    const [position, setPosition] = useState("");//Remote/Hybrid/Onsite
+    const [jobType, setJobType] = useState("");//Full-time/Part-time/Contract/Internship
     const [status, setStatus] = useState(""); // Status
     const [comment, setComment] = useState(""); // Kommentar
     const [editJobId, setEditJobId] = useState(null); // För att hantera redigeringsläge
@@ -56,12 +59,15 @@ const Home = () => {
 
         try {
             const userCollection = collection(db, userCollectionPath);
+            const jobData = { jobTitle, company, url, location, position, jobType, status, createdAt: new Date(), comment };
+
             if (editJobId) {
-                await updateDoc(doc(db, userCollectionPath, editJobId), { jobTitle, company, url, status, comment });
+                await updateDoc(doc(db, userCollectionPath, editJobId), jobData);
                 setEditJobId(null);
             } else {
-                await addDoc(userCollection, { jobTitle, company, url, status, createdAt: new Date(), comment });
+                await addDoc(userCollection, jobData);
             }
+
             cancelEdit();
         } catch (error) {
             console.error("Kunde inte spara jobbsökning:", error);
@@ -87,11 +93,11 @@ const Home = () => {
     };
 
     const startEditingJob = (job) => {
-        setJobTitle(job.jobTitle); setCompany(job.company); setUrl(job.url); setStatus(job.status); setEditJobId(job.id); setComment(job.comment)
+        setJobTitle(job.jobTitle); setCompany(job.company); setUrl(job.url || ""); setStatus(job.status); setEditJobId(job.id); setComment(job.comment || "")
     };
 
     const cancelEdit = () => {
-        setJobTitle(""); setCompany(""); setUrl(""); setStatus("");setComment("");setEditJobId(null); 
+        setJobTitle(""); setCompany(""); setUrl(""); setLocation(""); setPosition(""); setJobType(""); setStatus(""); setComment(""); setEditJobId(null);
     };
 
     return (
@@ -107,6 +113,12 @@ const Home = () => {
                         setCompany={setCompany}
                         url={url}
                         setUrl={setUrl}
+                        location={location}
+                        setLocation={setLocation}
+                        position={position}
+                        setPosition={setPosition}
+                        jobType={jobType}
+                        setJobType={setJobType}
                         status={status}
                         setStatus={setStatus}
                         comment={comment}
