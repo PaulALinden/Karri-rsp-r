@@ -13,7 +13,16 @@ export const validateEmail = (email) => {
 };
 
 export const validatePassword = (password) => {
-    console.log("inkorrekt lösen " + password)
     return passwordRegex.test(password);
 };
 
+// Funktion för att validera lösenordet mot kraven i register
+export const validatePasswordChecks = (password, setPasswordValidations) => {
+    setPasswordValidations({
+        length: password.length >= 12,
+        lowercase: /[a-z]/.test(password),
+        uppercase: /[A-Z]/.test(password),
+        number: /\d/.test(password),
+        special: /[\W_]/.test(password),
+    });
+};
