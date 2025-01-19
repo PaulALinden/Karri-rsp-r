@@ -1,0 +1,63 @@
+/*Modal*/
+.confirm-delete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-delete-modal {
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+    width: 400px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.close-btn {
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: black;
+    margin-left: 15px;
+    height: 20px;
+    padding: 0;
+}
+
+.close-btn:hover{
+   color: var(--color-light-grey);
+background: none;
+}
+
+.confirm-btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.confirm-delete-p {
+    margin-bottom: 5px;
+}
+
+.confirm-delete-divider {
+    display: flex;
+    align-items: flex-start;
+}
+
+.confirm-delete-section {
+    margin-top: 20px;
+    text-align: center;
+    margin-left: 20px;
+}

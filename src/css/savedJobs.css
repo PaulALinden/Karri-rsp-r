@@ -1,0 +1,135 @@
+/*Style fo saved jobs*/
+#savedjobs {
+    flex-basis: 55%;
+}
+
+#savedjoblist {
+    list-style: none;
+    max-height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+.savedjoblistitem {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.savedjoblistitem:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling för jobbtitel */
+.savedjoblistitem strong {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Styling för status */
+.savedjoblistitem p {
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Styling för knappar */
+.savedjoblistitem button {
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-right: 5px;
+
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.first-row {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    margin-right: 30px;
+}
+
+.saved-job-row-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 45%;
+}
+
+.saved-job-row-item-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 27.5%;
+}
+
+.inline-paragraph {
+    margin-bottom: 4px;
+}
+
+.inline-paragraph p {
+    margin-left: 4px;
+}
+
+/*Filter*/
+
+.filter-options {
+    display: flex;
+}
+
+.filter-options div {
+    margin: 15px;
+    margin-top: 5px;
+}
+
+.headerspace {
+    margin-bottom: 20px;
+}
+
+.status-color {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    width: 15px;
+    height: 100%;
+    background-color: var(--color-secondary);
+}
+
+/*Sign out button*/
+#signout {
+    position: fixed;
+    right: 40px;
+    top: 20px;
+}
+
+/*Statistics*/
+.statistics {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.statistics h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+}
+
+.statistics p {
+    margin: 5px 0;
+    font-size: 1.2rem;
+}
