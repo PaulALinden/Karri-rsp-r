@@ -13,56 +13,39 @@
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 8px;
-    color: #333;
 }
 
 .addjobform-select {
     padding: 10px 12px;
     font-size: 16px;
-    color: #555;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
+    color: var(--color-light-grey);
+    border: 1px solid var(--color-light-grey);
+    background-color: var(--color-white);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.addjobform-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
-}
-
 .addjobform-select:hover {
-    border-color: #888;
+    border-color: var(--color-grey);
 }
 
 .addjobform-select option {
-    color: #333;
+    color: var(--color-grey);
     font-size: 16px;
 }
 
 .addjobform-input {
     padding: 10px 12px;
     font-size: 16px;
-    color: #555;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
+    border: 1px solid var(--color-light-grey);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.addjobform-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
-}
-
 .addjobform-input:hover {
-    border-color: #888;
+    border-color: var(--color-grey);
 }
 
 .addjobform-input::placeholder {
-    color: #aaa;
+    color: var(--color-light-grey);
     font-style: italic;
 }
 
@@ -71,16 +54,11 @@
     justify-content: space-between;
 }
 
-.cancelButton {
-    background-color: #f70404;
+.addjobform-buttons button{
+   width: 100px;
 }
 
-.cancelButton:hover {
-    background-color: #b30000;
-}
-
-/*Spacers*/
 .spacer {
     margin: 5px;
-    border-left: rgb(171, 170, 170) 2px solid;
+    border-left:var(--color-light-grey) 2px solid;
 }

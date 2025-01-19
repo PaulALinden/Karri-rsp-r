@@ -14,7 +14,7 @@
 .savedjoblistitem {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     padding: 15px;
     margin-bottom: 10px;
     height: fit-content;
@@ -46,10 +46,8 @@
 /* Styling för knappar */
 .savedjoblistitem button {
     border: none;
-    border-radius: 4px;
     padding: 8px 12px;
     margin-right: 5px;
-
     cursor: pointer;
     font-size: 0.9rem;
     transition: background-color 0.2s ease;
@@ -113,23 +111,4 @@
     position: fixed;
     right: 40px;
     top: 20px;
-}
-
-/*Statistics*/
-.statistics {
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.statistics h2 {
-    margin: 0 0 10px;
-    font-size: 1.5rem;
-}
-
-.statistics p {
-    margin: 5px 0;
-    font-size: 1.2rem;
 }

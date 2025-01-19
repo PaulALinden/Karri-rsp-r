@@ -1,0 +1,53 @@
+.statistics {
+    text-align: center;
+    background-color: var(--color-light-shade);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+}
+
+.stats-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.stats-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 20%;
+    border-radius: var(--border-radius);
+}
+
+.applied{
+    background-color: var(--color-secondary);
+}
+
+.interview {
+    background-color: var(--color-interview);
+}
+
+.rejected {
+    background-color: var(--color-rejected);
+}
+
+.stats-lable {
+    font-weight: 600;
+}
+
+.stats-amount{
+    font-weight: 700;
+}
+
+.statistics h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+}
+
+.statistics p {
+    margin: 5px 0;
+    font-size: 1.2rem;
+}
