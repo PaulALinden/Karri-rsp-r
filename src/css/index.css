@@ -114,6 +114,18 @@ p a {
     text-decoration-skip-ink: none;
 }
 
+.applied {
+    background-color: var(--color-secondary);
+}
+
+.interview {
+    background-color: var(--color-interview);
+}
+
+.rejected {
+    background-color: var(--color-rejected);
+}
+
 /*Home styles*/
 #home {
     width: 100%;

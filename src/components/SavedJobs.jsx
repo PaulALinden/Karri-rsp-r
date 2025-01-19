@@ -1,10 +1,11 @@
 import { useState } from "react";
 import FilterOptions from "./FilterOptions";
-import { MdDelete } from "react-icons/md";
-import { FaPencilAlt, FaArchive } from "react-icons/fa";
 import Statistics from "./Statistics"
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
-import "../css/savedJobs.css"
+import "../css/savedJobs.css";
+import inventory from "../../public/inventory.svg";
+import edit from "../../public/edit.svg";
+import trash from "../../public/trash.svg";
 
 const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, archiveJobApplication, stats }) => {
     const [searchValue, setSearchValue] = useState("");
@@ -50,6 +51,17 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
         await deleteJobApplication(docId); // Anropa deleteJobApplication med det valda docId
         setIsModalOpen(false); // Stäng modalen efter radering
     };
+
+    const getJobStatus = (status) => {
+        switch (status) {
+            case "Intervju":
+                return "interview";
+            case "Avslag":
+                return "rejected";
+            default:
+                return "applied"
+        }
+    }
 
     return (
         <div id="savedjobs">
@@ -102,17 +114,17 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                         
                             <div className="listbuttons">
                                 <button className="change" onClick={() => startEditingJob(job)} aria-label="Change">
-                                    <FaPencilAlt />
+                                    <img src={edit} frameborder="0"></img>
                                 </button>
                                 <button className="archive" onClick={() => archiveJobApplication(job.id)} aria-label="Remove">
-                                    <FaArchive />
+                                    <img src={inventory} frameborder="0"></img>
                                 </button>
                                 <button className="delete" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
-                                    <MdDelete />
+                                    <img src={trash} frameborder="0"></img>
                                 </button>
                             </div>
                             
-                            <div className="status-color"/>
+                            <div className={`status-color ${getJobStatus(job.status)}`} />
                         </li>
                         
                     ))}

@@ -19,19 +19,8 @@
     align-items: center;
     height: 80px;
     width: 20%;
+    min-width: 120px;
     border-radius: var(--border-radius);
-}
-
-.applied{
-    background-color: var(--color-secondary);
-}
-
-.interview {
-    background-color: var(--color-interview);
-}
-
-.rejected {
-    background-color: var(--color-rejected);
 }
 
 .stats-lable {
