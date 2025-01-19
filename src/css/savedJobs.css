@@ -104,10 +104,3 @@
     width: 15px;
     height: 100%;
 }
-
-/*Sign out button*/
-#signout {
-    position: fixed;
-    right: 40px;
-    top: 20px;
-}

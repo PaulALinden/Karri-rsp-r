@@ -6,6 +6,7 @@ import { db } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
 import { collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 //Components
+import Header from "./Header"
 import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
 
@@ -106,6 +107,9 @@ const Home = () => {
                 <p>Laddar...</p>
             ) : user ? (
                 <>
+
+                        <Header handleSignOut={handleSignOut} />
+
                     <AddJobs
                         jobTitle={jobTitle}
                         setJobTitle={setJobTitle}
@@ -137,8 +141,6 @@ const Home = () => {
                         archiveJobApplication={archiveJobApplication}
                         stats={stats}
                     />
-
-                    <button onClick={handleSignOut} id="signout">Sign out</button>
                 </>
             ) : (
                 <p >Du måste vara inloggad för att visa denna sida. <Link to="/login">login</Link></p>

@@ -82,7 +82,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                 <p>Inga jobbsökningar ännu.</p>
             ) : (
                 <ul id="savedjoblist">
-                    {filteredJobs.map((job) => (console.log(job.createdAt.toDate().toLocaleDateString()),
+                    {filteredJobs.map((job) => (
 
                         <li
                             className="savedjoblistitem"

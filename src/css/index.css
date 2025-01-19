@@ -11,20 +11,20 @@
 #root {
     --color-primary: #16928E;
     --color-secondary: #80C7C5;
-    --color-primary-hover:#116b68;
+    --color-primary-hover: #116b68;
     --color-interview: #E07EA0;
     --color-rejected: #eb6565;
     --color-danger: #A60000;
     --color-danger-hover: #720202;
     --color-white: #ffffff;
     --color-light: #f8f9fa;
-    --color-light-shade:#EEEEEE;
-    --color-light-grey:#B2B2B2;
+    --color-light-shade: #EEEEEE;
+    --color-light-grey: #B2B2B2;
     --color-grey: #888888;
     --color-black: #515050;
     --color-black-hover: #000000;
 
-    --border-radius:10px;
+    --border-radius: 10px;
 
     font-family: 'Outfit', sans-serif;
     color: #000000;
@@ -41,7 +41,49 @@
     align-items: center;
 }
 
-input,button,select{
+header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 99px;
+    width: 100vw;
+    background-color: #93D8D6;
+    box-shadow: 5px 5px 10px 4px #00000033;
+}
+
+header img {
+    position: absolute;
+    width: 48px;
+    height: 58px;
+    top: 19px;
+    left: 150px;
+    gap: 0px;
+}
+
+header button {
+    position: absolute;
+    width: 148px;
+    height: 40px;
+    top: 33px;
+    right: 20px;
+    gap: 0px;
+}
+
+#home {
+    width: 100%;
+    margin-top: 120px;
+    min-height: 90vh;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+input,
+button,
+select {
     border-radius: var(--border-radius);
 }
 
@@ -124,13 +166,4 @@ p a {
 
 .rejected {
     background-color: var(--color-rejected);
-}
-
-/*Home styles*/
-#home {
-    width: 100%;
-    min-height: 90vh;
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
 }
