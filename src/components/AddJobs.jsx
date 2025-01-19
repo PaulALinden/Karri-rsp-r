@@ -1,3 +1,5 @@
+import "../css/addJob.css"
+
 const AddJobs = ({
     jobTitle, setJobTitle,
     company, setCompany,
@@ -58,21 +60,21 @@ const AddJobs = ({
                     />
                 </div>
                 <div className="addjobform-group">
-                    <label className="addjobform-label">Position:*</label>
+                    <label className="addjobform-label">Arbetsform:*</label>
                     <select
                         value={position}
                         onChange={(e) => setPosition(e.target.value)}
                         required
                         className="addjobform-select"
                     >
-                        <option value="">Välj position</option>
-                        <option value="Onsite">På plats</option>
+                        <option value="">Välj arbetsform</option>
+                        <option value="På plats">På plats</option>
                         <option value="Hybrid">Hybrid</option>
-                        <option value="Remote">Distans</option>
+                        <option value="Distans">Distans</option>
                     </select>
                 </div>
                 <div className="addjobform-group">
-                    <label className="addjobform-label">Typ av jobb:*</label>
+                    <label className="addjobform-label">Anställningsform:*</label>
                     <select
                         value={jobType}
                         onChange={(e) => setJobType(e.target.value)}
@@ -80,10 +82,10 @@ const AddJobs = ({
                         className="addjobform-select"
                     >
                         <option value="">Välj typ</option>
-                        <option value="Full-time">Heltid</option>
-                        <option value="Part-time">Deltid</option>
-                        <option value="Contract">Kontrakt</option>
-                        <option value="Internship">Praktik</option>
+                        <option value="Heltid">Heltid</option>
+                        <option value="Deltid">Deltid</option>
+                        <option value="Kontrakt">Kontrakt</option>
+                        <option value="Praktik">Praktik</option>
                     </select>
                 </div>
                 <div className="addjobform-group">
@@ -116,7 +118,7 @@ const AddJobs = ({
                     </button>
                     <button
                         type="button"
-                        className="cancelButton"
+                        className="delete"
                         onClick={cancelEdit}
                     >
                         Avbryt

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 
 // Skapa kontext
@@ -12,13 +12,16 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user);
-            setLoading(false); // Indikerar att autentiseringsstatus har laddats
-
-            if (user.uid) {
-                console.log(user.email + " is logged in!");
+            console.log(user.emailVerified)
+            if (!user.emailVerified) {
+                sendEmailVerification(user);
+                setLoading(false); 
+                const error = new Error('Please verify your email');
+                error.code = "auth/email-verification";
+                throw error;
             } else {
-                console.log('User is logged out!');
+                setUser(user);
+                setLoading(false); 
             }
         });
 
@@ -34,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, handleSignOut}}>
+        <AuthContext.Provider value={{ user, loading, handleSignOut }}>
             {children}
         </AuthContext.Provider>
     );

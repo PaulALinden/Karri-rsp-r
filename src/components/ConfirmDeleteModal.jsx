@@ -1,3 +1,5 @@
+import "../css/confirmDelete.css"
+
 const ConfirmDeleteModal = ({ isOpen, onClose, onConfirm, docId }) => {
     if (!isOpen) return null; // Om modalen inte är öppen renderas den inte
 
@@ -10,11 +12,11 @@ const ConfirmDeleteModal = ({ isOpen, onClose, onConfirm, docId }) => {
                         <p className="confirm-delete-p">Detta kommer även att påverka din statistik.</p>
                         <p className="confirm-delete-p">Välj annars arkivera.</p>
                     </section>
-                    <button className="confirm-delete-close-btn" onClick={onClose}>&times;</button>
+                    <button className="close-btn" onClick={onClose}>&times;</button>
                 </div>
                 <div>
-                    <button onClick={() => onConfirm(docId)} className="confirm-delete-confirm-btn">Ja</button>
-                    <button onClick={onClose} className="confirm-delete-cancel-btn">Nej</button>
+                    <button onClick={() => onConfirm(docId)} className="confirm-btn">Ja</button>
+                    <button onClick={onClose} className="confirm-btn">Nej</button>
                 </div>
             </div>
         </div>

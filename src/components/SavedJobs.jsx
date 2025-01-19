@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FilterOptions from "./FilterOptions";
-
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt, FaArchive } from "react-icons/fa";
-
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import "../css/savedJobs.css"
 
 const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, archiveJobApplication, stats }) => {
     const [searchValue, setSearchValue] = useState("");
@@ -37,26 +36,6 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
         job.jobTitle.toLowerCase().includes(searchValue.toLowerCase()) ||
         job.company.toLowerCase().includes(searchValue.toLowerCase())
     );
-
-    function setStatusColor(status) {
-        let statusColor;
-
-        switch (status) {
-            case "Avslag":
-                statusColor = "rejection";
-                break;
-
-            case "Intervju":
-                statusColor = "interview";
-                break;
-            default:
-                statusColor = "applied"
-                break;
-        }
-
-        return statusColor;
-    }
-
     const handleDeleteClick = (docId) => {
         setCurrentDocId(docId); // Sätt det valda docId
         setIsModalOpen(true); // Visa modalen
@@ -95,7 +74,8 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                 <p>Inga jobbsökningar ännu.</p>
             ) : (
                 <ul id="savedjoblist">
-                    {filteredJobs.map((job) => (
+                    {filteredJobs.map((job) => (console.log(job.createdAt.toDate().toLocaleDateString()),
+
                         <li
                             className="savedjoblistitem"
                             key={job.id}
@@ -105,23 +85,40 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                                 }
                             }}
                         >
-                            <div>
-                                <strong>{job.jobTitle}</strong> på {job.company}
-                                <strong>{job.comment}</strong>
+
+                            <div className="first-row">
+
+                                <div className="saved-job-row-item">
+                                    <strong className="inline-paragraph">{job.jobTitle}</strong>
+                                    <p className="inline-paragraph">{`på ${job.company}`}</p>
+                                    <p className="inline-paragraph">{job.createdAt.toDate().toLocaleDateString()}</p>
+                                </div>
+
+                                <div className="saved-job-row-item-2">
+                                    <strong>Arbetsform: </strong>
+                                    <p>{job.jobType}</p>
+                                </div>
+                                <div className="saved-job-row-item-2">
+                                    <strong>Status:</strong><p> {job.status}</p>
+                                </div>
                             </div>
-                            <p className={setStatusColor(job.status)}>Status: {job.status}</p>
+
+                        
                             <div className="listbuttons">
-                                <button id="change" onClick={() => startEditingJob(job)} aria-label="Change">
+                                <button className="change" onClick={() => startEditingJob(job)} aria-label="Change">
                                     <FaPencilAlt />
                                 </button>
-                                <button id="archive" onClick={() => archiveJobApplication(job.id)} aria-label="Remove">
+                                <button className="archive" onClick={() => archiveJobApplication(job.id)} aria-label="Remove">
                                     <FaArchive />
                                 </button>
-                                <button id="delete" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
+                                <button className="delete" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
                                     <MdDelete />
                                 </button>
                             </div>
+                            
+                            <div className="status-color"/>
                         </li>
+                        
                     ))}
                 </ul>
             )}
