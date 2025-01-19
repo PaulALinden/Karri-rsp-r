@@ -15,7 +15,7 @@ const AddJobs = ({
 }) => {
     return (
         <div id="addjob">
-            <h1 className="headerspace">{isEditing ? "Uppdatera jobbsökning" : "Lägg till jobbsökning"}</h1>
+            <h2 className="headerspace">{isEditing ? "Uppdatera jobbsökning" : "Lägg till jobbsökning"}</h2>
             <form onSubmit={addJobApplication}>
                 <div className="addjobform-group">
                     <label className="addjobform-label">Jobbtitel:*</label>

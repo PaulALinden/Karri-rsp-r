@@ -82,18 +82,8 @@
     margin-left: 4px;
 }
 
-/*Filter*/
-
-.filter-options {
-    display: flex;
-}
-
-.filter-options div {
-    margin: 15px;
-    margin-top: 5px;
-}
-
 .headerspace {
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 

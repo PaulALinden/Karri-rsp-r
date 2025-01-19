@@ -1,15 +1,17 @@
+import "../css/filter.css";
+
 const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder, searchValue, setSearchValue }) => {
     return (
         <div className="filter-options">
-            <div className="filter-jobs">
-                <label htmlFor="filterStatus">Status:</label>
+
+            <div>
                 <select
                     id="filterStatus"
                     value={filterStatus}
                     onChange={(e) => setFilterStatus(e.target.value)}
                     className="filter-select"
                 >
-                    <option value="">Visa alla</option>
+                    <option value="" disabled selected hidden>Status:</option>
                     <option value="Ansökt">Ansökt</option>
                     <option value="Intervju">Intervju</option>
                     <option value="Avslag">Avslag</option>
@@ -17,14 +19,14 @@ const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder,
                 </select>
             </div>
 
-            <div className="sort-dates">
-                <label htmlFor="sortOrder">Datum:</label>
+            <div>
                 <select
                     id="sortOrder"
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value)}
                     className="filter-select"
                 >
+                    <option value="" disabled selected hidden>Datum:</option>
                     <option value="newest">Nyast först</option>
                     <option value="oldest">Äldst först</option>
                 </select>
@@ -32,7 +34,7 @@ const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder,
 
             <div>
                 <input type="text"
-                    className="searchbar"
+                    className="filter-select"
                     placeholder="search..."
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
