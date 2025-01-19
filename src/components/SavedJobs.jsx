@@ -2,6 +2,7 @@ import { useState } from "react";
 import FilterOptions from "./FilterOptions";
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt, FaArchive } from "react-icons/fa";
+import Statistics from "./Statistics"
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import "../css/savedJobs.css"
 
@@ -54,12 +55,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
         <div id="savedjobs">
             <h2 className="headerspace">Sparade jobbsökningar</h2>
 
-            <div className="statistics">
-                <h2>Statistik</h2>
-                <p>Ansökningar: {stats.applied}</p>
-                <p>Intervjuer: {stats.interview}</p>
-                <p>Avslag: {stats.rejected}</p>
-            </div>
+            <Statistics className="statistics" stats={stats}/>
 
             <FilterOptions
                 filterStatus={filterStatus}
