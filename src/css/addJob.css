@@ -54,11 +54,21 @@
     justify-content: space-between;
 }
 
-.addjobform-buttons button{
-   width: 100px;
+.addjobform-buttons button {
+    width: 100px;
 }
 
 .spacer {
     margin: 5px;
-    border-left:var(--color-light-grey) 2px solid;
+    border-left: var(--color-light-grey) 2px solid;
+}
+
+.addJobform-parallel {
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle {
+    margin-left: 5px;
+    margin-right: 5px;
 }

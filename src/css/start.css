@@ -6,8 +6,7 @@
 }
 
 .start-right,
-.start-left 
-{
+.start-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,7 +16,7 @@
 }
 
 .start-left {
-    background: url("../../public/logo-bg.svg");
+    background: url("../assets/logo-bg.svg");
 }
 
 .startform {
@@ -124,9 +123,9 @@
 }
 
 .password-requirements li.valid::before {
-    background-image: url("../../public/check.svg");
+    background-image: url("../assets/check.svg");
 }
 
 .password-requirements li.invalid::before {
-    background-image: url("../../public/close.svg");
+    background-image: url("../assets/close.svg");
 }

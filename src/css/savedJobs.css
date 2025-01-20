@@ -1,21 +1,22 @@
 /*Style fo saved jobs*/
 #savedjobs {
     flex-basis: 55%;
+    overflow-y: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #savedjoblist {
     list-style: none;
     max-height: 500px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    padding: 20px;
+    overflow-x: visible;
 }
 
 .savedjoblistitem {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: var(--border-radius);
-    padding: 15px;
+    margin-top: 10px;
     margin-bottom: 10px;
     height: fit-content;
     display: flex;
@@ -60,6 +61,13 @@
     margin-right: 30px;
 }
 
+.second-row {
+    display: flex;
+    height: 100%;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
 .saved-job-row-item {
     display: flex;
     flex-direction: column;
@@ -93,4 +101,76 @@
     right: 10px;
     width: 15px;
     height: 100%;
+}
+
+.expand {
+    height: 273px;
+}
+
+/*   */
+.savedjoblistitem {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 10px;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Tre kolumner */
+    grid-auto-rows: auto;
+    gap: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    padding-right: 40px;
+}
+
+.savedjoblistitem.expand {
+    grid-template-rows: auto auto auto;
+    /* Tre rader för expanderat läge */
+}
+
+.savedjoblistitem:not(.expand) {
+    grid-template-rows: auto auto;
+    /* Två rader för kompakt läge */
+}
+
+.row {
+    grid-column: 1 / -1;
+    /* Sträcker sig över alla tre kolumner */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.full-row {
+    grid-column: 1 / -1;
+    /* Sträcker sig över alla tre kolumner */
+    min-height: 40px;
+    display: grid;
+    gap: 10px;
+}
+
+.saved-job-row-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+.url-button {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 30px;
+}
+
+.comment{
+    text-align: left;
+    border: 1px solid var(--color-light-grey);
+    border-radius: var(--border-radius);
+    padding: 5px;
+}
+
+.date-paragraph{
+    margin-top: 10px;
+    margin-bottom: 4px;
 }

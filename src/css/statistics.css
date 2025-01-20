@@ -7,12 +7,12 @@
     border-radius: var(--border-radius);
 }
 
-.stats-container{
+.stats-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
-.stats-box{
+.stats-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,13 +21,14 @@
     width: 20%;
     min-width: 120px;
     border-radius: var(--border-radius);
+    margin: 10px;
 }
 
 .stats-lable {
     font-weight: 600;
 }
 
-.stats-amount{
+.stats-amount {
     font-weight: 700;
 }
 
