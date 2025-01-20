@@ -59,49 +59,53 @@ const AddJobs = ({
                         className="addjobform-input"
                     />
                 </div>
-                <div className="addjobform-group">
-                    <label className="addjobform-label">Arbetsform:*</label>
-                    <select
-                        value={position}
-                        onChange={(e) => setPosition(e.target.value)}
-                        required
-                        className="addjobform-select"
-                    >
-                        <option value="">Välj arbetsform</option>
-                        <option value="På plats">På plats</option>
-                        <option value="Hybrid">Hybrid</option>
-                        <option value="Distans">Distans</option>
-                    </select>
-                </div>
-                <div className="addjobform-group">
-                    <label className="addjobform-label">Anställningsform:*</label>
-                    <select
-                        value={jobType}
-                        onChange={(e) => setJobType(e.target.value)}
-                        required
-                        className="addjobform-select"
-                    >
-                        <option value="">Välj typ</option>
-                        <option value="Heltid">Heltid</option>
-                        <option value="Deltid">Deltid</option>
-                        <option value="Kontrakt">Kontrakt</option>
-                        <option value="Praktik">Praktik</option>
-                    </select>
-                </div>
-                <div className="addjobform-group">
-                    <label className="addjobform-label">Status:*</label>
-                    <select
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
-                        required
-                        className="addjobform-select"
-                    >
-                        <option value="">Välj status</option>
-                        <option value="Ansökt">Ansökt</option>
-                        <option value="Intervju">Intervju</option>
-                        <option value="Avslag">Avslag</option>
-                    </select>
-                </div>
+
+                <section className="addJobform-parallel">
+                    <div className="addjobform-group">
+                        <label className="addjobform-label">Arbetsform:*</label>
+                        <select
+                            value={position}
+                            onChange={(e) => setPosition(e.target.value)}
+                            required
+                            className="addjobform-select"
+                        >
+                            <option value="">Välj arbetsform</option>
+                            <option value="På plats">På plats</option>
+                            <option value="Hybrid">Hybrid</option>
+                            <option value="Distans">Distans</option>
+                        </select>
+                    </div>
+
+                    <div className="addjobform-group middle">
+                        <label className="addjobform-label">Anställningsform:*</label>
+                        <select
+                            value={jobType}
+                            onChange={(e) => setJobType(e.target.value)}
+                            required
+                            className="addjobform-select"
+                        >
+                            <option value="">Välj typ</option>
+                            <option value="Heltid">Heltid</option>
+                            <option value="Deltid">Deltid</option>
+                            <option value="Kontrakt">Kontrakt</option>
+                            <option value="Praktik">Praktik</option>
+                        </select>
+                    </div>
+                    <div className="addjobform-group">
+                        <label className="addjobform-label">Status:*</label>
+                        <select
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            required
+                            className="addjobform-select"
+                        >
+                            <option value="">Välj status</option>
+                            <option value="Ansökt">Ansökt</option>
+                            <option value="Intervju">Intervju</option>
+                            <option value="Avslag">Avslag</option>
+                        </select>
+                    </div>
+                </section>
                 <div className="addjobform-group">
                     <label className="addjobform-label">Kommentar:</label>
                     <input

@@ -7,7 +7,7 @@ import handleFirebaseAuthError from "../utils/authErrorHandler";
 import Alert from "./Alert";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-import logo from "../../public/logo.svg"
+import logo from "../assets/logo.svg"
 import "../css/start.css";
 
 const Register = () => {
@@ -120,7 +120,7 @@ const Register = () => {
                                         Minst en siffra (0-9)
                                     </li>
                                     <li className={passwordValidations.special ? 'valid' : 'invalid'}>
-                                         Minst ett specialtecken (t.ex. !, @, #, $, %, &, etc.)
+                                        Minst ett specialtecken (t.ex. !, @, #, $, %, &, etc.)
                                     </li>
                                 </ul>
                             </div>

@@ -3,14 +3,17 @@ import FilterOptions from "./FilterOptions";
 import Statistics from "./Statistics"
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import "../css/savedJobs.css";
-import inventory from "../../public/inventory.svg";
-import edit from "../../public/edit.svg";
-import trash from "../../public/trash.svg";
+
+import inventory from "../assets/inventory.svg";
+import edit from "../assets/edit.svg";
+import trash from "../assets/trash.svg";
+import open_in_browser from "../assets/open_in_browser.svg"
 
 const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, archiveJobApplication, stats }) => {
     const [searchValue, setSearchValue] = useState("");
     const [filterStatus, setFilterStatus] = useState("");
     const [sortOrder, setSortOrder] = useState("newest");
+    const [expandedItemId, setExpandedItemId] = useState(null);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentDocId, setCurrentDocId] = useState(null); // För att hålla reda på vilket dokument som ska tas bort
@@ -52,6 +55,10 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
         setIsModalOpen(false); // Stäng modalen efter radering
     };
 
+    const handleExpandListItem = (itemId) => {
+        setExpandedItemId(itemId === expandedItemId ? null : itemId);
+    };
+
     const getJobStatus = (status) => {
         switch (status) {
             case "Intervju":
@@ -67,7 +74,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
         <div id="savedjobs">
             <h2 className="headerspace">Sparade jobbsökningar</h2>
 
-            <Statistics className="statistics" stats={stats}/>
+            <Statistics className="statistics" stats={stats} />
 
             <FilterOptions
                 filterStatus={filterStatus}
@@ -81,52 +88,81 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
             {jobApplications.length === 0 ? (
                 <p>Inga jobbsökningar ännu.</p>
             ) : (
+
                 <ul id="savedjoblist">
                     {filteredJobs.map((job) => (
 
                         <li
-                            className="savedjoblistitem"
+                            className={`savedjoblistitem ${job.id === expandedItemId ? 'expand' : ''}`}
                             key={job.id}
-                            onClick={(e) => {
-                                if (!e.target.closest("button")) {
-                                    window.open(job.url, '_blank');
-                                }
-                            }}
+                            onClick={() => handleExpandListItem(job.id)}
                         >
 
-                            <div className="first-row">
+                            <div className="row">
 
                                 <div className="saved-job-row-item">
                                     <strong className="inline-paragraph">{job.jobTitle}</strong>
                                     <p className="inline-paragraph">{`på ${job.company}`}</p>
-                                    <p className="inline-paragraph">{job.createdAt.toDate().toLocaleDateString()}</p>
+                                    <p className="date-paragraph">{job.createdAt.toDate().toLocaleDateString()}</p>
                                 </div>
 
                                 <div className="saved-job-row-item-2">
                                     <strong>Arbetsform: </strong>
-                                    <p>{job.jobType}</p>
+                                    <p>{job.position}</p>
                                 </div>
                                 <div className="saved-job-row-item-2">
                                     <strong>Status:</strong><p> {job.status}</p>
                                 </div>
                             </div>
 
-                        
-                            <div className="listbuttons">
-                                <button className="change" onClick={() => startEditingJob(job)} aria-label="Change">
-                                    <img src={edit} frameborder="0"></img>
-                                </button>
-                                <button className="archive" onClick={() => archiveJobApplication(job.id)} aria-label="Remove">
-                                    <img src={inventory} frameborder="0"></img>
-                                </button>
-                                <button className="delete" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
-                                    <img src={trash} frameborder="0"></img>
-                                </button>
+                            {job.id === expandedItemId && (
+                                <>
+                                    <div className="row">
+                                        <div className="saved-job-row-item">
+                                            <strong>Plats: </strong>
+                                            <p>{job.location}</p>
+                                        </div>
+
+                                        <div className="saved-job-row-item">
+                                            <strong>Anställningsform: </strong>
+                                            <p>{job.jobType}</p>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="full-row">
+                                        <p className="comment">{job.comment}</p>
+                                    </div>
+
+                                </>
+                            )}
+
+
+                            <div className="row">
+                                <div className="">
+                                    <button className="change" onClick={() => startEditingJob(job)} aria-label="Change">
+                                        <img src={edit} ></img>
+                                    </button>
+                                    <button className="archive" onClick={() => archiveJobApplication(job.id)} aria-label="Remove">
+                                        <img src={inventory} ></img>
+                                    </button>
+                                    <button className="delete" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
+                                        <img src={trash} ></img>
+                                    </button>
+                                </div>
+
+                                <div></div>
+
+                                <div className="url-button">
+                                    <button onClick={() => { window.open(job.url) }} >
+                                        <img src={open_in_browser} />
+                                    </button>
+                                </div>
                             </div>
-                            
+
                             <div className={`status-color ${getJobStatus(job.status)}`} />
                         </li>
-                        
+
                     ))}
                 </ul>
             )}

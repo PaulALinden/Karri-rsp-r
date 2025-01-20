@@ -1,10 +1,11 @@
 import "../css/filter.css";
+import zoom_out from "../assets/zoom_out.svg"
 
 const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder, searchValue, setSearchValue }) => {
     return (
         <div className="filter-options">
 
-            <div>
+            <div className="space-right">
                 <select
                     id="filterStatus"
                     value={filterStatus}
@@ -19,7 +20,7 @@ const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder,
                 </select>
             </div>
 
-            <div>
+            <div className="space-right">
                 <select
                     id="sortOrder"
                     value={sortOrder}
@@ -32,13 +33,14 @@ const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder,
                 </select>
             </div>
 
-            <div>
+            <div className="search">
                 <input type="text"
-                    className="filter-select"
-                    placeholder="search..."
+                    className="filter-select search-input"
+                    placeholder="Sök..."
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                 />
+                <img className="zoom_out" src={zoom_out} />
             </div>
         </div>
     );

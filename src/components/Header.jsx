@@ -1,6 +1,6 @@
-import logo from "../../public/logo.svg"
+import logo from "../assets/logo.svg"
 
-const Header = (handleSignOut) => { 
+const Header = (handleSignOut) => {
 
     return (
         <header>

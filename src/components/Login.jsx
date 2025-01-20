@@ -8,7 +8,7 @@ import Alert from "./Alert";
 import handleFirebaseAuthError from "../utils/authErrorHandler";
 import { sanitizeInput } from "../utils/validators";
 
-import logo from "../../public/logo.svg"
+import logo from "../assets/logo.svg"
 import "../css/start.css";
 
 
@@ -56,7 +56,7 @@ const Login = () => {
             <div className="start-left">
                 <img src={logo} alt="" />
             </div>
-            
+
             <div className="start-right">
                 <div className="startform">
                     {showErrorBanner && (

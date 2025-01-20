@@ -108,7 +108,7 @@ const Home = () => {
             ) : user ? (
                 <>
 
-                        <Header handleSignOut={handleSignOut} />
+                    <Header handleSignOut={handleSignOut} />
 
                     <AddJobs
                         jobTitle={jobTitle}
