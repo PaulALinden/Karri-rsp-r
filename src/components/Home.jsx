@@ -12,7 +12,7 @@ import SavedJobs from "./SavedJobs";
 
 const Home = () => {
     //Auth
-    const { user, loading, handleSignOut } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
+    const { user, loading } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
     //Form
     const [jobTitle, setJobTitle] = useState(""); // Jobbtitel
     const [company, setCompany] = useState(""); // Företagsnamn
@@ -20,7 +20,7 @@ const Home = () => {
     const [location, setLocation] = useState("");//City and so on/ integrera med API?
     const [position, setPosition] = useState("");//Remote/Hybrid/Onsite
     const [jobType, setJobType] = useState("");//Full-time/Part-time/Contract/Internship
-    const [status, setStatus] = useState(""); // Status
+    const [status, setStatus] = useState({}); // Status
     const [comment, setComment] = useState(""); // Kommentar
     const [editJobId, setEditJobId] = useState(null); // För att hantera redigeringsläge
     //Applications
@@ -41,7 +41,7 @@ const Home = () => {
 
     useEffect(() => {
         if (!userCollectionPath) return;
-        console.log("hämtar");
+        console.log("Hämtar data---");
         const unsubscribeJobs = onSnapshot(
             query(collection(db, userCollectionPath), orderBy("createdAt", "desc")),
             (snapshot) => {
@@ -94,7 +94,7 @@ const Home = () => {
     };
 
     const startEditingJob = (job) => {
-        setJobTitle(job.jobTitle); setCompany(job.company); setUrl(job.url || ""); setStatus(job.status); setEditJobId(job.id); setComment(job.comment || "")
+        setJobTitle(job.jobTitle); setCompany(job.company); setUrl(job.url || ""); setStatus(job.status); setEditJobId(job.id); setComment(job.comment || "", setLocation(job.location || ""), setPosition(job.position), setJobType(job.jobTyp))
     };
 
     const cancelEdit = () => {
@@ -108,7 +108,7 @@ const Home = () => {
             ) : user ? (
                 <>
 
-                    <Header handleSignOut={handleSignOut} />
+                    <Header />
 
                     <AddJobs
                         jobTitle={jobTitle}

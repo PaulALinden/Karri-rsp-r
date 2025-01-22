@@ -13,6 +13,7 @@ const AddJobs = ({
     isEditing,
     cancelEdit
 }) => {
+
     return (
         <div id="addjob">
             <h2 className="headerspace">{isEditing ? "Uppdatera jobbsökning" : "Lägg till jobbsökning"}</h2>

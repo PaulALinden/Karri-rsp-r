@@ -12,8 +12,8 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            console.log(user.emailVerified)
-            if (!user.emailVerified) {
+
+            if (user && !user.emailVerified) {
                 sendEmailVerification(user);
                 setLoading(false); 
                 const error = new Error('Please verify your email');

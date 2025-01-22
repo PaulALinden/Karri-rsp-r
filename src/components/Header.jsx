@@ -1,7 +1,9 @@
 import logo from "../assets/logo.svg"
+import { useAuth } from "./AuthContext";
 
-const Header = (handleSignOut) => {
-
+const Header = () => {
+     const { handleSignOut } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
+    
     return (
         <header>
             <img src={logo} alt="logo" />

@@ -12,7 +12,7 @@ const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder,
                     onChange={(e) => setFilterStatus(e.target.value)}
                     className="filter-select"
                 >
-                    <option value="" disabled selected hidden>Status:</option>
+                    <option value="" disabled hidden>Status:</option>
                     <option value="Ansökt">Ansökt</option>
                     <option value="Intervju">Intervju</option>
                     <option value="Avslag">Avslag</option>
@@ -27,7 +27,7 @@ const FilterOptions = ({ filterStatus, setFilterStatus, sortOrder, setSortOrder,
                     onChange={(e) => setSortOrder(e.target.value)}
                     className="filter-select"
                 >
-                    <option value="" disabled selected hidden>Datum:</option>
+                    <option value="" disabled hidden>Datum:</option>
                     <option value="newest">Nyast först</option>
                     <option value="oldest">Äldst först</option>
                 </select>

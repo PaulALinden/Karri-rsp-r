@@ -53,53 +53,60 @@ const Login = () => {
 
     return (
         <div className="start-page">
-            <div className="start-left">
-                <img src={logo} alt="" />
-            </div>
+            {loading ?
+                <div className="start-left">
+                    <img src={logo} alt="" />
+                </div> :
+                <>
+                    <div className="start-left">
+                        <img src={logo} alt="" />
+                    </div>
 
-            <div className="start-right">
-                <div className="startform">
-                    {showErrorBanner && (
-                        <Alert severity="error" onClose={() => setShowErrorBanner(false)}>
-                            {error}
-                        </Alert>
-                    )}
-                    <h1>LOGGA IN</h1>
-                    <form onSubmit={handleLogin}>
-                        <div className="inputcontainer">
-                            <label>E-postadress</label>
-                            <input
-                                type="email"
-                                placeholder="Fyll i din e-postadress"
-                                value={email}
-                                onChange={(e) => setEmail(sanitizeInput(e.target.value))}
-                                required
-                            />
+                    <div className="start-right">
+                        <div className="startform">
+                            {showErrorBanner && (
+                                <Alert severity="error" onClose={() => setShowErrorBanner(false)}>
+                                    {error}
+                                </Alert>
+                            )}
+                            <h1>LOGGA IN</h1>
+                            <form onSubmit={handleLogin}>
+                                <div className="inputcontainer">
+                                    <label>E-postadress</label>
+                                    <input
+                                        type="email"
+                                        placeholder="Fyll i din e-postadress"
+                                        value={email}
+                                        onChange={(e) => setEmail(sanitizeInput(e.target.value))}
+                                        required
+                                    />
+                                </div>
+                                <div className="inputcontainer">
+                                    <label>Lösenord</label>
+                                    <input
+                                        type={isPasswordVisible ? 'text' : 'password'}
+                                        placeholder="Fyll i ditt lösenord"
+                                        value={password}
+                                        onChange={(e) => setPassword(sanitizeInput(e.target.value))}
+                                        required
+                                    />
+                                    <span className="eyeContainer">
+                                        {isPasswordVisible ? <FaEyeSlash className="eyeIconClosed" onClick={togglePasswordVisibility} /> : <FaEye className="eyeIconOpen" onClick={togglePasswordVisibility} />}
+                                    </span>
+
+                                    <Link to="/">Glömt lösenord</Link>
+
+                                </div>
+                                <button className="submitbutton" type="submit">Logga in</button>
+                            </form>
+
+                            <p>
+                                Har du inget konto? <Link to="/register">Skapa konto</Link>
+                            </p>
                         </div>
-                        <div className="inputcontainer">
-                            <label>Lösenord</label>
-                            <input
-                                type={isPasswordVisible ? 'text' : 'password'}
-                                placeholder="Fyll i ditt lösenord"
-                                value={password}
-                                onChange={(e) => setPassword(sanitizeInput(e.target.value))}
-                                required
-                            />
-                            <span className="eyeContainer">
-                                {isPasswordVisible ? <FaEyeSlash className="eyeIconClosed" onClick={togglePasswordVisibility} /> : <FaEye className="eyeIconOpen" onClick={togglePasswordVisibility} />}
-                            </span>
-
-                            <Link to="/">Glömt lösenord</Link>
-
-                        </div>
-                        <button className="submitbutton" type="submit">Logga in</button>
-                    </form>
-
-                    <p>
-                        Har du inget konto? <Link to="/register">Skapa konto</Link>
-                    </p>
-                </div>
-            </div>
+                    </div>
+                </>
+            }
         </div>
     );
 };
