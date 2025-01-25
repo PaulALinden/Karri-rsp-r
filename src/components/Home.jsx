@@ -6,9 +6,10 @@ import { db } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
 import { collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 //Components
-import Header from "./Header"
+import Header from "./Header";
 import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
+import Alert from "./Alert";
 
 const Home = () => {
     //Auth
@@ -26,6 +27,10 @@ const Home = () => {
     //Applications
     const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
     const [stats, setStats] = useState({ applied: 0, interview: 0, rejected: 0 });
+    //Error handling
+    const [error, setError] = useState("");
+    const [severity, setSeverity] = useState("error");
+    const [showErrorBanner, setShowErrorBanner] = useState(false);
     //Navigation
     const navigate = useNavigate();
 
@@ -34,25 +39,48 @@ const Home = () => {
 
     useEffect(() => {
         if (!user && !loading) {
-            console.log("No user");
             navigate("/");
         }
     }, [user]);
 
     useEffect(() => {
         if (!userCollectionPath) return;
-        console.log("Hämtar data---");
+
         const unsubscribeJobs = onSnapshot(
             query(collection(db, userCollectionPath), orderBy("createdAt", "desc")),
             (snapshot) => {
-                const jobs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setJobApplications(jobs);
-                let count = { applied: jobs.length, interview: jobs.filter(j => j.status === "Intervju").length, rejected: jobs.filter(j => j.status === "Avslag").length };
-                setStats(count);
-            });
+                try {
+                    const jobs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    setJobApplications(jobs);
 
-        return unsubscribeJobs;
+                    const count = {
+                        applied: jobs.length,
+                        interview: jobs.filter(j => j.status === "Intervju").length,
+                        rejected: jobs.filter(j => j.status === "Avslag").length,
+                    };
+                    setStats(count);
+                } catch (error) {
+                    setError("Ett fel uppstod vid hämtning av jobbansökningar.");
+                    setSeverity("warning");
+                    setShowErrorBanner(true);
+                }
+            },
+            (error) => {
+                console.error("Fel vid anslutning till Firestore:", error);
+                setError("Ett fel uppstod vid anslutning till databasen. Försök igen senare.");
+                setShowErrorBanner(true);
+            }
+        );
+
+        return () => {
+            try {
+                unsubscribeJobs();
+            } catch (error) {
+                console.error("Fel vid avregistrering av Firestore-listener:", error);
+            }
+        };
     }, [userCollectionPath]);
+
 
     const addJobApplication = async (e) => {
         e.preventDefault();
@@ -71,7 +99,9 @@ const Home = () => {
 
             cancelEdit();
         } catch (error) {
-            console.error("Kunde inte spara jobbsökning:", error);
+            setError("Kunde inte spara jobbsökning. Försök igen.");
+            setSeverity("warning");
+            setShowErrorBanner(true);
         }
     };
 
@@ -80,7 +110,9 @@ const Home = () => {
             await deleteDoc(doc(db, userCollectionPath, docId));
             console.log("Dokumentet har raderats framgångsrikt.");
         } catch (error) {
-            console.error("Kunde inte radera jobbsökning:", error);
+            setError("Kunde inte radera jobbsökning. Försök igen.");
+            setSeverity("warning");
+            setShowErrorBanner(true);
         }
     };
 
@@ -89,12 +121,14 @@ const Home = () => {
             await updateDoc(doc(db, userCollectionPath, docId), { archived: true });
             console.log("Status uppdaterad till Arkiverad.");
         } catch (error) {
-            console.error("Kunde inte uppdatera status:", error);
+            setError("Kunde inte arkivera jobbsökning. Försök igen.");
+            setSeverity("warning");
+            setShowErrorBanner(true);
         }
     };
 
     const startEditingJob = (job) => {
-        setJobTitle(job.jobTitle); setCompany(job.company); setUrl(job.url || ""); setStatus(job.status); setEditJobId(job.id); setComment(job.comment || "", setLocation(job.location || ""), setPosition(job.position), setJobType(job.jobTyp))
+        setJobTitle(job.jobTitle || ""); setCompany(job.company || ""); setUrl(job.url || ""); setStatus(job.status || ""); setEditJobId(job.id); setComment(job.comment || "", setLocation(job.location || ""), setPosition(job.position || ""), setJobType(job.jobTyp || ""))
     };
 
     const cancelEdit = () => {
@@ -107,9 +141,12 @@ const Home = () => {
                 <p>Laddar...</p>
             ) : user ? (
                 <>
-
                     <Header />
-
+                    {showErrorBanner && (
+                        <Alert severity={severity} onClose={() => setShowErrorBanner(false)}>
+                            {error}
+                        </Alert>
+                    )}
                     <AddJobs
                         jobTitle={jobTitle}
                         setJobTitle={setJobTitle}
@@ -143,7 +180,7 @@ const Home = () => {
                     />
                 </>
             ) : (
-                <p >Du måste vara inloggad för att visa denna sida. <Link to="/login">login</Link></p>
+                <p>Du måste vara inloggad för att visa denna sida. <Link to="/login">login</Link></p>
             )}
         </div>
     );

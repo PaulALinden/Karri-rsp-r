@@ -86,7 +86,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
             />
 
             {jobApplications.length === 0 ? (
-                <p>Inga jobbsökningar ännu.</p>
+                <p className="empty-list">Inga jobbsökningar ännu.</p>
             ) : (
 
                 <ul id="savedjoblist">

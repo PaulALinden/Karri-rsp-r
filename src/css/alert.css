@@ -46,3 +46,8 @@
     cursor: pointer;
     margin-left: 1rem;
 }
+
+.alert-close-btn:hover {
+    background: none;
+    color: var(--color-light-grey);
+}
