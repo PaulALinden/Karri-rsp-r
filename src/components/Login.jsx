@@ -48,18 +48,6 @@ const Login = () => {
         }
     };
 
-    const handlePasswordReset = async () => {
-        const auth = getAuth();
-        try {
-            await sendPasswordResetEmail(auth, email);
-            setErrorBanner("A reset link has been sent to your email.");
-            setError(""); // Clear any previous errors
-        } catch (err) {
-            setError(err.message);
-            setMessage(""); // Clear any previous messages
-        }
-    };
-
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     };
