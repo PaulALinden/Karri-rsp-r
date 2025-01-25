@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FilterOptions from "./FilterOptions";
 import Statistics from "./Statistics"
+import StatusPieChart from "./StatusPieChart";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import "../css/savedJobs.css";
 
@@ -74,7 +75,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
         <div id="savedjobs">
             <h2 className="headerspace">Sparade jobbsökningar</h2>
 
-            <Statistics className="statistics" stats={stats} />
+            <StatusPieChart className="statistics" jobs={jobApplications} />
 
             <FilterOptions
                 filterStatus={filterStatus}

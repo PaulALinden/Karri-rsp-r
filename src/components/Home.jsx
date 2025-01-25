@@ -52,13 +52,6 @@ const Home = () => {
                 try {
                     const jobs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     setJobApplications(jobs);
-
-                    const count = {
-                        applied: jobs.length,
-                        interview: jobs.filter(j => j.status === "Intervju").length,
-                        rejected: jobs.filter(j => j.status === "Avslag").length,
-                    };
-                    setStats(count);
                 } catch (error) {
                     setError("Ett fel uppstod vid hämtning av jobbansökningar.");
                     setSeverity("warning");
@@ -128,7 +121,16 @@ const Home = () => {
     };
 
     const startEditingJob = (job) => {
-        setJobTitle(job.jobTitle || ""); setCompany(job.company || ""); setUrl(job.url || ""); setStatus(job.status || ""); setEditJobId(job.id); setComment(job.comment || "", setLocation(job.location || ""), setPosition(job.position || ""), setJobType(job.jobTyp || ""))
+        console.log(job)
+        setJobTitle(job.jobTitle || "");
+        setCompany(job.company || "");
+        setUrl(job.url || "");
+        setStatus(job.status || "");
+        setEditJobId(job.id);
+        setComment(job.comment || "");
+        setLocation(job.location || "");
+        setPosition(job.position || "");
+        setJobType(job.jobType || "");
     };
 
     const cancelEdit = () => {
@@ -176,7 +178,6 @@ const Home = () => {
                         deleteJobApplication={deleteJobApplication}
                         startEditingJob={startEditingJob}
                         archiveJobApplication={archiveJobApplication}
-                        stats={stats}
                     />
                 </>
             ) : (
