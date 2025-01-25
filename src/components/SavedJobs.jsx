@@ -1,6 +1,5 @@
 import { useState } from "react";
 import FilterOptions from "./FilterOptions";
-import Statistics from "./Statistics"
 import StatusPieChart from "./StatusPieChart";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import "../css/savedJobs.css";
