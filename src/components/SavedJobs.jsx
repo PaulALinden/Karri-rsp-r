@@ -55,7 +55,10 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
         setIsModalOpen(false); // Stäng modalen efter radering
     };
 
-    const handleExpandListItem = (itemId) => {
+    const handleExpandListItem = (itemId, event) => {
+        if (event.target.tagName.toLowerCase() === 'button') {
+            return; // Expandera inte listan om klicket var på en knapp
+        }
         setExpandedItemId(itemId === expandedItemId ? null : itemId);
     };
 
@@ -95,7 +98,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                         <li
                             className={`savedjoblistitem ${job.id === expandedItemId ? 'expand' : ''}`}
                             key={job.id}
-                            onClick={() => handleExpandListItem(job.id)}
+                            onClick={(event) => handleExpandListItem(job.id, event)}
                         >
 
                             <div className="row">
