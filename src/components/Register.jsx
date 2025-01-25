@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { auth } from "../../config/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../../config/firebaseConfig";
 import { sanitizeInput, validateEmail, validatePasswordChecks } from "../utils/validators";
 import handleFirebaseAuthError from "../utils/authErrorHandler";
 import Alert from "./Alert";
@@ -13,6 +14,7 @@ import "../css/start.css";
 const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [termsAccepted, setTermsAccepted] = useState(false);
     const [passwordValidations, setPasswordValidations] = useState({
         length: false,
         lowercase: false,
@@ -41,23 +43,51 @@ const Register = () => {
             setShowErrorBanner(false);
 
             if (!validateEmail(email)) {
-                setError("Ogiltig e-postadress")
+                setError("Ogiltig e-postadress");
+                setShowErrorBanner(true);
+                return;
+            }
+
+            if (!termsAccepted) {
+                setError("Du måste acceptera villkoren och sekretesspolicyn för att registrera dig.");
                 setShowErrorBanner(true);
                 return;
             }
 
             if (areAllPasswordValidationsTrue()) {
-                await createUserWithEmailAndPassword(auth, email, password);
-                alert("Account created successfully! Please verify your email before logging in.");
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const userId = userCredential.user.uid;
+
+                if (!userId) {
+                    throw new Error("Användar-ID saknas!");
+                }
+
+                // Verifiera om användaren är skapad och har UID
+                console.log("User ID:", userId);
+
+                const userCollectionPath = `/users/${userId}/terms`;
+                const userCollectionRef = collection(db, userCollectionPath);
+                //5LlsLiUXqsXM05Ht8gPeBRNNm6i2
+                const terms = {
+                    termsAccepted: true,
+                    acceptedAt: new Date().toISOString(),
+                };
+
+                // Vänta på att dokumentet ska läggas till innan vi går vidare
+                await addDoc(userCollectionRef, terms);
+
+                console.log("Terms document created successfully!");
+
+                alert("Konto skapat framgångsrikt! Vänligen verifiera din e-postadress innan du loggar in.");
                 navigate("/login");
             }
         } catch (err) {
-            console.log(err.message)
+            console.log(err);
             const message = handleFirebaseAuthError(err);
             setError(message);
-
         }
     };
+
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
@@ -125,6 +155,22 @@ const Register = () => {
                                 </ul>
                             </div>
 
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={termsAccepted}
+                                    onChange={(e) => setTermsAccepted(e.target.checked)}
+                                    required
+                                />
+                                I accept the{" "}
+                                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">
+                                    Terms and Conditions
+                                </a>{" "}
+                                and{" "}
+                                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
+                                    Privacy Policy
+                                </a>.
+                            </label>
 
                         </div>
                         <button className={areAllPasswordValidationsTrue() ? "submitbutton" : "disabled-button"} type="submit">Register{!areAllPasswordValidationsTrue()}</button>
@@ -133,7 +179,6 @@ const Register = () => {
                         Har du redan ett konto? <Link to="/login">Login here</Link>
                     </p>
                 </div>
-                {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
         </div>
     );

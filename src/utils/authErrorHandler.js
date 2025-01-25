@@ -21,7 +21,8 @@ export default function handleFirebaseAuthError(error) {
         'auth/session-cookie-expired': 'Sessionens cookie har gått ut. Logga in igen.',
         'auth/session-cookie-revoked': 'Sessionens cookie har återkallats. Logga in igen.',
 
-        'auth/email-verification': 'Please verify your email.'
+        'auth/email-verification': 'Vänligen verifiera din e-postadress.',
+        'auth/email-already-in-use': 'E-postadressen är redan i användning.',
     };
 
     if (errorMap[error.code]) {

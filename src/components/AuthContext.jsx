@@ -14,14 +14,14 @@ export const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
 
             if (user && !user.emailVerified) {
-                sendEmailVerification(user);
-                setLoading(false); 
-                const error = new Error('Please verify your email');
-                error.code = "auth/email-verification";
-                throw error;
+                //sendEmailVerification(user);
+                setLoading(false);
+                //const error = new Error('Please verify your email');
+                //error.code = "auth/email-verification";
+                //throw error;
             } else {
                 setUser(user);
-                setLoading(false); 
+                setLoading(false);
             }
         });
 

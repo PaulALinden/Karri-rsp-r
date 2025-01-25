@@ -26,7 +26,6 @@ const Home = () => {
     const [editJobId, setEditJobId] = useState(null); // För att hantera redigeringsläge
     //Applications
     const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
-    const [stats, setStats] = useState({ applied: 0, interview: 0, rejected: 0 });
     //Error handling
     const [error, setError] = useState("");
     const [severity, setSeverity] = useState("error");
