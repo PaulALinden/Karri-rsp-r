@@ -5,9 +5,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
 import Alert from "./Alert";
+import PasswordResetModal from "./PasswordResetModal";
 import handleFirebaseAuthError from "../utils/authErrorHandler";
 import { sanitizeInput } from "../utils/validators";
-
 import logo from "../assets/logo.svg"
 import "../css/start.css";
 
@@ -19,6 +19,7 @@ const Login = () => {
     const [error, setError] = useState("");
     const [showErrorBanner, setShowErrorBanner] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,8 +48,25 @@ const Login = () => {
         }
     };
 
+    const handlePasswordReset = async () => {
+        const auth = getAuth();
+        try {
+            await sendPasswordResetEmail(auth, email);
+            setErrorBanner("A reset link has been sent to your email.");
+            setError(""); // Clear any previous errors
+        } catch (err) {
+            setError(err.message);
+            setMessage(""); // Clear any previous messages
+        }
+    };
+
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false); // Stäng modalen utan att ta bort något
+        setError("");
     };
 
     return (
@@ -94,7 +112,7 @@ const Login = () => {
                                         {isPasswordVisible ? <FaEyeSlash className="eyeIconClosed" onClick={togglePasswordVisibility} /> : <FaEye className="eyeIconOpen" onClick={togglePasswordVisibility} />}
                                     </span>
 
-                                    <Link to="/">Glömt lösenord</Link>
+                                    <Link onClick={() => setIsModalOpen(true)} >Glömt lösenord</Link>
 
                                 </div>
                                 <button className="submitbutton" type="submit">Logga in</button>
@@ -105,6 +123,14 @@ const Login = () => {
                             </p>
                         </div>
                     </div>
+
+                    <PasswordResetModal
+                        isOpen={isModalOpen}
+                        onClose={handleCloseModal}
+                        error={error}
+                        setError={setError}
+                        handleFirebaseAuthError={handleFirebaseAuthError}
+                    />
                 </>
             }
         </div>
