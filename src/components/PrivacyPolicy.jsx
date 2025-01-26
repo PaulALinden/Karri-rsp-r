@@ -1,11 +1,12 @@
 const PrivacyPolicy = (() => {
+   
 
     return (
         <div>
             <h1>Privacy Policy</h1>
             <p><strong>Effective Date:</strong> 2025-01-25</p>
 
-            <p><strong>Karriärspår</strong> we, value your privacy. This Privacy Policy explains how we collect, use, and protect the personal information you provide when using our website and services.</p>
+            <p>We at <strong>Karriärspår</strong>, value your privacy. This Privacy Policy explains how we collect, use, and protect the personal information you provide when using our website and services.</p>
 
             <h2>Information We Collect</h2>
             <p>We collect the following types of information from you:</p>
@@ -32,13 +33,13 @@ const PrivacyPolicy = (() => {
                 <li>Request access to the data we store about you.</li>
                 <li>Request that we delete your account and all associated data.</li>
             </ul>
-            <p>To exercise these rights, please contact us at <strong>[Your Email Address]</strong>.</p>
+            <p>To exercise these rights, please contact us at <strong>linden.91.pl@gmail.com</strong>.</p>
 
             <h2>Third-Party Services</h2>
             <p>We rely on Firebase services to manage authentication and data storage. Firebase may collect certain data as described in their Privacy Policy.</p>
 
             <h2>Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us at <strong>[Your Email Address]</strong>.</p>
+            <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us at <strong>linden.91.pl@gmail.com</strong>.</p>
         </div>
     );
 });

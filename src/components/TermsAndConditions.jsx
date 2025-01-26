@@ -31,7 +31,7 @@ const TermsAndConditions = (() => {
             <p>The Service is provided free of charge and there are no current plans to introduce payments.</p>
 
             <h2>Contact Us</h2>
-            <p>If you have any questions about these terms, please contact us at <strong>[Your Email Address]</strong>.</p>
+            <p>If you have any questions about these terms, please contact us at <strong>linden.91.pl@gmail.com</strong>.</p>
 
             <p><em>Note: By continuing to use this Service, you confirm that you have read and agree to this Privacy Policy and Terms and Conditions.</em></p>
         </div>
