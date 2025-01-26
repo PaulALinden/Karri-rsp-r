@@ -1,8 +1,19 @@
 import logo from "../assets/logo.svg"
-import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router";
+import { auth } from "../../config/firebaseConfig";
+import { signOut } from "firebase/auth";
 
 const Header = () => {
-     const { handleSignOut } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
+    const navigate = useNavigate();
+
+   const handleSignOut = async () => {
+           try {
+               await signOut(auth);
+               navigate("/login")
+           } catch (error) {
+               console.error(error);
+           }
+       };
     
     return (
         <header>

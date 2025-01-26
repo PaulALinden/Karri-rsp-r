@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
 import { sanitizeInput, validateEmail, validatePasswordChecks } from "../utils/validators";
 import handleFirebaseAuthError from "../utils/authErrorHandler";
 import Alert from "./Alert";
+import SuccessModal from "./SuccesRegisterModal";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import logo from "../assets/logo.svg"
@@ -25,7 +26,7 @@ const Register = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [error, setError] = useState("");
     const [showErrorBanner, setShowErrorBanner] = useState(false);
-    const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
     const areAllPasswordValidationsTrue = () => {
         return (
             passwordValidations.length &&
@@ -56,18 +57,22 @@ const Register = () => {
 
             if (areAllPasswordValidationsTrue()) {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const userId = userCredential.user.uid;
+                const user = userCredential.user;
+                const userId = user.uid;
 
                 if (!userId) {
                     throw new Error("Användar-ID saknas!");
                 }
 
+                await sendEmailVerification(user);
                 // Verifiera om användaren är skapad och har UID
                 console.log("User ID:", userId);
+                console.log("Email verification sent.");
 
                 const userCollectionPath = `/users/${userId}/terms`;
                 const userCollectionRef = collection(db, userCollectionPath);
-                //5LlsLiUXqsXM05Ht8gPeBRNNm6i2
+               
+
                 const terms = {
                     termsAccepted: true,
                     acceptedAt: new Date().toISOString(),
@@ -77,9 +82,7 @@ const Register = () => {
                 await addDoc(userCollectionRef, terms);
 
                 console.log("Terms document created successfully!");
-
-                alert("Konto skapat framgångsrikt! Vänligen verifiera din e-postadress innan du loggar in.");
-                navigate("/login");
+                setIsOpen(true);
             }
         } catch (err) {
             console.log(err);
@@ -179,6 +182,8 @@ const Register = () => {
                         Har du redan ett konto? <Link to="/login">Login here</Link>
                     </p>
                 </div>
+
+                <SuccessModal isOpen={isOpen} setIsOpen={setIsOpen}></SuccessModal>
             </div>
         </div>
     );

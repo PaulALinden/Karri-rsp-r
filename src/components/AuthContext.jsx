@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { onAuthStateChanged, signOut, sendEmailVerification } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 
 // Skapa kontext
@@ -12,32 +12,17 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-
-            if (user && !user.emailVerified) {
-                //sendEmailVerification(user);
-                setLoading(false);
-                //const error = new Error('Please verify your email');
-                //error.code = "auth/email-verification";
-                //throw error;
-            } else {
-                setUser(user);
-                setLoading(false);
-            }
+            setUser(user);
+            setLoading(false);
         });
 
         return () => unsubscribe();
     }, []);
 
-    const handleSignOut = async () => {
-        try {
-            await signOut(auth);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    
 
     return (
-        <AuthContext.Provider value={{ user, loading, handleSignOut }}>
+        <AuthContext.Provider value={{ user, loading }}>
             {children}
         </AuthContext.Provider>
     );

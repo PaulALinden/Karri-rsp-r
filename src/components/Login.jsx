@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
 import Alert from "./Alert";
@@ -23,7 +23,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user && user.uid) {
+        if (user && user.uid && user.emailVerified) {
             navigate("/home");
         }
     }, [user, loading])
@@ -35,8 +35,10 @@ const Login = () => {
             setError("");
             setShowErrorBanner(false);
             const loginUser = await signInWithEmailAndPassword(auth, email, password);
-            console.log(loginUser.user.emailVerified)
+            
             if (!loginUser.user.emailVerified) {
+                await sendEmailVerification(loginUser.user);
+                console.log("Verification mail has been sent.")
                 const error = new Error('Please verify your email');
                 error.code = "auth/email-verification";
                 throw error;
