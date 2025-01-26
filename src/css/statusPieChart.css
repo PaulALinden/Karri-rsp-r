@@ -1,5 +1,15 @@
 .chart-container {
     width: 50%;
     max-width: 400px;
-    margin: 0 auto;
+    max-height: 300px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+h5{
+    margin-bottom: 15px;
+    text-align: center;
 }

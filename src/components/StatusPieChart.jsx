@@ -19,7 +19,7 @@ const StatusPieChart = ({ jobs }) => {
 
     useEffect(() => {
         const count = {
-            applied: jobs.length,
+            applied: jobs.filter(j => j.status === "Ansökt").length,
             interview: jobs.filter(j => j.status === "Intervju").length,
             rejected: jobs.filter(j => j.status === "Avslag").length,
         };
@@ -27,7 +27,7 @@ const StatusPieChart = ({ jobs }) => {
     }, [jobs]);
 
     const data = {
-        labels: ['Applications Sent', 'Interviews', 'Rejections'],
+        labels: ['Ansökt', 'Intervju', 'Avslag'],
         datasets: [
             {
                 data: [stats.applied, stats.interview, stats.rejected],
@@ -61,6 +61,7 @@ const StatusPieChart = ({ jobs }) => {
 
     return (
         <div className="chart-container">
+            <h5>Totalt antal ansökningar: {jobs.length}</h5>
             <Pie data={data} options={options} />
         </div>
     );
