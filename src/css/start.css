@@ -137,6 +137,7 @@
         width: 100%;
         height: 100vh;
         overflow: hidden;
+        align-items: center;
     }
 
     .start-right,
@@ -145,16 +146,16 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
     }
 
     .start-right {
         height: 80%;
+        width: 80%;
     }
 
     .start-left {
         height: 20%;
-
+        width: 100%;
 
     }
 
@@ -164,6 +165,7 @@
     }
 
     .startform {
+        min-width: 100%;
         margin-right: 0;
     }
 }

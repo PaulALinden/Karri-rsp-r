@@ -72,3 +72,39 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+
+@media only screen and (max-width: 1000px) {
+
+    /*Style fo saved jobs*/
+    #addjob {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-basis: 100%;
+
+        opacity: 0;
+        transform: translateX(-50px);
+        animation: slide-in 0.5s ease-out forwards;
+    }
+
+    @keyframes slide-in {
+        0% {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .addjobform-group {
+        min-width: 100%;
+    }
+
+    .addJobform-parallel {
+        display: block;
+    }
+}

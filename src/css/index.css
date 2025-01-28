@@ -212,3 +212,10 @@ p a {
     cursor: pointer;
     margin-right: 10px;
 }
+
+.switch-button{
+    position: absolute;
+    left: 10px;
+    top:40%;
+    z-index: 9999;
+}
