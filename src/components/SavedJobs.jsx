@@ -144,19 +144,19 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                             <div className="full-row">
                                 <div className="saved-job-btn-group">
                                     <div>
-                                        <button className="change" onClick={() => startEditingJob(job)} aria-label="Change">
+                                        <button className="change" title="Ändra" onClick={() => startEditingJob(job)} aria-label="Change">
                                             <img src={edit} ></img>
                                         </button>
-                                        <button className="archive" onClick={() => archiveJobApplication(job)} aria-label="Archive">
+                                        <button className="archive" title="Arkivera" onClick={() => archiveJobApplication(job)} aria-label="Archive">
                                             <img src={inventory} ></img>
                                         </button>
-                                        <button className="delete" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
+                                        <button className="delete" title="Ta bort" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
                                             <img src={trash} ></img>
                                         </button>
                                     </div>
 
                                     <div>
-                                        <button className="url-button" onClick={() => { window.open(job.url) }} >
+                                        <button className="url-button" title="Gå till" onClick={() => { window.open(job.url) }} >
                                             <img src={open_in_browser} />
                                         </button>
                                     </div>

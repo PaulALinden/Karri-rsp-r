@@ -10,6 +10,8 @@ import Header from "./Header";
 import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
 import Alert from "./Alert";
+//SVG
+import addNote from "../assets/add-note.svg";
 
 const Home = () => {
     //Auth
@@ -101,6 +103,9 @@ const Home = () => {
             }
 
             cancelEdit();
+            if (isSmallScreen) {
+                setSwitchToAdd(false)
+            }
         } catch (error) {
             setError("Kunde inte spara jobbsökning. Försök igen.");
             setSeverity("warning");
@@ -142,10 +147,25 @@ const Home = () => {
         setLocation(job.location || "");
         setPosition(job.position || "");
         setJobType(job.jobType || "");
+
+        if (isSmallScreen) {
+            setSwitchToAdd(true)
+        }
     };
 
     const cancelEdit = () => {
-        setJobTitle(""); setCompany(""); setUrl(""); setLocation(""); setPosition(""); setJobType(""); setStatus(""); setComment(""); setEditJobId(null);
+        setJobTitle("");
+        setCompany("");
+        setUrl("");
+        setLocation("");
+        setPosition("");
+        setJobType("");
+        setStatus("");
+        setComment(""); setEditJobId(null);
+
+        if (isSmallScreen) {
+            setSwitchToAdd(false)
+        }
     };
 
     return (
@@ -162,7 +182,9 @@ const Home = () => {
                     )}
 
                     {isSmallScreen ? (
-                        <button className="switch-button" onClick={() => setSwitchToAdd(!switchToAdd)}>+</button>
+                        <button className="switch-button" title="Lägg till" onClick={() => setSwitchToAdd(!switchToAdd)}>
+                            <img src={addNote} alt="" />
+                        </button>
                     ) : null
                     }
 

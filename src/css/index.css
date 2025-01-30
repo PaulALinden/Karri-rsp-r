@@ -213,9 +213,16 @@ p a {
     margin-right: 10px;
 }
 
-.switch-button{
+.switch-button {
     position: absolute;
-    left: 10px;
-    top:40%;
+    right: 0;
+    bottom: 0;
+    width: 100%;
     z-index: 9999;
+    border-radius: 10px 10px 0 0;
+    border-top: var(--color-light) solid 1px;
+}
+
+.switch-button img{
+    height: 40px;
 }
