@@ -73,6 +73,7 @@ header button {
     display: flex;
     justify-content: space-around;
     overflow-y: scroll;
+    padding-bottom: 60px;
 }
 
 
@@ -214,7 +215,7 @@ p a {
 }
 
 .switch-button {
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     width: 100%;

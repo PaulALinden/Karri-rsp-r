@@ -10,8 +10,6 @@ import Header from "./Header";
 import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
 import Alert from "./Alert";
-//SVG
-import addNote from "../assets/add-note.svg";
 
 const Home = () => {
     //Auth
@@ -182,8 +180,8 @@ const Home = () => {
                     )}
 
                     {isSmallScreen ? (
-                        <button className="switch-button" title="Lägg till" onClick={() => setSwitchToAdd(!switchToAdd)}>
-                            <img src={addNote} alt="" />
+                            <button className="switch-button" title="Lägg till" onClick={() => setSwitchToAdd(!switchToAdd)}>
+                                <p>{!switchToAdd ? "Lägg till ny ansökan +" : "Gå till sparade ansökningar" }</p> 
                         </button>
                     ) : null
                     }
