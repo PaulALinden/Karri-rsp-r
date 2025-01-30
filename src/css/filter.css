@@ -15,7 +15,7 @@
 
 .filter-options {
     display: flex;
-    width: -moz-available;
+    width: 100%;
 }
 
 .filter-options div {
