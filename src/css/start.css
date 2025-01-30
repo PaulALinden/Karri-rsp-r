@@ -17,6 +17,7 @@
 
 .start-left {
     background: url("../assets/logo-bg.svg");
+    background-size: cover;
 }
 
 .startform {
