@@ -39,10 +39,9 @@ const Register = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setError("");
+        setShowErrorBanner(false);
         try {
-            setError("");
-            setShowErrorBanner(false);
-
             if (!validateEmail(email)) {
                 setError("Ogiltig e-postadress");
                 setShowErrorBanner(true);
@@ -88,6 +87,7 @@ const Register = () => {
             console.log(err);
             const message = handleFirebaseAuthError(err);
             setError(message);
+            setShowErrorBanner(true);
         }
     };
 
