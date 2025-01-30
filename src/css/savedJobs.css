@@ -157,12 +157,6 @@
     align-items: flex-start;
 }
 
-.url-button {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-right: 30px;
-}
-
 .comment {
     text-align: left;
     border: 1px solid var(--color-light-grey);

@@ -56,7 +56,8 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
     };
 
     const handleExpandListItem = (itemId, event) => {
-        if (event.target.tagName.toLowerCase() === 'button') {
+        console.log(event.target.tagName)
+        if (event.target.tagName.toLowerCase() === 'button' || event.target.tagName.toLowerCase() === 'img') {
             return; // Expandera inte listan om klicket var på en knapp
         }
         setExpandedItemId(itemId === expandedItemId ? null : itemId);
@@ -156,7 +157,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                                     </div>
 
                                     <div>
-                                        <button className="url-button" title="Gå till" onClick={() => { window.open(job.url) }} >
+                                        <button className="url-button" title="Gå till" onClick={() => {window.open(job.url)}} >
                                             <img src={open_in_browser} />
                                         </button>
                                     </div>
