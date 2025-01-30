@@ -161,12 +161,18 @@
     .start-right {
         height: 80%;
         width: 80%;
+        background-size: contain;
     }
 
     .start-left {
         height: 20%;
         width: 100%;
+        background-position: bottom;
+        background-size: 100%;
+    }
 
+    .start-left img {
+        height: 40%;
     }
 
     .startform {

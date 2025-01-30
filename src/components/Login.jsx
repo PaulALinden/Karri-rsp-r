@@ -23,10 +23,10 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user && user.uid && user.emailVerified) {
+        if (!loading && user && user.uid && user.emailVerified) {
             navigate("/home");
         }
-    }, [user, loading])
+    }, [user, loading, navigate]);
 
 
     const handleLogin = async (e) => {

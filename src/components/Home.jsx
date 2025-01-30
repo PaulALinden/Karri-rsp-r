@@ -27,7 +27,7 @@ const Home = () => {
     //Applications
     const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
     //Screen-size
-    const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia("(max-width: 1000px)"));
+    const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia("(max-width: 1000px)").matches);
     const [switchToAdd, setSwitchToAdd] = useState(false);
     //Error handling
     const [error, setError] = useState("");
@@ -39,10 +39,10 @@ const Home = () => {
     const userCollectionPath = user ? `users/${user.uid}/jobApplications` : null;
 
     useEffect(() => {
-        if (!user && !loading || !user.uid ) {
-            navigate("/");
+        if (!loading && (!user || !user.uid)) {
+            navigate("/login");
         }
-    }, [user]);
+    }, [user, loading, navigate]);
 
     useEffect(() => {
         if (!userCollectionPath) return;
@@ -55,35 +55,33 @@ const Home = () => {
                     setJobApplications(jobs);
                 } catch (error) {
                     setError("Ett fel uppstod vid hämtning av jobbansökningar.");
-                    setSeverity("warning");
                     setShowErrorBanner(true);
                 }
             },
             (error) => {
-                console.error("Fel vid anslutning till Firestore:", error);
-                setError("Ett fel uppstod vid anslutning till databasen. Försök igen senare.");
+                setError("Ett fel uppstod vid anslutning till databasen.");
                 setShowErrorBanner(true);
             }
         );
 
-        return () => {
-            try {
-                unsubscribeJobs();
-            } catch (error) {
-                console.error("Fel vid avregistrering av Firestore-listener:", error);
-            }
-        };
+        return () => unsubscribeJobs(); // Avregistrera korrekt
     }, [userCollectionPath]);
+
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 1000px)");
+
+        // Set the initial state correctly
+        setIsSmallScreen(mediaQuery.matches);
+
         const handleChange = (e) => {
             setIsSmallScreen(e.matches);
         };
-        // Lyssna på ändringar
+
+        // Listen for changes
         mediaQuery.addEventListener("change", handleChange);
 
-        // Rensa upp lyssnaren vid unmount
+        // Cleanup listener on unmount
         return () => mediaQuery.removeEventListener("change", handleChange);
     }, []);
 
@@ -152,7 +150,7 @@ const Home = () => {
 
     return (
         <div id="home">
-            {loading ? (
+            {loading || isSmallScreen === null ? (
                 <p>Laddar...</p>
             ) : user ? (
                 <>
