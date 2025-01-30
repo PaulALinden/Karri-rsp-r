@@ -15,6 +15,7 @@
 
 .filter-options {
     display: flex;
+    width: -moz-available;
 }
 
 .filter-options div {
@@ -36,6 +37,15 @@
 
 @media only screen and (max-width: 1000px) {
     .filter-options {
-            flex-wrap: wrap;
-        }
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .space-right {
+        min-width: 100%;
+    }
+
+    #filterStatus,#sortOrder{
+        min-width: 100%;
+    }
 }

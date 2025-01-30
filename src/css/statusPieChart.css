@@ -9,7 +9,14 @@
     margin-bottom: 50px;
 }
 
-h5{
+h5 {
     margin-bottom: 15px;
     text-align: center;
+}
+
+@media only screen and (max-width: 1000px){
+    .chart-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
