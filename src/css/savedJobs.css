@@ -200,10 +200,7 @@
             transform: translateX(0);
         }
     }
-        .chart-container {
-            margin: 0;
-            margin-bottom: 40px;
-        }
+
 }
 
 @media only screen and (max-width: 360px){

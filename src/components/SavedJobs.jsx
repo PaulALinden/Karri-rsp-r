@@ -15,7 +15,7 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
     const [sortOrder, setSortOrder] = useState("newest");
     const [expandedItemId, setExpandedItemId] = useState(null);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(true);
     const [currentDocId, setCurrentDocId] = useState(null); // För att hålla reda på vilket dokument som ska tas bort
 
     // Sortera jobben baserat på valt sorteringsordning

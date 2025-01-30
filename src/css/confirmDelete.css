@@ -1,7 +1,6 @@
 /* Specifik stil för Confirm Delete Modal */
 .confirm-delete-container {
-    height: 180px;
-
+    height: 250px;
     text-align: center;
     display: flex;
     justify-content: center;
