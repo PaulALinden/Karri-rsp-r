@@ -55,6 +55,7 @@
     margin-bottom: 15px;
     border: 1px solid var(--color-light-grey);
     width: 100%;
+    margin-right: 10px
 }
 
 .inputcontainer label {
@@ -107,9 +108,12 @@
     padding: 0;
 }
 
-.password-requirements li {
-    display: flex;
-    align-items: center;
+.password-requirements {
+    text-align: left;
+}
+
+.password-requirements ul {
+    text-align: start;
 }
 
 .password-requirements li::before {
@@ -128,6 +132,12 @@
 
 .password-requirements li.invalid::before {
     background-image: url("../assets/close.svg");
+}
+
+.check-box-container {
+    padding: 5px;
+    margin-top: 5px;
+    display: -webkit-box;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -159,13 +169,16 @@
 
     }
 
-    img {
-        margin: auto;
-        height: 50%;
-    }
-
     .startform {
         min-width: 100%;
         margin-right: 0;
+    }
+
+    .startform form {
+        margin-bottom: 10px;
+    }
+
+    .startform h1 {
+        margin-bottom: 0;
     }
 }

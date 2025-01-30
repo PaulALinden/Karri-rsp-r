@@ -71,7 +71,7 @@ const Register = () => {
 
                 const userCollectionPath = `/users/${userId}/terms`;
                 const userCollectionRef = collection(db, userCollectionPath);
-               
+
 
                 const terms = {
                     termsAccepted: true,
@@ -90,7 +90,6 @@ const Register = () => {
             setError(message);
         }
     };
-
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
@@ -158,22 +157,26 @@ const Register = () => {
                                 </ul>
                             </div>
 
-                            <label>
+                            <div className="check-box-container">
                                 <input
                                     type="checkbox"
                                     checked={termsAccepted}
                                     onChange={(e) => setTermsAccepted(e.target.checked)}
                                     required
                                 />
-                                I accept the{" "}
-                                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">
-                                    Terms and Conditions
-                                </a>{" "}
-                                and{" "}
-                                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
-                                    Privacy Policy
-                                </a>.
-                            </label>
+                                <label> 
+                                    I accept the{" "}
+                                    <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">
+                                        Terms and Conditions
+                                    </a>{" "}
+                                    and{" "}
+                                    <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
+                                        Privacy Policy
+                                    </a>.
+
+                                </label>
+                            </div>
+
 
                         </div>
                         <button className={areAllPasswordValidationsTrue() ? "submitbutton" : "disabled-button"} type="submit">Register{!areAllPasswordValidationsTrue()}</button>

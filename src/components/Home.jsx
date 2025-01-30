@@ -26,18 +26,20 @@ const Home = () => {
     const [editJobId, setEditJobId] = useState(null); // För att hantera redigeringsläge
     //Applications
     const [jobApplications, setJobApplications] = useState([]); // Lista över jobbansökningar
+    //Screen-size
+    const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia("(max-width: 1000px)"));
+    const [switchToAdd, setSwitchToAdd] = useState(false);
     //Error handling
     const [error, setError] = useState("");
     const [severity, setSeverity] = useState("error");
     const [showErrorBanner, setShowErrorBanner] = useState(false);
     //Navigation
     const navigate = useNavigate();
-
     // Firestore-referens
     const userCollectionPath = user ? `users/${user.uid}/jobApplications` : null;
 
     useEffect(() => {
-        if (!user && !loading) {
+        if (!user && !loading || !user.uid ) {
             navigate("/");
         }
     }, [user]);
@@ -73,6 +75,17 @@ const Home = () => {
         };
     }, [userCollectionPath]);
 
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 1000px)");
+        const handleChange = (e) => {
+            setIsSmallScreen(e.matches);
+        };
+        // Lyssna på ändringar
+        mediaQuery.addEventListener("change", handleChange);
+
+        // Rensa upp lyssnaren vid unmount
+        return () => mediaQuery.removeEventListener("change", handleChange);
+    }, []);
 
     const addJobApplication = async (e) => {
         e.preventDefault();
@@ -108,9 +121,10 @@ const Home = () => {
         }
     };
 
-    const archiveJobApplication = async (docId) => {
+    const archiveJobApplication = async (job) => {
         try {
-            await updateDoc(doc(db, userCollectionPath, docId), { archived: true });
+            const archived = !(job.archived || false);
+            await updateDoc(doc(db, userCollectionPath, job.id), { archived: archived });
             console.log("Status uppdaterad till Arkiverad.");
         } catch (error) {
             setError("Kunde inte arkivera jobbsökning. Försök igen.");
@@ -148,36 +162,49 @@ const Home = () => {
                             {error}
                         </Alert>
                     )}
-                    <AddJobs
-                        jobTitle={jobTitle}
-                        setJobTitle={setJobTitle}
-                        company={company}
-                        setCompany={setCompany}
-                        url={url}
-                        setUrl={setUrl}
-                        location={location}
-                        setLocation={setLocation}
-                        position={position}
-                        setPosition={setPosition}
-                        jobType={jobType}
-                        setJobType={setJobType}
-                        status={status}
-                        setStatus={setStatus}
-                        comment={comment}
-                        setComment={setComment}
-                        addJobApplication={addJobApplication}
-                        isEditing={!!editJobId}
-                        cancelEdit={cancelEdit}
-                    />
 
-                    <div className="spacer" />
+                    {isSmallScreen ? (
+                        <button className="switch-button" onClick={() => setSwitchToAdd(!switchToAdd)}>+</button>
+                    ) : null
+                    }
 
-                    <SavedJobs
-                        jobApplications={jobApplications}
-                        deleteJobApplication={deleteJobApplication}
-                        startEditingJob={startEditingJob}
-                        archiveJobApplication={archiveJobApplication}
-                    />
+                    {!isSmallScreen || switchToAdd ? (
+                        <AddJobs
+                            jobTitle={jobTitle}
+                            setJobTitle={setJobTitle}
+                            company={company}
+                            setCompany={setCompany}
+                            url={url}
+                            setUrl={setUrl}
+                            location={location}
+                            setLocation={setLocation}
+                            position={position}
+                            setPosition={setPosition}
+                            jobType={jobType}
+                            setJobType={setJobType}
+                            status={status}
+                            setStatus={setStatus}
+                            comment={comment}
+                            setComment={setComment}
+                            addJobApplication={addJobApplication}
+                            isEditing={!!editJobId}
+                            cancelEdit={cancelEdit}
+                        />
+                    ) : null
+                    }
+
+                    {!isSmallScreen ? (<div className="spacer" />) : null}
+
+
+                    {!switchToAdd ? (
+                        <SavedJobs className={""}
+                            jobApplications={jobApplications}
+                            deleteJobApplication={deleteJobApplication}
+                            startEditingJob={startEditingJob}
+                            archiveJobApplication={archiveJobApplication}
+                        />
+                    ) : null
+                    }
                 </>
             ) : (
                 <p>Du måste vara inloggad för att visa denna sida. <Link to="/login">login</Link></p>

@@ -9,7 +9,7 @@ import edit from "../assets/edit.svg";
 import trash from "../assets/trash.svg";
 import open_in_browser from "../assets/open_in_browser.svg"
 
-const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, archiveJobApplication, stats }) => {
+const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, archiveJobApplication }) => {
     const [searchValue, setSearchValue] = useState("");
     const [filterStatus, setFilterStatus] = useState("");
     const [sortOrder, setSortOrder] = useState("newest");
@@ -141,25 +141,26 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                             )}
 
 
-                            <div className="row">
-                                <div className="">
-                                    <button className="change" onClick={() => startEditingJob(job)} aria-label="Change">
-                                        <img src={edit} ></img>
-                                    </button>
-                                    <button className="archive" onClick={() => archiveJobApplication(job.id)} aria-label="Remove">
-                                        <img src={inventory} ></img>
-                                    </button>
-                                    <button className="delete" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
-                                        <img src={trash} ></img>
-                                    </button>
-                                </div>
+                            <div className="full-row">
+                                <div className="saved-job-btn-group">
+                                    <div>
+                                        <button className="change" onClick={() => startEditingJob(job)} aria-label="Change">
+                                            <img src={edit} ></img>
+                                        </button>
+                                        <button className="archive" onClick={() => archiveJobApplication(job)} aria-label="Archive">
+                                            <img src={inventory} ></img>
+                                        </button>
+                                        <button className="delete" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
+                                            <img src={trash} ></img>
+                                        </button>
+                                    </div>
 
-                                <div></div>
+                                    <div>
+                                        <button className="url-button" onClick={() => { window.open(job.url) }} >
+                                            <img src={open_in_browser} />
+                                        </button>
+                                    </div>
 
-                                <div className="url-button">
-                                    <button onClick={() => { window.open(job.url) }} >
-                                        <img src={open_in_browser} />
-                                    </button>
                                 </div>
                             </div>
 

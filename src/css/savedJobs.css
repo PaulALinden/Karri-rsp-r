@@ -179,6 +179,11 @@
     margin-top: 50px;
 }
 
+.saved-job-btn-group{
+    display: flex;
+    justify-content: space-between;
+}
+
 @media only screen and (max-width: 1000px) {
 
     /*Style fo saved jobs*/

@@ -11,7 +11,7 @@ import "../css/statusPieChart.css";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const StatusPieChart = ({ jobs }) => {
-    const [stats, setStats] = useState({ applied: 0, interview: 0, rejected: 0 });
+    const [stats, setStats] = useState({ applied: 3, interview: 3, rejected: 3 });
     const element = window.document.getElementById("root");
     const primaryColor = getComputedStyle(element).getPropertyValue('--color-primary');
     const interviewColor = getComputedStyle(element).getPropertyValue('--color-interview');
