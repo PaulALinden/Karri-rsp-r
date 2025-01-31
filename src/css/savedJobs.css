@@ -36,12 +36,14 @@
 .savedjoblistitem strong {
     font-size: 1.1rem;
     color: #333;
+    text-align: left;
 }
 
 /* Styling för status */
 .savedjoblistitem p {
     font-size: 0.9rem;
     font-style: italic;
+    text-align: left;
 }
 
 /* Styling för knappar */
