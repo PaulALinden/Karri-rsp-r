@@ -48,14 +48,38 @@ header {
     width: 100vw;
     background-color: #93D8D6;
     box-shadow: 5px 5px 10px 4px #00000033;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 25px;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 999999;
+    top: 70px;
+    right: 0;
+    background-color: var(--color-primary);
+    min-height: 218px;
+    padding-top: 10px;
+    border-radius: 0 0 0 var(--border-radius);
+}
+
+nav button{
+    border-radius: 0;
+    width: 100%;
+}
+
+nav div {
+    border: solid 1px var(--color-light-grey);
+    margin: 5px;
 }
 
 header img {
+    position: absolute;
+    left: 25px;
     width: 48px;
     height: 52px;
 }
@@ -63,6 +87,18 @@ header img {
 header button {
     width: 148px;
     height: 40px;
+}
+
+/* Hamburgarikonen */
+.hamburger {
+    position: absolute;
+    right: 25px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-black-hover);
+    /* Dölj på större skärmar */
 }
 
 #home {
@@ -236,6 +272,6 @@ p a {
     border-top: var(--color-light) solid 1px;
 }
 
-.switch-button img{
+.switch-button img {
     height: 40px;
 }
