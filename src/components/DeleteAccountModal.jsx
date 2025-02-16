@@ -1,4 +1,3 @@
-
 import ReactDOM from 'react-dom';
 import { auth, db } from "../../config/firebaseConfig";
 import { deleteUser } from "firebase/auth";

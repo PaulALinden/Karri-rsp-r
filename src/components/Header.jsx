@@ -37,11 +37,10 @@ const Header = () => {
             {menuOpen ? (
                 <nav>
                     <div className="menu-group1">
-                        <Link to={"/privacy-policy"}>Policy</Link>
-                        <Link to={"/terms-and-conditions"}>Användarvilkor</Link>
+                        <a href={"/privacy-policy"} target="_blank" rel="noopener noreferrer">Policy</a>
+                        <a href={"/terms-and-conditions"} target="_blank" rel="noopener noreferrer">Användarvilkor</a>
                         <Link onClick={() => setIsModalOpen(true)} className="menu-btn">Ta bort konto</Link>
                     </div>
-
 
                     <div className="menu-group2">
                         <button onClick={handleSignOut} className="menu-btn sign-out">Logga ut</button>

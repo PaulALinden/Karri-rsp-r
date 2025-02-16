@@ -1,0 +1,35 @@
+.article{
+    padding: 30px 60px 20px 60px;
+    overflow-y: scroll;
+}
+
+.article button {
+  margin-top: 20px;
+}
+
+.article h1 {
+    margin-bottom: 10px;
+}
+
+.article h2 {
+    margin-top: 10px;
+}
+
+.article p {
+    text-align: left;
+}
+
+.main-section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+}
+
+.main-section li{
+margin-left: 15px;
+}
+
+.note{
+    margin-top: 20px;
+}
