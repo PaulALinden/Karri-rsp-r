@@ -11,7 +11,8 @@
 #root {
     --color-primary: #16928E;
     --color-secondary: #80C7C5;
-    --color-primary-hover: #116b68;
+    --color-primary-hover: rgb(17, 107, 104);
+    --color-light-blue: #93D8D6;
     --color-interview: #E07EA0;
     --color-rejected: #eb6565;
     --color-danger: #A60000;
@@ -19,7 +20,7 @@
     --color-white: #ffffff;
     --color-light: #f8f9fa;
     --color-light-shade: #EEEEEE;
-    --color-light-grey: #B2B2B2;
+    --color-light-grey: #b2b2b2;
     --color-grey: #888888;
     --color-black: #515050;
     --color-black-hover: #000000;
@@ -41,12 +42,13 @@
 }
 
 header {
-    position: absolute;
+    position: fixed;
+    z-index: 1002;
     top: 0;
     right: 0;
     height: 70px;
     width: 100vw;
-    background-color: #93D8D6;
+    background-color: var(--color-light-blue);
     box-shadow: 5px 5px 10px 4px #00000033;
     display: flex;
     justify-content: space-between;
@@ -55,26 +57,47 @@ header {
 }
 
 nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+    /* Initial position off-screen */
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-light);
+    padding: 120px 10px;
+}
+
+nav button {
+    margin-bottom: 20px;
+    width: 200px;
+}
+
+nav .sign-out {
+    position: relative;
+    margin-top: 20px;
+}
+
+.menu-group1 {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    z-index: 999999;
-    top: 70px;
-    right: 0;
-    background-color: var(--color-primary);
-    min-height: 218px;
-    padding-top: 10px;
-    border-radius: 0 0 0 var(--border-radius);
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 80%;
 }
 
-nav button{
-    border-radius: 0;
-    width: 100%;
+.menu-group1 a{
+  text-decoration: underline;
+  font-size: xx-large;
 }
 
-nav div {
-    border: solid 1px var(--color-light-grey);
-    margin: 5px;
+.menu-group2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
 }
 
 header img {
@@ -82,11 +105,6 @@ header img {
     left: 25px;
     width: 48px;
     height: 52px;
-}
-
-header button {
-    width: 148px;
-    height: 40px;
 }
 
 /* Hamburgarikonen */
@@ -223,6 +241,7 @@ p a {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 99999999;
 }
 
 .modal-container {

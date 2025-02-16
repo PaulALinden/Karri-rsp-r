@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import { auth } from "../../config/firebaseConfig";
 import { signOut } from "firebase/auth";
 import DeleteAccountModal from "./DeleteAccountModal";
+import Hamburger from 'hamburger-react'
+import { Link } from "react-router";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -20,29 +22,34 @@ const Header = () => {
     };
 
     return (
-        <header className="header">
-            <img src={logo} alt="logo" className="logo" />
+        <>
+            <header className="header">
+                <img src={logo} alt="logo" className="logo" />
 
-            {/* Hamburgarikonen */}
-            <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-                ☰
-            </div>
+                {/* Hamburgarikonen */}
+                <div className="hamburger">
+                    <Hamburger toggled={menuOpen} toggle={setMenuOpen} className="hamburger" onClick={() => setMenuOpen(!menuOpen)} />
+                </div>
+
+                <DeleteAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            </header>
 
             {menuOpen ? (
                 <nav>
-                    <button>Policy</button>
-                    <div />
-                    <button>Användarvilkor</button>
-                    <div />
-                    <button onClick={handleSignOut} className="menu-btn">Logga ut</button>
-                    <div/>
-                    <button onClick={() => setIsModalOpen(true)} className="menu-btn">Ta bort konto</button>
+                    <div className="menu-group1">
+                        <Link to={"/privacy-policy"}>Policy</Link>
+                        <Link to={"/terms-and-conditions"}>Användarvilkor</Link>
+                        <Link onClick={() => setIsModalOpen(true)} className="menu-btn">Ta bort konto</Link>
+                    </div>
+
+
+                    <div className="menu-group2">
+                        <button onClick={handleSignOut} className="menu-btn sign-out">Logga ut</button>
+                    </div>
                 </nav>
             ) : null}
+        </>
 
-
-            <DeleteAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-        </header>
     );
 };
 
