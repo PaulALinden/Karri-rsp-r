@@ -18,8 +18,14 @@ const VerifyEmail = () => {
 
     return (
         <div>
-            <h2>Verifiera e-post</h2>
-            <p>{message}</p>
+            {oobCode ? (
+                <>
+                    <h2>Verifiera e-post</h2>
+                    <p>{message}</p>
+                </>
+            ) : (
+                <p>Något gick fel. <a href="/">Till start.</a></p>
+            )}
         </div>
     );
 };

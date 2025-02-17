@@ -113,7 +113,6 @@ const ResetPassword = () => {
                 </>
             ): <p>Något gick fel. <a href="/">Till start.</a></p>}
         </div>
-
     );
 };
 
