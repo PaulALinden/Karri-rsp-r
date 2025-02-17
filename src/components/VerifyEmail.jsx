@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAuth, applyActionCode } from "firebase/auth";
 
-const VerifyEmail = (oobCode) => {
+const VerifyEmail = ({oobCode}) => {
     const auth = getAuth();
     const [message, setMessage] = useState("");
 

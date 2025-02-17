@@ -3,7 +3,7 @@ import { getAuth, verifyPasswordResetCode, confirmPasswordReset } from "firebase
 import { sanitizeInput, validatePasswordChecks } from "../utils/validators";
 import "../css/reset-password.css";
 
-const ResetPassword = (oobCode) => {
+const ResetPassword = ({oobCode}) => {
     const auth = getAuth();
     const [newPassword, setNewPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -17,6 +17,7 @@ const ResetPassword = (oobCode) => {
     const [statusMessage, setStatusMessage] = useState("");
  
     useEffect(() => {
+        console.log(oobCode)
         if (oobCode) {
             verifyPasswordResetCode(auth, oobCode)
                 .then((email) => setEmail(email))
