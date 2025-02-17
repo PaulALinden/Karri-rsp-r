@@ -126,7 +126,7 @@ const Register = () => {
                                 value={password}
                                 onChange={(e) => {
                                     setPassword(sanitizeInput(e.target.value));
-                                    validatePasswordChecks(e.target.value, setPasswordValidations);
+                                    validatePasswordChecks(sanitizeInput(e.target.value), setPasswordValidations);
                                 }
                                 }
                                 required
