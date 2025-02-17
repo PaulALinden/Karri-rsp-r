@@ -5,14 +5,17 @@ import VerifyEmail from "./VerifyEmail";
 const AuthActionHandler = () => {
     const [searchParams] = useSearchParams();
     const mode = searchParams.get("mode");
+    const oobCode = searchParams.get("oobCode");
 
     return (
         <div className="auth-container">
-            {mode === "resetPassword" && <ResetPassword />}
-            {mode === "verifyEmail" && <VerifyEmail />}
-            {!mode && <p>Ogiltig länk.</p>}
+            {mode === "resetPassword" && <ResetPassword oobCode={oobCode} />}
+            {mode === "verifyEmail" && <VerifyEmail oobCode={oobCode} />}
+
+            {!mode && <p>Ogiltig länk. <a href="/">Till start.</a></p>}
         </div>
     );
 };
 
 export default AuthActionHandler;
+

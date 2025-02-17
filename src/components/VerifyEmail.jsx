@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
 import { getAuth, applyActionCode } from "firebase/auth";
 
-const VerifyEmail = () => {
+const VerifyEmail = (oobCode) => {
     const auth = getAuth();
-    const [searchParams] = useSearchParams();
-    const oobCode = searchParams.get("oobCode");
     const [message, setMessage] = useState("");
 
     useEffect(() => {
@@ -21,7 +18,7 @@ const VerifyEmail = () => {
             {oobCode ? (
                 <>
                     <h2>Verifiera e-post</h2>
-                    <p>{message}</p>
+                    <p>{message}<a href="/"> Till start.</a></p>
                 </>
             ) : (
                 <p>Något gick fel. <a href="/">Till start.</a></p>
