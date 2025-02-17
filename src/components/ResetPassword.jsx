@@ -17,11 +17,12 @@ const ResetPassword = ({oobCode}) => {
     const [statusMessage, setStatusMessage] = useState("");
  
     useEffect(() => {
-        console.log(oobCode)
+    
         if (oobCode) {
             verifyPasswordResetCode(auth, oobCode)
                 .then((email) => setEmail(email))
-                .catch(() => { setStatusMessage("Ogiltig eller föråldrad återställningslänk."); });
+                .catch(() => { setStatusMessage("Ogiltig eller föråldrad återställningslänk.");
+                });
         }
     }, [oobCode]);
 

@@ -5,8 +5,7 @@ import VerifyEmail from "./VerifyEmail";
 const AuthActionHandler = () => {
     const [searchParams] = useSearchParams();
     const mode = searchParams.get("mode");
-    //const oobCode = searchParams.get("oobCode");
-    const oobCode = "adsd"
+    const oobCode = searchParams.get("oobCode");
 
     return (
         <div className="auth-container">
