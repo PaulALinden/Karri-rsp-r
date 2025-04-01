@@ -1,13 +1,18 @@
 import "../css/policy-and-terms.css";
+import logo from "../assets/logo.svg";
 
 const PrivacyPolicy = ((previous) => {
-    
+
     return (
         <div className="article">
 
-            <h1>Privacy Policy</h1>
+            <header>
+                <img src={logo} alt="logo" className="logo" />
+            </header>
 
             <section className="main-section">
+                <h1>Privacy Policy</h1>
+
                 <p><strong>Effective Date:</strong> 2025-01-25</p>
 
                 <p>We at <strong>Karriärspår</strong>, value your privacy. This Privacy Policy explains how we collect, use, and protect the personal information you provide when using our website and services.</p>

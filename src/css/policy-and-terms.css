@@ -1,10 +1,10 @@
-.article{
-    padding: 30px 60px 20px 60px;
+.article {
+    padding: 0 60px 20px 60px;
     overflow-y: scroll;
 }
 
 .article button {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .article h1 {
@@ -19,17 +19,18 @@
     text-align: left;
 }
 
-.main-section{
+.main-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
+    margin-top: 100px;
 }
 
-.main-section li{
-margin-left: 15px;
+.main-section li {
+    margin-left: 15px;
 }
 
-.note{
+.note {
     margin-top: 20px;
 }

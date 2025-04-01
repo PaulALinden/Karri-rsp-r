@@ -26,7 +26,6 @@ const Header = () => {
             <header className="header">
                 <img src={logo} alt="logo" className="logo" />
 
-                {/* Hamburgarikonen */}
                 <div className="hamburger">
                     <Hamburger toggled={menuOpen} toggle={setMenuOpen} className="hamburger" onClick={() => setMenuOpen(!menuOpen)} />
                 </div>
@@ -37,8 +36,8 @@ const Header = () => {
             {menuOpen ? (
                 <nav>
                     <div className="menu-group1">
-                        <a href={"/privacy-policy"} target="_blank" rel="noopener noreferrer">Policy</a>
-                        <a href={"/terms-and-conditions"} target="_blank" rel="noopener noreferrer">Användarvilkor</a>
+                        <Link to={"/privacy-policy"}>Policy</Link>
+                        <Link to={"/terms-and-conditions"}>Användarvilkor</Link>
                         <Link onClick={() => setIsModalOpen(true)} className="menu-btn">Ta bort konto</Link>
                     </div>
 

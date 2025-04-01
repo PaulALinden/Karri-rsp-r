@@ -1,9 +1,15 @@
 import "../css/policy-and-terms.css";
+import logo from "../assets/logo.svg";
 
 const TermsAndConditions = ((previous) => {
- 
+
     return (
         <div className="article">
+
+            <header>
+                <img src={logo} alt="logo" className="logo" />
+            </header>
+
             <div className="main-section">
                 <h1>Terms and Conditions</h1>
                 <p><strong>Effective Date:</strong> 2025-01-25</p>

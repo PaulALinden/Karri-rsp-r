@@ -56,6 +56,8 @@ header {
     padding: 25px;
 }
 
+
+
 nav {
     position: fixed;
     top: 0;
@@ -87,9 +89,9 @@ nav .sign-out {
     height: 80%;
 }
 
-.menu-group1 a{
-  text-decoration: underline;
-  font-size: xx-large;
+.menu-group1 a {
+    text-decoration: underline;
+    font-size: xx-large;
 }
 
 .menu-group2 {
