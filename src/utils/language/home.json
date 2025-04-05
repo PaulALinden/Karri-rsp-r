@@ -1,0 +1,28 @@
+{
+    "en": {
+        "home": {
+            "loading": "Loading...",
+            "notLoggedIn": "You must be logged in to view this page.",
+            "loginLink": "login",
+            "switchButtonAdd": "Add new application +",
+            "switchButtonSaved": "Go to saved applications",
+            "errorSaving": "Could not save job application. Please try again.",
+            "errorDeleting": "Could not delete job application. Please try again.",
+            "errorArchiving": "Could not archive job application. Please try again.",
+            "fillAllFields": "Fill in all fields."
+        }
+    },
+    "sv": {
+        "home": {
+            "loading": "Laddar...",
+            "notLoggedIn": "Du måste vara inloggad för att visa denna sida.",
+            "loginLink": "logga in",
+            "switchButtonAdd": "Lägg till ny ansökan +",
+            "switchButtonSaved": "Gå till sparade ansökningar",
+            "errorSaving": "Kunde inte spara jobbsökning. Försök igen.",
+            "errorDeleting": "Kunde inte radera jobbsökning. Försök igen.",
+            "errorArchiving": "Kunde inte arkivera jobbsökning. Försök igen.",
+            "fillAllFields": "Fyll i alla fält."
+        }
+    }
+}

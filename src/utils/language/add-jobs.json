@@ -1,0 +1,84 @@
+{
+    "en": {
+        "addJobs": {
+            "titleAdd": "Add Job Application",
+            "titleUpdate": "Update Job Application",
+            "jobTitleLabel": "Job Title:*",
+            "jobTitlePlaceholder": "Ex: Frontend Developer",
+            "companyLabel": "Company:*",
+            "companyPlaceholder": "Ex: Spotify",
+            "urlLabel": "URL:",
+            "urlPlaceholder": "Ex: www.example.com",
+            "locationLabel": "Location:",
+            "locationPlaceholder": "Ex: Stockholm",
+            "positionLabel": "Work Arrangement:*",
+            "positionPlaceholder": "Select work arrangement",
+            "positionOptions": [
+                "On-site",
+                "Hybrid",
+                "Remote"
+            ],
+            "jobTypeLabel": "Employment Type:*",
+            "jobTypePlaceholder": "Select type",
+            "jobTypeOptions": [
+                "Full-time",
+                "Part-time",
+                "Contract",
+                "Internship"
+            ],
+            "statusLabel": "Status:*",
+            "statusPlaceholder": "Select status",
+            "statusOptions": [
+                "Applied",
+                "Interview",
+                "Rejected"
+            ],
+            "commentLabel": "Comment:",
+            "commentPlaceholder": "Ex: Completed tests",
+            "addButton": "Add",
+            "updateButton": "Update",
+            "cancelButton": "Cancel"
+        }
+    },
+    "sv": {
+        "addJobs": {
+            "titleAdd": "Lägg till jobbsökning",
+            "titleUpdate": "Uppdatera jobbsökning",
+            "jobTitleLabel": "Jobbtitel:*",
+            "jobTitlePlaceholder": "Ex: Frontendutvecklare",
+            "companyLabel": "Företag:*",
+            "companyPlaceholder": "Ex: Spotify",
+            "urlLabel": "URL:",
+            "urlPlaceholder": "Ex: www.exempel.com",
+            "locationLabel": "Plats:",
+            "locationPlaceholder": "Ex: Stockholm",
+            "positionLabel": "Arbetsform:*",
+            "positionPlaceholder": "Välj arbetsform",
+            "positionOptions": [
+                "På plats",
+                "Hybrid",
+                "Distans"
+            ],
+            "jobTypeLabel": "Anställningsform:*",
+            "jobTypePlaceholder": "Välj typ",
+            "jobTypeOptions": [
+                "Heltid",
+                "Deltid",
+                "Kontrakt",
+                "Praktik"
+            ],
+            "statusLabel": "Status:*",
+            "statusPlaceholder": "Välj status",
+            "statusOptions": [
+                "Ansökt",
+                "Intervju",
+                "Avslag"
+            ],
+            "commentLabel": "Kommentar:",
+            "commentPlaceholder": "Ex: Utfört tester",
+            "addButton": "Lägg till",
+            "updateButton": "Uppdatera",
+            "cancelButton": "Avbryt"
+        }
+    }
+}

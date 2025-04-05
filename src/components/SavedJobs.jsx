@@ -3,20 +3,28 @@ import FilterOptions from "./FilterOptions";
 import StatusPieChart from "./StatusPieChart";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import "../css/savedJobs.css";
-
 import inventory from "../assets/inventory.svg";
 import edit from "../assets/edit.svg";
 import trash from "../assets/trash.svg";
-import open_in_browser from "../assets/open_in_browser.svg"
+import open_in_browser from "../assets/open_in_browser.svg";
 
-const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, archiveJobApplication }) => {
+import { useLanguage } from "./context/LanguageContext";
+import translations from "../utils/language/saved-jobs.json";
+
+const SavedJobs = ({
+    jobApplications,
+    deleteJobApplication,
+    startEditingJob,
+    archiveJobApplication,
+}) => {
     const [searchValue, setSearchValue] = useState("");
     const [filterStatus, setFilterStatus] = useState("");
     const [sortOrder, setSortOrder] = useState("newest");
     const [expandedItemId, setExpandedItemId] = useState(null);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentDocId, setCurrentDocId] = useState(null); // För att hålla reda på vilket dokument som ska tas bort
+    const [currentDocId, setCurrentDocId] = useState(null);
+    const { language } = useLanguage();
+    const t = translations[language].savedJobs;
 
     // Sortera jobben baserat på valt sorteringsordning
     const sortedJobs = [...jobApplications].sort((a, b) => {
@@ -25,39 +33,43 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
         return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
     });
 
-    // Filtrera jobben baserat på status
+    // Filtrera jobben baserat på status (använd svenska värden för filtrering)
     const statusFilteredJobs = sortedJobs.filter((job) => {
         if (filterStatus === "") {
-            return job.status && !job.archived; // Visa alla jobb utom arkiverade
+            return job.status && !job.archived;
         } else if (filterStatus === "Arkiverad") {
-            return job.archived
+            return job.archived;
         }
-        // Annars filtrera på den valda specifika statusen
-        return job.status === filterStatus && !job.archived;;
+        return job.status === filterStatus && !job.archived;
     });
 
     // Filtrera jobben baserat på sökvärde
-    const filteredJobs = statusFilteredJobs.filter((job) =>
-        job.jobTitle.toLowerCase().includes(searchValue.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchValue.toLowerCase())
+    const filteredJobs = statusFilteredJobs.filter(
+        (job) =>
+            job.jobTitle.toLowerCase().includes(searchValue.toLowerCase()) ||
+            job.company.toLowerCase().includes(searchValue.toLowerCase())
     );
+
     const handleDeleteClick = (docId) => {
-        setCurrentDocId(docId); // Sätt det valda docId
-        setIsModalOpen(true); // Visa modalen
+        setCurrentDocId(docId);
+        setIsModalOpen(true);
     };
 
     const handleCloseModal = () => {
-        setIsModalOpen(false); // Stäng modalen utan att ta bort något
+        setIsModalOpen(false);
     };
 
     const handleConfirmDelete = async (docId) => {
-        await deleteJobApplication(docId); // Anropa deleteJobApplication med det valda docId
-        setIsModalOpen(false); // Stäng modalen efter radering
+        await deleteJobApplication(docId);
+        setIsModalOpen(false);
     };
 
     const handleExpandListItem = (itemId, event) => {
-        if (event.target.tagName.toLowerCase() === 'button' || event.target.tagName.toLowerCase() === 'img') {
-            return; // Expandera inte listan om klicket var på en knapp
+        if (
+            event.target.tagName.toLowerCase() === "button" ||
+            event.target.tagName.toLowerCase() === "img"
+        ) {
+            return;
         }
         setExpandedItemId(itemId === expandedItemId ? null : itemId);
     };
@@ -69,13 +81,21 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
             case "Avslag":
                 return "rejected";
             default:
-                return "applied"
+                return "applied";
         }
-    }
+    };
+
+    // Funktioner för att översätta värden baserat på språk
+    const translatePosition = (position) =>
+        position ? t.positionTranslations[position] || position : "";
+    const translateJobType = (jobType) =>
+        jobType ? t.jobTypeTranslations[jobType] || jobType : "";
+    const translateStatus = (status) =>
+        status ? t.statusTranslations[status] || status : "";
 
     return (
         <div id="savedjobs">
-            <h2 className="headerspace">Sparade jobbsökningar</h2>
+            <h2 className="headerspace">{t.title}</h2>
 
             <StatusPieChart className="statistics" jobs={jobApplications} />
 
@@ -89,32 +109,32 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
             />
 
             {jobApplications.length === 0 ? (
-                <p className="empty-list">Inga jobbsökningar ännu.</p>
+                <p className="empty-list">{t.emptyList}</p>
             ) : (
-
                 <ul id="savedjoblist">
                     {filteredJobs.map((job) => (
-
                         <li
-                            className={`savedjoblistitem ${job.id === expandedItemId ? 'expand' : ''}`}
+                            className={`savedjoblistitem ${job.id === expandedItemId ? "expand" : ""
+                                }`}
                             key={job.id}
                             onClick={(event) => handleExpandListItem(job.id, event)}
                         >
-
                             <div className="row">
-
                                 <div className="saved-job-row-item">
                                     <strong className="inline-paragraph">{job.jobTitle}</strong>
-                                    <p className="inline-paragraph">{`på ${job.company}`}</p>
-                                    <p className="date-paragraph">{job.createdAt.toDate().toLocaleDateString()}</p>
+                                    <p className="inline-paragraph">{`${t.companyPrefix} ${job.company}`}</p>
+                                    <p className="date-paragraph">
+                                        {job.createdAt.toDate().toLocaleDateString()}
+                                    </p>
                                 </div>
 
                                 <div className="saved-job-row-item-2">
-                                    <strong>Arbetsform: </strong>
-                                    <p>{job.position}</p>
+                                    <strong>{t.positionLabel}</strong>
+                                    <p>{translatePosition(job.position)}</p>
                                 </div>
                                 <div className="saved-job-row-item-2">
-                                    <strong>Status:</strong><p> {job.status}</p>
+                                    <strong>{t.statusLabel}</strong>
+                                    <p>{translateStatus(job.status)}</p>
                                 </div>
                             </div>
 
@@ -122,51 +142,67 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
                                 <>
                                     <div className="row">
                                         <div className="saved-job-row-item">
-                                            <strong>Plats: </strong>
+                                            <strong>{t.locationLabel}</strong>
                                             <p>{job.location}</p>
                                         </div>
 
                                         <div className="saved-job-row-item">
-                                            <strong>Anställningsform: </strong>
-                                            <p>{job.jobType}</p>
+                                            <strong>{t.jobTypeLabel}</strong>
+                                            <p>{translateJobType(job.jobType)}</p>
                                         </div>
                                     </div>
-
 
                                     <div className="full-row">
                                         <p className="comment">{job.comment}</p>
                                     </div>
-
                                 </>
                             )}
-
 
                             <div className="full-row">
                                 <div className="saved-job-btn-group">
                                     <div>
-                                        <button className="change" title="Ändra" onClick={() => startEditingJob(job)} aria-label="Change">
-                                            <img src={edit} ></img>
+                                        <button
+                                            className="change"
+                                            title={t.changeButtonTitle}
+                                            onClick={() => startEditingJob(job)}
+                                            aria-label="Change"
+                                        >
+                                            <img src={edit} alt="Edit" />
                                         </button>
-                                        <button className="archive" title="Arkivera" onClick={() => archiveJobApplication(job)} aria-label="Archive">
-                                            <img src={inventory} ></img>
+                                        <button
+                                            className="archive"
+                                            title={t.archiveButtonTitle}
+                                            onClick={() => archiveJobApplication(job)}
+                                            aria-label="Archive"
+                                        >
+                                            <img src={inventory} alt="Archive" />
                                         </button>
-                                        <button className="delete" title="Ta bort" onClick={() => handleDeleteClick(job.id)} aria-label="Remove">
-                                            <img src={trash} ></img>
+                                        <button
+                                            className="delete"
+                                            title={t.deleteButtonTitle}
+                                            onClick={() => handleDeleteClick(job.id)}
+                                            aria-label="Remove"
+                                        >
+                                            <img src={trash} alt="Delete" />
                                         </button>
                                     </div>
 
                                     <div>
-                                        <button className="url-button" title="Gå till" onClick={() => { window.open(job.url) }} >
-                                            <img src={open_in_browser} />
+                                        <button
+                                            className="url-button"
+                                            title={t.urlButtonTitle}
+                                            onClick={() => {
+                                                window.open(job.url);
+                                            }}
+                                        >
+                                            <img src={open_in_browser} alt="Visit" />
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
 
                             <div className={`status-color ${getJobStatus(job.status)}`} />
                         </li>
-
                     ))}
                 </ul>
             )}
@@ -182,4 +218,3 @@ const SavedJobs = ({ jobApplications, deleteJobApplication, startEditingJob, arc
 };
 
 export default SavedJobs;
-

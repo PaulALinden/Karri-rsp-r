@@ -1,17 +1,26 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router";
+//Firebase
 import { db } from "../../config/firebaseConfig";
-import { useAuth } from "./auth/AuthContext";
-import { useJobs } from "./context/JobContext"; // Ny import
 import { collection, doc, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
+//Context
+import { useAuth } from "./auth/AuthContext";
+import { useJobs } from "./context/JobContext";
+import { useLanguage } from "./context/LanguageContext";
+//Components
 import Header from "./Header";
 import AddJobs from "./AddJobs";
 import SavedJobs from "./SavedJobs";
 import Alert from "./Alert";
+//Language
+import translations from "../utils/language/home.json"
 
 const Home = () => {
     const { user, loading: authLoading } = useAuth();
-    const { jobApplications, error: jobError, loading: jobsLoading } = useJobs(); // Hämta från Context
+    const { jobApplications, error: jobError, loading: jobsLoading } = useJobs();
+    const { language } = useLanguage();
+    const t = translations[language].home;
+
     const [jobTitle, setJobTitle] = useState("");
     const [company, setCompany] = useState("");
     const [url, setUrl] = useState("");
@@ -114,7 +123,7 @@ const Home = () => {
     return (
         <div id="home">
             {authLoading || jobsLoading || isSmallScreen === null ? (
-                <p>Laddar...</p>
+                <p>{t.loading}</p>
             ) : user ? (
                 <>
                     <Header />
@@ -124,8 +133,12 @@ const Home = () => {
                         </Alert>
                     )}
                     {isSmallScreen ? (
-                        <button className="switch-button" title="Lägg till" onClick={() => setSwitchToAdd(!switchToAdd)}>
-                            <p>{!switchToAdd ? "Lägg till ny ansökan +" : "Gå till sparade ansökningar"}</p>
+                        <button
+                            className="switch-button"
+                            title={t.switchButtonAdd}
+                            onClick={() => setSwitchToAdd(!switchToAdd)}
+                        >
+                            <p>{!switchToAdd ? t.switchButtonAdd : t.switchButtonSaved}</p>
                         </button>
                     ) : null}
                     {!isSmallScreen || switchToAdd ? (
@@ -163,7 +176,9 @@ const Home = () => {
                     ) : null}
                 </>
             ) : (
-                <p>Du måste vara inloggad för att visa denna sida. <Link to="/login">login</Link></p>
+                <p>
+                    {t.notLoggedIn} <Link to="/login">{t.loginLink}</Link>
+                </p>
             )}
         </div>
     );
