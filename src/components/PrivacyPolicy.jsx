@@ -1,14 +1,19 @@
 import "../css/policy-and-terms.css";
-import logo from "../assets/logo.svg";
+import Header from "./Header";
+import { useNavigate } from "react-router";
 
-const PrivacyPolicy = ((previous) => {
+const PrivacyPolicy = (() => {
+
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+        navigate(-1); // Går tillbaka en sida i historiken
+    };
 
     return (
         <div className="article">
 
-            <header>
-                <img src={logo} alt="logo" className="logo" />
-            </header>
+            <Header showFull={false}></Header>
 
             <section className="main-section">
                 <h1>Privacy Policy</h1>
@@ -50,6 +55,10 @@ const PrivacyPolicy = ((previous) => {
                 <h2>Contact Us</h2>
                 <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us at <strong>linden.91.pl@gmail.com</strong>.</p>
             </section>
+
+            <button onClick={handleGoBack} className="back-button">
+                Tillbaka
+            </button>
         </div>
     );
 });

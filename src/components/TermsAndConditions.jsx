@@ -1,14 +1,19 @@
 import "../css/policy-and-terms.css";
-import logo from "../assets/logo.svg";
+import Header from "./Header";
+import { useNavigate } from "react-router";
 
-const TermsAndConditions = ((previous) => {
+const TermsAndConditions = (() => {
+
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+        navigate(-1); // Går tillbaka en sida i historiken
+    };
 
     return (
         <div className="article">
 
-            <header>
-                <img src={logo} alt="logo" className="logo" />
-            </header>
+            <Header showFull={false}></Header>
 
             <div className="main-section">
                 <h1>Terms and Conditions</h1>
@@ -44,6 +49,10 @@ const TermsAndConditions = ((previous) => {
 
                 <p className="note"><em>Note: By continuing to use this Service, you confirm that you have read and agree to this Privacy Policy and Terms and Conditions.</em></p>
             </div>
+
+            <button onClick={handleGoBack} className="back-button">
+                Tillbaka
+            </button>
         </div>
     );
 });
