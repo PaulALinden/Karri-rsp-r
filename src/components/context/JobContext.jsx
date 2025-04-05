@@ -1,6 +1,6 @@
 // JobContext.jsx
 import { createContext, useContext, useState, useEffect } from "react";
-import { db } from "../../config/firebaseConfig";
+import { db } from "../../../config/firebaseConfig";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 const JobContext = createContext();

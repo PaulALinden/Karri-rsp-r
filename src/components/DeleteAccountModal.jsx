@@ -2,12 +2,12 @@ import ReactDOM from 'react-dom';
 import { auth, db } from "../../config/firebaseConfig";
 import { deleteUser } from "firebase/auth";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./auth/AuthContext";
 import "../css/confirmDelete.css"
 const DeleteAccountModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null; // Om modalen inte är öppen renderas den inte
     const { user } = useAuth(); // Säkerställ att denna hook alltid ligger högst upp
-  
+
     const deleteUserAccount = async (userId) => {
         if (!userId) {
             console.error("Ingen användar-ID angiven.");

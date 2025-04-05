@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router";
-import ResetPassword from "./ResetPassword";
-import VerifyEmail from "./VerifyEmail";
+import ResetPassword from "../ResetPassword";
+import VerifyEmail from "../auth/VerifyEmail";
 
 const AuthActionHandler = () => {
     const [searchParams] = useSearchParams();

@@ -12,7 +12,7 @@ import AuthActionHandler from "./components/auth/AuthActionHandler";//<--Auth
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import PublicRoute from "./components/route/PublicRoute";
 //Context
-import { JobProvider } from "./components/JobContext";
+import { JobProvider } from "./components/context/JobContext";
 import { useAuth } from "./components/auth/AuthContext";//<--Auth
 
 function App() {

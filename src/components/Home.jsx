@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router";
 import { db } from "../../config/firebaseConfig";
-import { useAuth } from "./AuthContext";
-import { useJobs } from "./JobContext"; // Ny import
+import { useAuth } from "./auth/AuthContext";
+import { useJobs } from "./context/JobContext"; // Ny import
 import { collection, doc, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import Header from "./Header";
 import AddJobs from "./AddJobs";
