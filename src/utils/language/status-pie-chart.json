@@ -1,0 +1,22 @@
+{
+    "en": {
+        "statusPieChart": {
+            "title": "Total number of applications: ",
+            "labels": {
+                "Ansökt": "Applied",
+                "Intervju": "Interview",
+                "Avslag": "Rejected"
+            }
+        }
+    },
+    "sv": {
+        "statusPieChart": {
+            "title": "Totalt antal ansökningar: ",
+            "labels": {
+                "Ansökt": "Ansökt",
+                "Intervju": "Intervju",
+                "Avslag": "Avslag"
+            }
+        }
+    }
+}

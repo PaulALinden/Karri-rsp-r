@@ -1,41 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { Pie } from 'react-chartjs-2';
+import React, { useState, useEffect } from "react";
+import { Pie } from "react-chartjs-2";
 import {
     Chart as ChartJS,
     ArcElement,
     Tooltip,
-    Legend
-} from 'chart.js';
+    Legend,
+} from "chart.js";
 import "../css/statusPieChart.css";
+import { useLanguage } from "./context/LanguageContext"; // Importera språk-kontexten
+import statusPieChartTranslations from "../utils/language/status-pie-chart.json"; // Importera översättningar
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const StatusPieChart = ({ jobs }) => {
     const [stats, setStats] = useState({ applied: 3, interview: 3, rejected: 3 });
     const element = window.document.getElementById("root");
-    const primaryColor = getComputedStyle(element).getPropertyValue('--color-primary');
-    const interviewColor = getComputedStyle(element).getPropertyValue('--color-interview');
-    const rejectedColor = getComputedStyle(element).getPropertyValue('--color-rejected');
+    const primaryColor = getComputedStyle(element).getPropertyValue(
+        "--color-primary"
+    );
+    const interviewColor = getComputedStyle(element).getPropertyValue(
+        "--color-interview"
+    );
+    const rejectedColor = getComputedStyle(element).getPropertyValue(
+        "--color-rejected"
+    );
+    const { language } = useLanguage();
+    const t = statusPieChartTranslations[language].statusPieChart; // Hämta översättningar
 
     useEffect(() => {
         const count = {
-            applied: jobs.filter(j => j.status === "Ansökt").length,
-            interview: jobs.filter(j => j.status === "Intervju").length,
-            rejected: jobs.filter(j => j.status === "Avslag").length,
+            applied: jobs.filter((j) => j.status === "Ansökt").length,
+            interview: jobs.filter((j) => j.status === "Intervju").length,
+            rejected: jobs.filter((j) => j.status === "Avslag").length,
         };
         setStats(count);
     }, [jobs]);
 
+    // Översätt etiketterna baserat på språk
+    const translatedLabels = ["Ansökt", "Intervju", "Avslag"].map(
+        (label) => t.labels[label]
+    );
+
     const data = {
-        labels: ['Ansökt', 'Intervju', 'Avslag'],
+        labels: translatedLabels,
         datasets: [
             {
                 data: [stats.applied, stats.interview, stats.rejected],
-                backgroundColor: [
-                    primaryColor,
-                    interviewColor,
-                    rejectedColor
-                ],
+                backgroundColor: [primaryColor, interviewColor, rejectedColor],
                 hoverOffset: 10,
             },
         ],
@@ -45,7 +56,7 @@ const StatusPieChart = ({ jobs }) => {
         plugins: {
             legend: {
                 display: true,
-                position: 'bottom',
+                position: "bottom",
             },
             tooltip: {
                 callbacks: {
@@ -61,7 +72,10 @@ const StatusPieChart = ({ jobs }) => {
 
     return (
         <div className="chart-container">
-            <h5>Totalt antal ansökningar: {jobs.length}</h5>
+            <h5>
+                {t.title}
+                {jobs.length}
+            </h5>
             <Pie data={data} options={options} />
         </div>
     );
