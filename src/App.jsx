@@ -1,16 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
+//Componenets
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import NotFoundPage from "./components/404page";
-import AuthActionHandler from "./components/AuthActionHandler";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PublicRoute from "./components/PublicRoute";
+import AuthActionHandler from "./components/auth/AuthActionHandler";//<--Auth
+//Route handlers
+import ProtectedRoute from "./components/route/ProtectedRoute";
+import PublicRoute from "./components/route/PublicRoute";
+//Context
 import { JobProvider } from "./components/JobContext";
-import { useAuth } from "./components/AuthContext";
+import { useAuth } from "./components/auth/AuthContext";//<--Auth
 
 function App() {
     const { user, loading: authLoading } = useAuth();

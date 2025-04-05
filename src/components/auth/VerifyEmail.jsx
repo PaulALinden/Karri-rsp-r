@@ -4,7 +4,7 @@ import { getAuth, applyActionCode, signOut } from "firebase/auth";
 const VerifyEmail = ({ oobCode }) => {
     const auth = getAuth();
     const [message, setMessage] = useState("");
- 
+
     const handleVerifyEmail = async () => {
         try {
             await applyActionCode(auth, oobCode);
@@ -17,13 +17,13 @@ const VerifyEmail = ({ oobCode }) => {
             signOut(auth);
         }
     };
-        
+
     return (
         <div>
             {oobCode ? (
                 <>
                     {!message && <button onClick={handleVerifyEmail}>Verifiera e-post</button>}
-                    {message && <p>{message}<a href="/"> Till start.</a></p> }
+                    {message && <p>{message}<a href="/"> Till start.</a></p>}
                 </>
             ) : (
                 <p>Något gick fel. <a href="/">Till start.</a></p>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { AuthProvider } from "./components/AuthContext";
+import { AuthProvider } from "./components/auth/AuthContext";
 
 // Skapa en root och rendera appen
 const root = ReactDOM.createRoot(document.getElementById('root'));
