@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { db } from "../../config/firebaseConfig";
 import { useAuth } from "./AuthContext";
 import { useJobs } from "./JobContext"; // Ny import
@@ -26,7 +26,6 @@ const Home = () => {
     const [error, setError] = useState("");
     const [severity, setSeverity] = useState("error");
     const [showErrorBanner, setShowErrorBanner] = useState(false);
-    const navigate = useNavigate();
     const userCollectionPath = useMemo(() => user ? `users/${user.uid}/jobApplications` : null, [user]);
 
     useEffect(() => {
