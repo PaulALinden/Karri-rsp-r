@@ -1,0 +1,82 @@
+{
+    "en": {
+        "privacyPolicy": {
+            "title": "Privacy Policy",
+            "effectiveDate": "Effective Date:",
+            "welcome": {
+                "before": "We at ",
+                "highlight": "Karriärspår",
+                "after": " value your privacy. This Privacy Policy explains how we collect, use, and protect the personal information you provide when using our website and services."
+            },
+            "infoCollectTitle": "Information We Collect",
+            "infoCollectText": "We collect the following types of information from you:",
+            "infoCollectItems": [
+                "Account Information: When you register an account, we collect your email address and password through Firebase Authentication.",
+                "User-Generated Data: The job application logs and other data you choose to input and save within our service."
+            ],
+            "noTracking": "We do not use tracking tools such as Google Analytics or other similar services.",
+            "howWeUseTitle": "How We Use Your Data",
+            "howWeUseText": "We use the information we collect to:",
+            "howWeUseItems": [
+                "Enable account creation and login functionality.",
+                "Store and display your job application data for your personal use.",
+                "Provide simple statistics about your job applications, such as the number of applications and their statuses."
+            ],
+            "dataStorageTitle": "Data Storage and Security",
+            "dataStorageText": "All user data is stored securely in Firebase Firestore. While Firebase provides robust security measures, we do not apply any additional encryption or security mechanisms beyond Firebase’s default setup.",
+            "userRightsTitle": "User Rights",
+            "userRightsText": "You have the right to:",
+            "userRightsItems": [
+                "Request access to the data we store about you.",
+                "Request that we delete your account and all associated data."
+            ],
+            "userRightsContact": "To exercise these rights, please contact us at ",
+            "thirdPartyTitle": "Third-Party Services",
+            "thirdPartyText": "We rely on Firebase services to manage authentication and data storage. Firebase may collect certain data as described in their Privacy Policy.",
+            "contactTitle": "Contact Us",
+            "contactText": "If you have any questions about this Privacy Policy or how your data is handled, please contact us at ",
+            "backButton": "Back",
+            "contactEmail": "linden.91.pl@gmail.com."
+        }
+    },
+    "sv": {
+        "privacyPolicy": {
+            "title": "Integritetspolicy",
+            "effectiveDate": "Ikraftträdandedatum:",
+            "welcome": {
+                "before": "Vi på ",
+                "highlight": "Karriärspår",
+                "after": " värdesätter din integritet. Denna integritetspolicy förklarar hur vi samlar in, använder och skyddar den personliga information du tillhandahåller när du använder vår webbplats och tjänster."
+            },
+            "infoCollectTitle": "Information vi samlar in",
+            "infoCollectText": "Vi samlar in följande typer av information från dig:",
+            "infoCollectItems": [
+                "Kontoinformation: När du registrerar ett konto samlar vi in din e-postadress och ditt lösenord via Firebase Authentication.",
+                "Användargenererad data: Jobbansökningsloggar och annan data du väljer att mata in och spara i vår tjänst."
+            ],
+            "noTracking": "Vi använder inte spårningsverktyg som Google Analytics eller liknande tjänster.",
+            "howWeUseTitle": "Hur vi använder din data",
+            "howWeUseText": "Vi använder den information vi samlar in för att:",
+            "howWeUseItems": [
+                "Möjliggöra skapande av konto och inloggningsfunktionalitet.",
+                "Lagra och visa dina jobbansökningsdata för ditt personliga bruk.",
+                "Tillhandahålla enkel statistik om dina jobbansökningar, såsom antalet ansökningar och deras statusar."
+            ],
+            "dataStorageTitle": "Datalagring och säkerhet",
+            "dataStorageText": "All användardata lagras säkert i Firebase Firestore. Även om Firebase tillhandahåller robusta säkerhetsåtgärder, tillämpar vi inte några ytterligare krypterings- eller säkerhetsmekanismer utöver Firebase standardinställningar.",
+            "userRightsTitle": "Användarrättigheter",
+            "userRightsText": "Du har rätt att:",
+            "userRightsItems": [
+                "Begära tillgång till den data vi lagrar om dig.",
+                "Begära att vi raderar ditt konto och all associerad data."
+            ],
+            "userRightsContact": "För att utöva dessa rättigheter, kontakta oss på ",
+            "thirdPartyTitle": "Tredjepartstjänster",
+            "thirdPartyText": "Vi förlitar oss på Firebase-tjänster för att hantera autentisering och datalagring. Firebase kan samla in viss data enligt deras integritetspolicy.",
+            "contactTitle": "Kontakta oss",
+            "contactText": "Om du har några frågor om denna integritetspolicy eller hur din data hanteras, kontakta oss på ",
+            "backButton": "Tillbaka",
+            "contactEmail": "linden.91.pl@gmail.com."
+        }
+    }
+}

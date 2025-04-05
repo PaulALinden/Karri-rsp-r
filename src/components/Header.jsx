@@ -1,13 +1,26 @@
 import { useState } from "react";
-import logo from "../assets/logo.svg";
 import { useNavigate } from "react-router";
-import { auth } from "../../config/firebaseConfig";
-import { signOut } from "firebase/auth";
-import DeleteAccountModal from "./DeleteAccountModal";
 import Hamburger from 'hamburger-react'
 import { Link } from "react-router";
+//Logo
+import logo from "../assets/logo.svg";
+import ReactCountryFlag from "react-country-flag"
+//Auth
+import { auth } from "../../config/firebaseConfig";
+import { signOut } from "firebase/auth";
+//Component
+import DeleteAccountModal from "./DeleteAccountModal";
+//Context
+import { useLanguage } from "./context/LanguageContext";
+import { useAuth } from "./auth/AuthContext";
+//Language
+import translations from "../utils/language/header.json"
+import LanguageDropdown from "./LanguageDropdown";
 
-const Header = ({ showFull = true }) => { // showFull defaults till true om ingen prop skickas
+const Header = () => {
+    const { user } = useAuth();
+    const { language, toggleLanguage } = useLanguage();
+    const t = translations[language].header;
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -19,6 +32,10 @@ const Header = ({ showFull = true }) => { // showFull defaults till true om inge
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const handleLanguageChange = (event) => {
+        toggleLanguage(event.target.value); // Sätt språket till det valda värdet
     };
 
     return (
@@ -40,21 +57,25 @@ const Header = ({ showFull = true }) => { // showFull defaults till true om inge
 
             {menuOpen && (
                 <nav>
-                    {showFull ? (
+
+                    <LanguageDropdown />
+
+                    {user ? (
                         <>
                             <div className="menu-group1">
-                                <Link to={"/privacy-policy"}>Policy</Link>
-                                <Link to={"/terms-and-conditions"}>Användarvilkor</Link>
-                                <Link onClick={() => setIsModalOpen(true)} className="menu-btn">Ta bort konto</Link>
+                                <Link to={"/"} onClick={() => setMenuOpen(!menuOpen)}>{t.home}</Link>
+                                <Link to={"/privacy-policy"} onClick={() => setMenuOpen(!menuOpen)}>{t.policy}</Link>
+                                <Link to={"/terms-and-conditions"} onClick={() => setMenuOpen(!menuOpen)}>{t.terms}</Link>
+                                <Link onClick={() => setIsModalOpen(true)} className="menu-btn">{t.deleteAccount}</Link>
                             </div>
                             <div className="menu-group2">
-                                <button onClick={handleSignOut} className="menu-btn sign-out">Logga ut</button>
+                                <button onClick={handleSignOut} className="menu-btn sign-out">{t.signOut}</button>
                             </div>
                         </>
                     ) : (
                         <div className="menu-group1">
-                            <Link to={"/privacy-policy"}>Policy</Link>
-                            <Link to={"/terms-and-conditions"}>Användarvilkor</Link>
+                            <Link to={"/privacy-policy"} onClick={() => setMenuOpen(!menuOpen)}>{t.policy}</Link>
+                            <Link to={"/terms-and-conditions"} onClick={() => setMenuOpen(!menuOpen)}>{t.terms}</Link>
                         </div>
                     )}
                 </nav>

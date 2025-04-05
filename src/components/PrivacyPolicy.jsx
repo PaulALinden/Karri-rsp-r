@@ -1,66 +1,87 @@
 import "../css/policy-and-terms.css";
 import Header from "./Header";
 import { useNavigate } from "react-router";
+import { useLanguage } from "./context/LanguageContext";
+import translations from "../utils/language/policy.json";
 
-const PrivacyPolicy = (() => {
-
+const PrivacyPolicy = () => {
     const navigate = useNavigate();
+    const { language } = useLanguage();
+    const t = translations[language].privacyPolicy;
 
     const handleGoBack = () => {
-        navigate(-1); // Går tillbaka en sida i historiken
+        navigate(-1);
     };
 
     return (
         <div className="article">
-
-            <Header showFull={false}></Header>
+            <Header />
 
             <section className="main-section">
-                <h1>Privacy Policy</h1>
+                <h1>{t.title}</h1>
+                <p>
+                    <strong>{t.effectiveDate}</strong> 2025-01-25
+                </p>
 
-                <p><strong>Effective Date:</strong> 2025-01-25</p>
+                <p>
+                    {t.welcome.before}
+                    <strong>{t.welcome.highlight}</strong>
+                    {t.welcome.after}
+                </p>
 
-                <p>We at <strong>Karriärspår</strong>, value your privacy. This Privacy Policy explains how we collect, use, and protect the personal information you provide when using our website and services.</p>
-
-                <h2>Information We Collect</h2>
-                <p>We collect the following types of information from you:</p>
+                <h2>{t.infoCollectTitle}</h2>
+                <p>{t.infoCollectText}</p>
                 <ul>
-                    <li><strong>Account Information:</strong> When you register an account, we collect your email address and password through Firebase Authentication.</li>
-                    <li><strong>User-Generated Data:</strong> The job application logs and other data you choose to input and save within our service.</li>
+                    {t.infoCollectItems.map((item, index) => {
+                        const [label, text] = item.split(": ");
+                        return (
+                            <li key={index}>
+                                <strong>{label}:</strong> {text}
+                            </li>
+                        );
+                    })}
                 </ul>
-                <p>We do not use tracking tools such as Google Analytics or other similar services.</p>
+                <p>{t.noTracking}</p>
 
-                <h2>How We Use Your Data</h2>
-                <p>We use the information we collect to:</p>
+                <h2>{t.howWeUseTitle}</h2>
+                <p>{t.howWeUseText}</p>
                 <ul>
-                    <li>Enable account creation and login functionality.</li>
-                    <li>Store and display your job application data for your personal use.</li>
-                    <li>Provide simple statistics about your job applications, such as the number of applications and their statuses.</li>
+                    {t.howWeUseItems.map((item, index) => (
+                        <li key={index}>{item}</li>
+                    ))}
                 </ul>
 
-                <h2>Data Storage and Security</h2>
-                <p>All user data is stored securely in Firebase Firestore. While Firebase provides robust security measures, we do not apply any additional encryption or security mechanisms beyond Firebase’s default setup.</p>
+                <h2>{t.dataStorageTitle}</h2>
+                <p>{t.dataStorageText}</p>
 
-                <h2>User Rights</h2>
-                <p>You have the right to:</p>
+                <h2>{t.userRightsTitle}</h2>
+                <p>{t.userRightsText}</p>
                 <ul>
-                    <li>Request access to the data we store about you.</li>
-                    <li>Request that we delete your account and all associated data.</li>
+                    {t.userRightsItems.map((item, index) => (
+                        <li key={index}>{item}</li>
+                    ))}
                 </ul>
-                <p>To exercise these rights, please contact us at <strong>linden.91.pl@gmail.com</strong>.</p>
+                <p>
+                    {t.userRightsContact}
+                    <strong>{t.contactEmail}</strong>
+                </p>
 
-                <h2>Third-Party Services</h2>
-                <p>We rely on Firebase services to manage authentication and data storage. Firebase may collect certain data as described in their Privacy Policy.</p>
+                <h2>{t.thirdPartyTitle}</h2>
+                <p>{t.thirdPartyText}</p>
 
-                <h2>Contact Us</h2>
-                <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us at <strong>linden.91.pl@gmail.com</strong>.</p>
+                <h2>{t.contactTitle}</h2>
+                <p>
+                    {t.contactText}
+                    <strong>{t.contactEmail}</strong>
+
+                </p>
             </section>
 
             <button onClick={handleGoBack} className="back-button">
-                Tillbaka
+                {t.backButton}
             </button>
         </div>
     );
-});
+};
 
 export default PrivacyPolicy;

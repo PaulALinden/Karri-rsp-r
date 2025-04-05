@@ -1,0 +1,22 @@
+{
+    "en": {
+        "header": {
+            "home": "Home",
+            "policy": "Policy",
+            "terms": "Terms",
+            "deleteAccount": "Delete Account",
+            "signOut": "Sign Out",
+            "switchToSwedish": "Switch to Swedish"
+        }
+    },
+    "sv": {
+        "header": {
+            "home": "Hem",
+            "policy": "Policy",
+            "terms": "Användarvillkor",
+            "deleteAccount": "Ta bort konto",
+            "signOut": "Logga ut",
+            "switchToEnglish": "Byt till Engelska"
+        }
+    }
+}

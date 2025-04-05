@@ -14,60 +14,63 @@ import PublicRoute from "./components/route/PublicRoute";
 //Context
 import { JobProvider } from "./components/context/JobContext";
 import { useAuth } from "./components/auth/AuthContext";//<--Auth
+import { LanguageProvider } from "./components/context/LanguageContext";
 
 function App() {
     const { user, loading: authLoading } = useAuth();
 
     return (
-        <JobProvider user={user}>
-            <Router>
-                <div className="app">
-                    <Routes>
-                        {/* Publika rutter: redirect inloggade användare */}
-                        <Route
-                            path="/login"
-                            element={
-                                <PublicRoute>
-                                    <Login />
-                                </PublicRoute>
-                            }
-                        />
-                        <Route
-                            path="/register"
-                            element={
-                                <PublicRoute>
-                                    <Register />
-                                </PublicRoute>
-                            }
-                        />
-                        <Route
-                            path="/"
-                            element={
-                                <PublicRoute>
-                                    <Login />
-                                </PublicRoute>
-                            }
-                        />
+        <LanguageProvider>
+            <JobProvider user={user}>
+                <Router>
+                    <div className="app">
+                        <Routes>
+                            {/* Publika rutter: redirect inloggade användare */}
+                            <Route
+                                path="/login"
+                                element={
+                                    <PublicRoute>
+                                        <Login />
+                                    </PublicRoute>
+                                }
+                            />
+                            <Route
+                                path="/register"
+                                element={
+                                    <PublicRoute>
+                                        <Register />
+                                    </PublicRoute>
+                                }
+                            />
+                            <Route
+                                path="/"
+                                element={
+                                    <PublicRoute>
+                                        <Login />
+                                    </PublicRoute>
+                                }
+                            />
 
-                        {/* Skyddade rutter: endast för inloggade och verifierade */}
-                        <Route
-                            path="/home"
-                            element={
-                                <ProtectedRoute>
-                                    <Home />
-                                </ProtectedRoute>
-                            }
-                        />
+                            {/* Skyddade rutter: endast för inloggade och verifierade */}
+                            <Route
+                                path="/home"
+                                element={
+                                    <ProtectedRoute>
+                                        <Home />
+                                    </ProtectedRoute>
+                                }
+                            />
 
-                        {/* Övriga sidor */}
-                        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-                        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                        <Route path="/auth-action" element={<AuthActionHandler />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                    </Routes>
-                </div>
-            </Router>
-        </JobProvider>
+                            {/* Övriga sidor */}
+                            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                            <Route path="/auth-action" element={<AuthActionHandler />} />
+                            <Route path="*" element={<NotFoundPage />} />
+                        </Routes>
+                    </div>
+                </Router>
+            </JobProvider>
+        </LanguageProvider>
     );
 }
 

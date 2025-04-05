@@ -56,8 +56,6 @@ header {
     padding: 25px;
 }
 
-
-
 nav {
     position: fixed;
     top: 0;
@@ -295,4 +293,27 @@ p a {
 
 .switch-button img {
     height: 40px;
+}
+
+/* Language */
+
+.language-options {
+    position: absolute;
+    top: 100;
+    right: 20px;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 65px;
+    height: 30px;
+    border-radius: var(--border-radius);
+    background-color: var(--color-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.language-option {
+    margin-bottom: 0;
+    padding: 5px;
+    cursor: pointer;
 }

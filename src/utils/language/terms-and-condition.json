@@ -1,0 +1,70 @@
+{
+    "en": {
+        "termsAndConditions": {
+            "title": "Terms and Conditions",
+            "effectiveDate": "Effective Date:",
+            "welcome": {
+                "before": "Welcome to ",
+                "highlight": "Karriärspår",
+                "after": ". By using our website, you agree to the following terms and conditions:"
+            },
+            "purposeTitle": "Purpose of the Service",
+            "purposeText": "This website is designed to provide users with a personal log for tracking their job applications. The service is intended solely for personal use.",
+            "acceptableUseTitle": "Acceptable Use",
+            "acceptableUseText": "By using the Service, you agree:",
+            "acceptableUseItems": [
+                "To use the Service only for tracking your personal job applications.",
+                "Not to store or share any illegal, sensitive, or inappropriate content through the Service.",
+                "Not to share your account credentials or allow others to access your account."
+            ],
+            "disclaimerTitle": "Disclaimer of Liability",
+            "disclaimerText1": "This is a hobby project, and we do not guarantee the accuracy, reliability, or availability of the Service.",
+            "disclaimerText2": "You are responsible for the content you store on the Service. Do not enter any sensitive personal information (e.g., Social Security numbers, credit card details) into the system.",
+            "disclaimerText3": "We are not liable for any data loss, technical issues, or interruptions in the Service.",
+            "terminationTitle": "Termination of Service",
+            "terminationText1": "We reserve the right to terminate accounts or discontinue the Service at any time without prior notice.",
+            "terminationText2": "Users have the right to delete their accounts at any time, which will also delete all associated data.",
+            "feesTitle": "Fees",
+            "feesText": "The Service is provided free of charge and there are no current plans to introduce payments.",
+            "contactTitle": "Contact Us",
+            "contactText": "If you have any questions about these terms, please contact us at ",
+            "contactMail": "linden.91.pl@gmail.com.",
+            "note": "Note: By continuing to use this Service, you confirm that you have read and agree to this Privacy Policy and Terms and Conditions.",
+            "backButton": "Back"
+        }
+    },
+    "sv": {
+        "termsAndConditions": {
+            "title": "Användarvillkor",
+            "effectiveDate": "Ikraftträdandedatum:",
+            "welcome": {
+                "before": "Välkommen till ",
+                "highlight": "Karriärspår",
+                "after": ". Genom att använda vår webbplats godkänner du följande användarvillkor:"
+            },
+            "purposeTitle": "Syftet med tjänsten",
+            "purposeText": "Denna webbplats är utformad för att ge användare en personlig logg för att spåra sina jobbansökningar. Tjänsten är avsedd enbart för personligt bruk.",
+            "acceptableUseTitle": "Acceptabel användning",
+            "acceptableUseText": "Genom att använda tjänsten samtycker du till:",
+            "acceptableUseItems": [
+                "Att använda tjänsten endast för att spåra dina personliga jobbansökningar.",
+                "Att inte lagra eller dela något olagligt, känsligt eller olämpligt innehåll via tjänsten.",
+                "Att inte dela dina kontouppgifter eller låta andra få tillgång till ditt konto."
+            ],
+            "disclaimerTitle": "Ansvarsfriskrivning",
+            "disclaimerText1": "Detta är ett hobbyprojekt, och vi garanterar inte tjänstens noggrannhet, tillförlitlighet eller tillgänglighet.",
+            "disclaimerText2": "Du är ansvarig för det innehåll du lagrar i tjänsten. Ange inte känslig personlig information (t.ex. personnummer, kreditkortsuppgifter) i systemet.",
+            "disclaimerText3": "Vi är inte ansvariga för dataförlust, tekniska problem eller avbrott i tjänsten.",
+            "terminationTitle": "Uppsägning av tjänsten",
+            "terminationText1": "Vi förbehåller oss rätten att avsluta konton eller avbryta tjänsten när som helst utan föregående meddelande.",
+            "terminationText2": "Användare har rätt att radera sina konton när som helst, vilket också raderar all associerad data.",
+            "feesTitle": "Avgifter",
+            "feesText": "Tjänsten tillhandahålls kostnadsfritt och det finns för närvarande inga planer på att införa betalningar.",
+            "contactTitle": "Kontakta oss",
+            "contactText": "Om du har några frågor om dessa villkor, kontakta oss på ",
+            "contactMail": "linden.91.pl@gmail.com.",
+            "note": "Notera: Genom att fortsätta använda denna tjänst bekräftar du att du har läst och godkänner denna integritetspolicy och användarvillkor.",
+            "backButton": "Tillbaka"
+        }
+    }
+}
