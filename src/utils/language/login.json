@@ -1,0 +1,30 @@
+{
+    "en": {
+        "login": {
+            "title": "LOG IN",
+            "emailLabel": "Email address",
+            "emailPlaceholder": "Enter your email address",
+            "passwordLabel": "Password",
+            "passwordPlaceholder": "Enter your password",
+            "forgotPassword": "Forgot password",
+            "submitButton": "Log in",
+            "noAccount": "Don't have an account?",
+            "createAccountLink": "Create account",
+            "emailVerificationError": "Please verify your email address. A verification email has been sent."
+        }
+    },
+    "sv": {
+        "login": {
+            "title": "LOGGA IN",
+            "emailLabel": "E-postadress",
+            "emailPlaceholder": "Fyll i din e-postadress",
+            "passwordLabel": "Lösenord",
+            "passwordPlaceholder": "Fyll i ditt lösenord",
+            "forgotPassword": "Glömt lösenord",
+            "submitButton": "Logga in",
+            "noAccount": "Har du inget konto?",
+            "createAccountLink": "Skapa konto",
+            "emailVerificationError": "Vänligen verifiera din e-postadress. Ett verifieringsmail har skickats."
+        }
+    }
+}

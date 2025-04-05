@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router"; // Ändrade till react-router-dom
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
@@ -7,11 +7,12 @@ import { sanitizeInput, validateEmail, validatePasswordChecks } from "../utils/v
 import handleFirebaseAuthError from "../utils/authErrorHandler";
 import Alert from "./Alert";
 import SuccessModal from "./SuccesRegisterModal";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
-import logo from "../assets/logo.svg"
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import logo from "../assets/logo.svg";
 import "../css/start.css";
-
+import { useLanguage } from "./context/LanguageContext"; // Importera språk-kontexten
+import registerTranslations from "../utils/language/register.json"; // Importera översättningar
+import LanguageDropdown from "./LanguageDropdown";
 const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,6 +28,9 @@ const Register = () => {
     const [error, setError] = useState("");
     const [showErrorBanner, setShowErrorBanner] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const { language } = useLanguage();
+    const t = registerTranslations[language].register; // Hämta översättningar
+
     const areAllPasswordValidationsTrue = () => {
         return (
             passwordValidations.length &&
@@ -43,13 +47,13 @@ const Register = () => {
         setShowErrorBanner(false);
         try {
             if (!validateEmail(email)) {
-                setError("Ogiltig e-postadress");
+                setError(t.invalidEmailError);
                 setShowErrorBanner(true);
                 return;
             }
 
             if (!termsAccepted) {
-                setError("Du måste acceptera villkoren och sekretesspolicyn för att registrera dig.");
+                setError(t.termsNotAcceptedError);
                 setShowErrorBanner(true);
                 return;
             }
@@ -64,22 +68,18 @@ const Register = () => {
                 }
 
                 await sendEmailVerification(user);
-                // Verifiera om användaren är skapad och har UID
                 console.log("User ID:", userId);
                 console.log("Email verification sent.");
 
                 const userCollectionPath = `/users/${userId}/terms`;
                 const userCollectionRef = collection(db, userCollectionPath);
 
-
                 const terms = {
                     termsAccepted: true,
                     acceptedAt: new Date().toISOString(),
                 };
 
-                // Vänta på att dokumentet ska läggas till innan vi går vidare
                 await addDoc(userCollectionRef, terms);
-
                 console.log("Terms document created successfully!");
                 setIsOpen(true);
             }
@@ -97,6 +97,9 @@ const Register = () => {
 
     return (
         <div className="start-page">
+
+            <LanguageDropdown />
+
             <div className="start-left">
                 <img src={logo} alt="" />
             </div>
@@ -108,10 +111,10 @@ const Register = () => {
                             {error}
                         </Alert>
                     )}
-                    <h1>SKAPA KONTO</h1>
+                    <h1>{t.title}</h1>
                     <form onSubmit={handleRegister}>
                         <div className="inputcontainer">
-                            <label>Email:</label>
+                            <label>{t.emailLabel}</label>
                             <input
                                 type="email"
                                 value={email}
@@ -120,39 +123,47 @@ const Register = () => {
                             />
                         </div>
                         <div className="inputcontainer">
-                            <label>Password:</label>
+                            <label>{t.passwordLabel}</label>
                             <input
-                                type={isPasswordVisible ? 'text' : 'password'}
+                                type={isPasswordVisible ? "text" : "password"}
                                 value={password}
                                 onChange={(e) => {
                                     setPassword(sanitizeInput(e.target.value));
                                     validatePasswordChecks(sanitizeInput(e.target.value), setPasswordValidations);
-                                }
-                                }
+                                }}
                                 required
                             />
-
                             <span className="eyeContainer">
-                                {isPasswordVisible ? <FaEyeSlash className="eyeIconClosed" onClick={togglePasswordVisibility} /> : <FaEye className="eyeIconOpen" onClick={togglePasswordVisibility} />}
+                                {isPasswordVisible ? (
+                                    <FaEyeSlash
+                                        className="eyeIconClosed"
+                                        onClick={togglePasswordVisibility}
+                                    />
+                                ) : (
+                                    <FaEye
+                                        className="eyeIconOpen"
+                                        onClick={togglePasswordVisibility}
+                                    />
+                                )}
                             </span>
 
                             <div className="password-requirements">
-                                <p>Lösenordet måste uppfylla följande krav:</p>
+                                <p>{t.passwordRequirements}</p>
                                 <ul>
-                                    <li className={passwordValidations.length ? 'valid' : 'invalid'}>
-                                        Minst 12 tecken långt
+                                    <li className={passwordValidations.length ? "valid" : "invalid"}>
+                                        {t.passwordValidations.length}
                                     </li>
-                                    <li className={passwordValidations.lowercase ? 'valid' : 'invalid'}>
-                                        Minst en liten bokstav (a-z)
+                                    <li className={passwordValidations.lowercase ? "valid" : "invalid"}>
+                                        {t.passwordValidations.lowercase}
                                     </li>
-                                    <li className={passwordValidations.uppercase ? 'valid' : 'invalid'}>
-                                        Minst en stor bokstav (A-Z)
+                                    <li className={passwordValidations.uppercase ? "valid" : "invalid"}>
+                                        {t.passwordValidations.uppercase}
                                     </li>
-                                    <li className={passwordValidations.number ? 'valid' : 'invalid'}>
-                                        Minst en siffra (0-9)
+                                    <li className={passwordValidations.number ? "valid" : "invalid"}>
+                                        {t.passwordValidations.number}
                                     </li>
-                                    <li className={passwordValidations.special ? 'valid' : 'invalid'}>
-                                        Minst ett specialtecken (t.ex. !, @, #, $, %, &, etc.)
+                                    <li className={passwordValidations.special ? "valid" : "invalid"}>
+                                        {t.passwordValidations.special}
                                     </li>
                                 </ul>
                             </div>
@@ -164,29 +175,31 @@ const Register = () => {
                                     onChange={(e) => setTermsAccepted(e.target.checked)}
                                     required
                                 />
-                                <label> 
-                                    I accept the{" "}
-                                    <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">
-                                        Terms and Conditions
-                                    </a>{" "}
-                                    and{" "}
-                                    <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
-                                        Privacy Policy
-                                    </a>.
-
+                                <label>
+                                    {t.termsLabel}{" "}
+                                    <Link to="/terms-and-conditions">
+                                        {t.termsLink}
+                                    </Link>{" "}
+                                    {language === "en" ? "and" : "och"}{" "}
+                                    <Link to="/privacy-policy">
+                                        {t.privacyLink}
+                                    </Link>.
                                 </label>
                             </div>
-
-
                         </div>
-                        <button className={areAllPasswordValidationsTrue() ? "submitbutton" : "disabled-button"} type="submit">Register{!areAllPasswordValidationsTrue()}</button>
+                        <button
+                            className={areAllPasswordValidationsTrue() ? "submitbutton" : "disabled-button"}
+                            type="submit"
+                        >
+                            {t.submitButton}
+                        </button>
                     </form>
                     <p>
-                        Har du redan ett konto? <Link to="/login">Login here</Link>
+                        {t.alreadyHaveAccount} <Link to="/login">{t.loginLink}</Link>
                     </p>
                 </div>
 
-                <SuccessModal isOpen={isOpen} setIsOpen={setIsOpen}></SuccessModal>
+                <SuccessModal isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
         </div>
     );

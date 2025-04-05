@@ -9,6 +9,9 @@ import handleFirebaseAuthError from "../utils/authErrorHandler";
 import { sanitizeInput } from "../utils/validators";
 import logo from "../assets/logo.svg";
 import "../css/start.css";
+import { useLanguage } from "./context/LanguageContext"; // Importera språk-kontexten
+import loginTranslations from "../utils/language/login.json"; // Importera översättningar
+import LanguageDropdown from "./LanguageDropdown"
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -17,6 +20,8 @@ const Login = () => {
     const [showErrorBanner, setShowErrorBanner] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { language } = useLanguage();
+    const t = loginTranslations[language].login; // Hämta översättningar
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -27,13 +32,10 @@ const Login = () => {
 
             if (!loginUser.user.emailVerified) {
                 await sendEmailVerification(loginUser.user);
-                const error = new Error(
-                    "Vänligen verifiera din e-postadress. Ett verifieringsmail har skickats."
-                );
+                const error = new Error(t.emailVerificationError);
                 error.code = "auth/email-verification";
                 throw error;
             }
-            // Redirect hanteras av PublicRoute/ProtectedRoute
         } catch (err) {
             const message = handleFirebaseAuthError(err);
             setError(message);
@@ -52,6 +54,9 @@ const Login = () => {
 
     return (
         <div className="start-page">
+
+            <LanguageDropdown />
+
             <div className="start-left">
                 <img src={logo} alt="" />
             </div>
@@ -62,23 +67,23 @@ const Login = () => {
                             {error}
                         </Alert>
                     )}
-                    <h1>LOGGA IN</h1>
+                    <h1>{t.title}</h1>
                     <form onSubmit={handleLogin}>
                         <div className="inputcontainer">
-                            <label>E-postadress</label>
+                            <label>{t.emailLabel}</label>
                             <input
                                 type="email"
-                                placeholder="Fyll i din e-postadress"
+                                placeholder={t.emailPlaceholder}
                                 value={email}
                                 onChange={(e) => setEmail(sanitizeInput(e.target.value))}
                                 required
                             />
                         </div>
                         <div className="inputcontainer">
-                            <label>Lösenord</label>
+                            <label>{t.passwordLabel}</label>
                             <input
                                 type={isPasswordVisible ? "text" : "password"}
-                                placeholder="Fyll i ditt lösenord"
+                                placeholder={t.passwordPlaceholder}
                                 value={password}
                                 onChange={(e) => setPassword(sanitizeInput(e.target.value))}
                                 required
@@ -96,12 +101,14 @@ const Login = () => {
                                     />
                                 )}
                             </span>
-                            <Link onClick={() => setIsModalOpen(true)}>Glömt lösenord</Link>
+                            <Link onClick={() => setIsModalOpen(true)}>{t.forgotPassword}</Link>
                         </div>
-                        <button className="submitbutton" type="submit">Logga in</button>
+                        <button className="submitbutton" type="submit">
+                            {t.submitButton}
+                        </button>
                     </form>
                     <p>
-                        Har du inget konto? <Link to="/register">Skapa konto</Link>
+                        {t.noAccount} <Link to="/register">{t.createAccountLink}</Link>
                     </p>
                 </div>
             </div>
