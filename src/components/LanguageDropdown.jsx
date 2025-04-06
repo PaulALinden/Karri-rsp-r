@@ -3,7 +3,7 @@ import { useLanguage } from "./context/LanguageContext";
 import ReactCountryFlag from "react-country-flag";
 
 const LanguageDropdown = () => {
-    const { language, toggleLanguage } = useLanguage();
+    const { language, changeLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -35,11 +35,10 @@ const LanguageDropdown = () => {
                     <ReactCountryFlag
                         key={opt.code}
                         onClick={() => {
-                            toggleLanguage(opt.code);
+                            changeLanguage(opt.code);
                             setIsOpen(false);
                         }}
                         className="language-option"
-
                         countryCode={opt.flag}
                         svg
                         style={{ width: '30px', height: '30px' }}

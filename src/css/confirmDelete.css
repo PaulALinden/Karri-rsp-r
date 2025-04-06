@@ -16,3 +16,15 @@
     margin-bottom: 20px;
 }
 
+.modal-input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+}
+
+.error-text {
+    color: red;
+    font-size: 14px;
+    margin: 10px 0;
+}

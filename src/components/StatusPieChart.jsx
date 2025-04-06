@@ -29,9 +29,9 @@ const StatusPieChart = ({ jobs }) => {
 
     useEffect(() => {
         const count = {
-            applied: jobs.filter((j) => j.status === "Ansökt").length,
-            interview: jobs.filter((j) => j.status === "Intervju").length,
-            rejected: jobs.filter((j) => j.status === "Avslag").length,
+            applied: jobs.filter((j) => j.status === "Applied").length,
+            interview: jobs.filter((j) => j.status === "Interview").length,
+            rejected: jobs.filter((j) => j.status === "Rejected").length,
         };
         setStats(count);
     }, [jobs]);

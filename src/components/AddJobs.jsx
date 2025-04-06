@@ -1,4 +1,4 @@
-import "../css/addJob.css"
+import "../css/addJob.css";
 import { useLanguage } from "./context/LanguageContext";
 import translations from "../utils/language/add-jobs.json";
 
@@ -78,8 +78,8 @@ const AddJobs = ({
                         >
                             <option value="">{t.positionPlaceholder}</option>
                             {t.positionOptions.map((option, index) => (
-                                <option key={index} value={option}>
-                                    {option}
+                                <option key={index} value={option.value}>
+                                    {option.label}
                                 </option>
                             ))}
                         </select>
@@ -95,12 +95,13 @@ const AddJobs = ({
                         >
                             <option value="">{t.jobTypePlaceholder}</option>
                             {t.jobTypeOptions.map((option, index) => (
-                                <option key={index} value={option}>
-                                    {option}
+                                <option key={index} value={option.value}>
+                                    {option.label}
                                 </option>
                             ))}
                         </select>
                     </div>
+
                     <div className="addjobform-group">
                         <label className="addjobform-label">{t.statusLabel}</label>
                         <select
@@ -111,13 +112,14 @@ const AddJobs = ({
                         >
                             <option value="">{t.statusPlaceholder}</option>
                             {t.statusOptions.map((option, index) => (
-                                <option key={index} value={option}>
-                                    {option}
+                                <option key={index} value={option.value}>
+                                    {option.label}
                                 </option>
                             ))}
                         </select>
                     </div>
                 </section>
+
                 <div className="addjobform-group">
                     <label className="addjobform-label">{t.commentLabel}</label>
                     <input

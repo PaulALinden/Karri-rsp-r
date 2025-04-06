@@ -88,6 +88,8 @@ const Register = () => {
             const message = handleFirebaseAuthError(err);
             setError(message);
             setShowErrorBanner(true);
+        } finally {
+            auth.signOut();
         }
     };
 

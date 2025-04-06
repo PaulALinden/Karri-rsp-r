@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
@@ -9,9 +9,10 @@ import handleFirebaseAuthError from "../utils/authErrorHandler";
 import { sanitizeInput } from "../utils/validators";
 import logo from "../assets/logo.svg";
 import "../css/start.css";
-import { useLanguage } from "./context/LanguageContext"; // Importera språk-kontexten
-import loginTranslations from "../utils/language/login.json"; // Importera översättningar
-import LanguageDropdown from "./LanguageDropdown"
+import { useLanguage } from "./context/LanguageContext";
+import loginTranslations from "../utils/language/login.json";
+import LanguageDropdown from "./LanguageDropdown";
+import { useAuth } from "./auth/AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -21,20 +22,53 @@ const Login = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { language } = useLanguage();
-    const t = loginTranslations[language].login; // Hämta översättningar
+    const t = loginTranslations[language].login;
+    const { user, loading } = useAuth();
+    const navigate = useNavigate();
+
+    // Funktion för att uppdatera användarstatus manuellt
+    const refreshUser = async () => {
+        if (user) {
+            await user.reload(); // Uppdatera användarens status
+            const updatedUser = auth.currentUser; // Hämta det uppdaterade användarobjektet
+            if (updatedUser.emailVerified) {
+                navigate("/home"); // Omdirigera om verifierad
+            } else {
+                setError(t.emailVerificationError);
+                setShowErrorBanner(true);
+            }
+        }
+    };
+
+    // Kontrollera och uppdatera användarstatus vid laddning
+    useEffect(() => {
+        if (!loading) {
+            if (user) {
+                refreshUser(); // Uppdatera användaren och agera baserat på status
+            }
+        }
+    }, [user, loading, navigate, t.emailVerificationError]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             setError("");
             setShowErrorBanner(false);
-            const loginUser = await signInWithEmailAndPassword(auth, email, password);
 
-            if (!loginUser.user.emailVerified) {
-                await sendEmailVerification(loginUser.user);
-                const error = new Error(t.emailVerificationError);
-                error.code = "auth/email-verification";
-                throw error;
+            // Om användaren redan är inloggad, uppdatera istället för att logga in igen
+            if (user) {
+                await refreshUser();
+            } else {
+                // Annars gör ett nytt inloggningsförsök
+                const loginUser = await signInWithEmailAndPassword(auth, email, password);
+                if (!loginUser.user.emailVerified) {
+                    await sendEmailVerification(loginUser.user);
+                    const error = new Error(t.emailVerificationError);
+                    error.code = "auth/email-verification";
+                    throw error;
+                } else {
+                    navigate("/home");
+                }
             }
         } catch (err) {
             const message = handleFirebaseAuthError(err);
@@ -52,11 +86,13 @@ const Login = () => {
         setError("");
     };
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="start-page">
-
             <LanguageDropdown />
-
             <div className="start-left">
                 <img src={logo} alt="" />
             </div>

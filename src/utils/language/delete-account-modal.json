@@ -1,16 +1,26 @@
 {
     "en": {
         "deleteAccountModal": {
-            "confirmationText": "Are you sure you want to delete your account?",
+            "confirmationText": "Are you sure you want to delete your account? This action cannot be undone.",
             "yesButton": "Yes",
-            "noButton": "No"
+            "noButton": "No",
+            "reauthPrompt": "For security reasons, please enter your password to confirm account deletion.",
+            "passwordPlaceholder": "Enter your password",
+            "confirmReauthButton": "Confirm",
+            "reauthFailed": "Incorrect password. Please try again.",
+            "deleteFailed": "Failed to delete account. Please try again later."
         }
     },
     "sv": {
         "deleteAccountModal": {
-            "confirmationText": "Är du säker på att du vill ta bort ditt konto?",
+            "confirmationText": "Är du säker på att du vill radera ditt konto? Denna åtgärd kan inte ångras.",
             "yesButton": "Ja",
-            "noButton": "Nej"
+            "noButton": "Nej",
+            "reauthPrompt": "Av säkerhetsskäl, ange ditt lösenord för att bekräfta radering av kontot.",
+            "passwordPlaceholder": "Ange ditt lösenord",
+            "confirmReauthButton": "Bekräfta",
+            "reauthFailed": "Felaktigt lösenord. Försök igen.",
+            "deleteFailed": "Misslyckades att radera kontot. Försök igen senare."
         }
     }
 }

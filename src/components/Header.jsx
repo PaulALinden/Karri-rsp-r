@@ -18,7 +18,7 @@ import LanguageDropdown from "./LanguageDropdown";
 
 const Header = () => {
     const { user } = useAuth();
-    const { language, toggleLanguage } = useLanguage();
+    const { language } = useLanguage();
     const t = translations[language].header;
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,10 +31,6 @@ const Header = () => {
         } catch (error) {
             console.error(error);
         }
-    };
-
-    const handleLanguageChange = (event) => {
-        toggleLanguage(event.target.value); // Sätt språket till det valda värdet
     };
 
     return (

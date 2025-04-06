@@ -27,13 +27,13 @@ export const JobProvider = ({ user, children }) => {
                     setJobApplications(jobs);
                     setError("");
                 } catch (err) {
-                    setError("Ett fel uppstod vid hämtning av jobbansökningar.");
+                    //setError("Ett fel uppstod vid hämtning av jobbansökningar.");
                 } finally {
                     setLoading(false);
                 }
             },
             (err) => {
-                setError("Ett fel uppstod vid anslutning till databasen.");
+                //setError("Ett fel uppstod vid anslutning till databasen.");
                 setLoading(false);
             }
         );
