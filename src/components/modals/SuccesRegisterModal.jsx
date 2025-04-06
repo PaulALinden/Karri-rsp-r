@@ -1,12 +1,12 @@
 import "../../css/successModal.css";
-import { useNavigate } from "react-router-dom"; // Ändrade till react-router-dom
-import { useLanguage } from "../LanguageContext"; // Importera språk-kontexten
-import successModalTranslations from "../successModalTranslations.json"; // Importera översättningar
+import { useNavigate } from "react-router";
+import { useLanguage } from "../context/LanguageContext";
+import successModalTranslations from "../../utils/language/success-modal.json";
 
 const SuccessModal = ({ isOpen, setIsOpen }) => {
     const navigate = useNavigate();
     const { language } = useLanguage();
-    const t = successModalTranslations[language].successModal; // Hämta översättningar
+    const t = successModalTranslations[language].successModal;
 
     if (!isOpen) return null;
 

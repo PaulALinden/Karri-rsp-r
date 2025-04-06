@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom";
 import "../../css/confirmDelete.css";
-import { useLanguage } from "../LanguageContext"; // Importera språk-kontexten
-import confirmDeleteModalTranslations from "../confirmDeleteModalTranslations.json"; // Importera översättningar
+import { useLanguage } from "../context/LanguageContext"; // Importera språk-kontexten
+import translations from "../../utils/language/confirm-delete-modal.json"; // Importera översättningar
 
 const ConfirmDeleteModal = ({ isOpen, onClose, onConfirm, docId }) => {
     const { language } = useLanguage();
-    const t = confirmDeleteModalTranslations[language].confirmDeleteModal; // Hämta översättningar
+    const t = translations[language].confirmDeleteModal; // Hämta översättningar
 
     if (!isOpen) return null;
 

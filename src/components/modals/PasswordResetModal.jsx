@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "../../css/PasswordResetModal.css";
-import { useLanguage } from "../LanguageContext"; // Importera språk-kontexten
-import passwordResetModalTranslations from "../passwordResetModalTranslations.json"; // Importera översättningar
+import { useLanguage } from "../context/LanguageContext";
+import passwordResetModalTranslations from "../../utils/language/password-reset-modal.json";
 
 const PasswordResetModal = ({ isOpen, onClose, error, setError, handleFirebaseAuthError }) => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const { language } = useLanguage();
-    const t = passwordResetModalTranslations[language].passwordResetModal; // Hämta översättningar
+    const t = passwordResetModalTranslations[language].passwordResetModal;
 
     const handlePasswordReset = async () => {
         const auth = getAuth();

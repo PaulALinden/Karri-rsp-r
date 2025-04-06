@@ -4,13 +4,13 @@ import { deleteUser } from "firebase/auth";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { useAuth } from "../auth/AuthContext";
 import "../../css/confirmDelete.css";
-import { useLanguage } from "../LanguageContext"; // Importera språk-kontexten
-import deleteAccountModalTranslations from "../deleteAccountModalTranslations.json"; // Importera översättningar
+import { useLanguage } from "../context/LanguageContext";
+import translations from "../../utils/language/delete-account-modal.json";
 
 const DeleteAccountModal = ({ isOpen, onClose }) => {
     const { user } = useAuth();
     const { language } = useLanguage();
-    const t = deleteAccountModalTranslations[language].deleteAccountModal; // Hämta översättningar
+    const t = translations[language].deleteAccountModal;
 
     if (!isOpen) return null;
 
