@@ -12,13 +12,13 @@
             "locationLabel": "Location:",
             "locationPlaceholder": "Ex: Stockholm",
             "positionLabel": "Work Arrangement:*",
-            "positionPlaceholder": "Select work arrangement",
+            "positionPlaceholder": "Select arrangement",
             "positionOptions": [
                 "On-site",
                 "Hybrid",
                 "Remote"
             ],
-            "jobTypeLabel": "Employment Type:*",
+            "jobTypeLabel": "Job Type:*",
             "jobTypePlaceholder": "Select type",
             "jobTypeOptions": [
                 "Full-time",

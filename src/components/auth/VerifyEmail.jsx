@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getAuth, applyActionCode, signOut } from "firebase/auth";
 
 const VerifyEmail = ({ oobCode }) => {

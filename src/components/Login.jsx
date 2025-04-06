@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 import Alert from "./Alert";
-import PasswordResetModal from "./PasswordResetModal";
+import PasswordResetModal from "./modals/PasswordResetModal";
 import handleFirebaseAuthError from "../utils/authErrorHandler";
 import { sanitizeInput } from "../utils/validators";
 import logo from "../assets/logo.svg";

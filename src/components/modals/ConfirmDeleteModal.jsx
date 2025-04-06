@@ -1,6 +1,6 @@
 
 import ReactDOM from 'react-dom';
-import "../css/confirmDelete.css"
+import "../../css/confirmDelete.css"
 
 const ConfirmDeleteModal = ({ isOpen, onClose, onConfirm, docId }) => {
     if (!isOpen) return null; // Om modalen inte är öppen renderas den inte

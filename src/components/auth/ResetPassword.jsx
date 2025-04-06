@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { getAuth, verifyPasswordResetCode, confirmPasswordReset } from "firebase/auth";
-import { sanitizeInput, validatePasswordChecks } from "../utils/validators";
-import "../css/reset-password.css";
+import { sanitizeInput, validatePasswordChecks } from "../../utils/validators";
+import "../../css/reset-password.css";
 
-const ResetPassword = ({oobCode}) => {
+const ResetPassword = ({ oobCode }) => {
     const auth = getAuth();
     const [newPassword, setNewPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -15,13 +15,14 @@ const ResetPassword = ({oobCode}) => {
         special: false,
     });
     const [statusMessage, setStatusMessage] = useState("");
- 
+
     useEffect(() => {
-    
+
         if (oobCode) {
             verifyPasswordResetCode(auth, oobCode)
                 .then((email) => setEmail(email))
-                .catch(() => { setStatusMessage("Ogiltig eller föråldrad återställningslänk.");
+                .catch(() => {
+                    setStatusMessage("Ogiltig eller föråldrad återställningslänk.");
                 });
         }
     }, [oobCode]);

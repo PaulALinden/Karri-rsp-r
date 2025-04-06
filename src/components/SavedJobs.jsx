@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FilterOptions from "./FilterOptions";
 import StatusPieChart from "./StatusPieChart";
-import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import ConfirmDeleteModal from "./modals/ConfirmDeleteModal";
 import "../css/savedJobs.css";
 import inventory from "../assets/inventory.svg";
 import edit from "../assets/edit.svg";

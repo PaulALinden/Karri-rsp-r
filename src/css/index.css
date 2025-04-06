@@ -299,7 +299,6 @@ p a {
 
 .language-options {
     position: absolute;
-    top: 100;
     right: 20px;
     z-index: 10;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -310,6 +309,7 @@ p a {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
 .language-option {

@@ -6,7 +6,7 @@ import { auth, db } from "../../config/firebaseConfig";
 import { sanitizeInput, validateEmail, validatePasswordChecks } from "../utils/validators";
 import handleFirebaseAuthError from "../utils/authErrorHandler";
 import Alert from "./Alert";
-import SuccessModal from "./SuccesRegisterModal";
+import SuccessModal from "./modals/SuccesRegisterModal";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import logo from "../assets/logo.svg";
 import "../css/start.css";

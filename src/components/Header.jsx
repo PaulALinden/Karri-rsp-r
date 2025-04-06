@@ -4,12 +4,11 @@ import Hamburger from 'hamburger-react'
 import { Link } from "react-router";
 //Logo
 import logo from "../assets/logo.svg";
-import ReactCountryFlag from "react-country-flag"
 //Auth
 import { auth } from "../../config/firebaseConfig";
 import { signOut } from "firebase/auth";
 //Component
-import DeleteAccountModal from "./DeleteAccountModal";
+import DeleteAccountModal from "./modals/DeleteAccountModal";
 //Context
 import { useLanguage } from "./context/LanguageContext";
 import { useAuth } from "./auth/AuthContext";
