@@ -1,0 +1,16 @@
+{
+    "en": {
+        "deleteAccountModal": {
+            "confirmationText": "Are you sure you want to delete your account?",
+            "yesButton": "Yes",
+            "noButton": "No"
+        }
+    },
+    "sv": {
+        "deleteAccountModal": {
+            "confirmationText": "Är du säker på att du vill ta bort ditt konto?",
+            "yesButton": "Ja",
+            "noButton": "Nej"
+        }
+    }
+}

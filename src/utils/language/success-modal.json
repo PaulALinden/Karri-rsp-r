@@ -1,0 +1,16 @@
+{
+    "en": {
+        "successModal": {
+            "successMessage": "Account created successfully!",
+            "verifyMessage": "Please verify your email address before logging in.",
+            "okButton": "OK"
+        }
+    },
+    "sv": {
+        "successModal": {
+            "successMessage": "Konto skapat framgångsrikt!",
+            "verifyMessage": "Vänligen verifiera din e-postadress innan du loggar in.",
+            "okButton": "OK"
+        }
+    }
+}

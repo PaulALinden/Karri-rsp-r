@@ -1,0 +1,20 @@
+{
+    "en": {
+        "confirmDeleteModal": {
+            "confirmationText1": "Are you sure you want to delete this item?",
+            "confirmationText2": "This will also affect your statistics.",
+            "confirmationText3": "Choose to archive instead if preferred.",
+            "yesButton": "Yes",
+            "noButton": "No"
+        }
+    },
+    "sv": {
+        "confirmDeleteModal": {
+            "confirmationText1": "Är du säker på att du vill ta bort objektet?",
+            "confirmationText2": "Detta kommer även att påverka din statistik.",
+            "confirmationText3": "Välj annars arkivera.",
+            "yesButton": "Ja",
+            "noButton": "Nej"
+        }
+    }
+}
