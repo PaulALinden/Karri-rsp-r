@@ -13,61 +13,31 @@
             "locationPlaceholder": "Ex: Stockholm",
             "positionLabel": "Work Arrangement:*",
             "positionPlaceholder": "Select arrangement",
-            "positionOptions": [
-                {
-                    "value": "On-site",
-                    "label": "On-site"
-                },
-                {
-                    "value": "Hybrid",
-                    "label": "Hybrid"
-                },
-                {
-                    "value": "Remote",
-                    "label": "Remote"
-                }
-            ],
             "jobTypeLabel": "Job Type:*",
             "jobTypePlaceholder": "Select type",
-            "jobTypeOptions": [
-                {
-                    "value": "Full-time",
-                    "label": "Full-time"
-                },
-                {
-                    "value": "Part-time",
-                    "label": "Part-time"
-                },
-                {
-                    "value": "Contract",
-                    "label": "Contract"
-                },
-                {
-                    "value": "Internship",
-                    "label": "Internship"
-                }
-            ],
             "statusLabel": "Status:*",
             "statusPlaceholder": "Select status",
-            "statusOptions": [
-                {
-                    "value": "Applied",
-                    "label": "Applied"
-                },
-                {
-                    "value": "Interview",
-                    "label": "Interview"
-                },
-                {
-                    "value": "Rejected",
-                    "label": "Rejected"
-                }
-            ],
             "commentLabel": "Comment:",
             "commentPlaceholder": "Ex: Completed tests",
             "addButton": "Add",
             "updateButton": "Update",
-            "cancelButton": "Cancel"
+            "cancelButton": "Cancel",
+            "position": {
+                "onSite": "On-site",
+                "hybrid": "Hybrid",
+                "remote": "Remote"
+            },
+            "jobType": {
+                "fullTime": "Full-time",
+                "partTime": "Part-time",
+                "contract": "Contract",
+                "internship": "Internship"
+            },
+            "status": {
+                "applied": "Applied",
+                "interview": "Interview",
+                "rejected": "Rejected"
+            }
         }
     },
     "sv": {
@@ -84,61 +54,31 @@
             "locationPlaceholder": "Ex: Stockholm",
             "positionLabel": "Arbetsform:*",
             "positionPlaceholder": "Välj arbetsform",
-            "positionOptions": [
-                {
-                    "value": "On-site",
-                    "label": "På plats"
-                },
-                {
-                    "value": "Hybrid",
-                    "label": "Hybrid"
-                },
-                {
-                    "value": "Remote",
-                    "label": "Distans"
-                }
-            ],
             "jobTypeLabel": "Anställningsform:*",
             "jobTypePlaceholder": "Välj typ",
-            "jobTypeOptions": [
-                {
-                    "value": "Full-time",
-                    "label": "Heltid"
-                },
-                {
-                    "value": "Part-time",
-                    "label": "Deltid"
-                },
-                {
-                    "value": "Contract",
-                    "label": "Kontrakt"
-                },
-                {
-                    "value": "Internship",
-                    "label": "Praktik"
-                }
-            ],
             "statusLabel": "Status:*",
             "statusPlaceholder": "Välj status",
-            "statusOptions": [
-                {
-                    "value": "Applied",
-                    "label": "Ansökt"
-                },
-                {
-                    "value": "Interview",
-                    "label": "Intervju"
-                },
-                {
-                    "value": "Rejected",
-                    "label": "Avslag"
-                }
-            ],
             "commentLabel": "Kommentar:",
             "commentPlaceholder": "Ex: Utfört tester",
             "addButton": "Lägg till",
             "updateButton": "Uppdatera",
-            "cancelButton": "Avbryt"
+            "cancelButton": "Avbryt",
+            "position": {
+                "onSite": "På plats",
+                "hybrid": "Hybrid",
+                "remote": "Distans"
+            },
+            "jobType": {
+                "fullTime": "Heltid",
+                "partTime": "Deltid",
+                "contract": "Kontrakt",
+                "internship": "Praktik"
+            },
+            "status": {
+                "applied": "Ansökt",
+                "interview": "Intervju",
+                "rejected": "Avslag"
+            }
         }
     }
 }

@@ -1,67 +1,65 @@
 {
     "en": {
         "savedJobs": {
-            "title": "Saved Job Applications",
-            "emptyList": "No job applications yet.",
-            "jobTitle": "Job Title:",
+            "title": "Saved Jobs",
+            "emptyList": "No saved jobs yet",
             "companyPrefix": "at",
             "positionLabel": "Work Arrangement:",
             "statusLabel": "Status:",
             "locationLabel": "Location:",
-            "jobTypeLabel": "Employment Type:",
-            "commentLabel": "Comment:",
-            "changeButtonTitle": "Edit",
-            "archiveButtonTitle": "Archive",
-            "deleteButtonTitle": "Delete",
-            "urlButtonTitle": "Visit",
-            "positionTranslations": {
-                "På plats": "On-site",
-                "Hybrid": "Hybrid",
-                "Distans": "Remote"
+            "jobTypeLabel": "Job Type:",
+            "changeButtonTitle": "Edit job",
+            "archiveButtonTitle": "Archive job",
+            "deleteButtonTitle": "Delete job",
+            "urlButtonTitle": "Visit job URL",
+            "position": {
+                "onSite": "On-site",
+                "hybrid": "Hybrid",
+                "remote": "Remote"
             },
-            "jobTypeTranslations": {
-                "Heltid": "Full-time",
-                "Deltid": "Part-time",
-                "Kontrakt": "Contract",
-                "Praktik": "Internship"
+            "jobType": {
+                "fullTime": "Full-time",
+                "partTime": "Part-time",
+                "contract": "Contract",
+                "internship": "Internship"
             },
-            "statusTranslations": {
-                "Ansökt": "Applied",
-                "Intervju": "Interview",
-                "Avslag": "Rejected"
+            "status": {
+                "applied": "Applied",
+                "interview": "Interview",
+                "rejected": "Rejected",
+                "archived": "Archived"
             }
         }
     },
     "sv": {
         "savedJobs": {
-            "title": "Sparade jobbsökningar",
-            "emptyList": "Inga jobbsökningar ännu.",
-            "jobTitle": "Jobbtitel:",
+            "title": "Sparade jobb",
+            "emptyList": "Inga sparade jobb än",
             "companyPrefix": "på",
             "positionLabel": "Arbetsform:",
             "statusLabel": "Status:",
             "locationLabel": "Plats:",
             "jobTypeLabel": "Anställningsform:",
-            "commentLabel": "Kommentar:",
-            "changeButtonTitle": "Ändra",
-            "archiveButtonTitle": "Arkivera",
-            "deleteButtonTitle": "Ta bort",
-            "urlButtonTitle": "Gå till",
-            "positionTranslations": {
-                "På plats": "På plats",
-                "Hybrid": "Hybrid",
-                "Distans": "Distans"
+            "changeButtonTitle": "Redigera jobb",
+            "archiveButtonTitle": "Arkivera jobb",
+            "deleteButtonTitle": "Ta bort jobb",
+            "urlButtonTitle": "Besök jobb-URL",
+            "position": {
+                "onSite": "På plats",
+                "hybrid": "Hybrid",
+                "remote": "Distans"
             },
-            "jobTypeTranslations": {
-                "Heltid": "Heltid",
-                "Deltid": "Deltid",
-                "Kontrakt": "Kontrakt",
-                "Praktik": "Praktik"
+            "jobType": {
+                "fullTime": "Heltid",
+                "partTime": "Deltid",
+                "contract": "Kontrakt",
+                "internship": "Praktik"
             },
-            "statusTranslations": {
-                "Ansökt": "Ansökt",
-                "Intervju": "Intervju",
-                "Avslag": "Avslag"
+            "status": {
+                "applied": "Ansökt",
+                "interview": "Intervju",
+                "rejected": "Avslag",
+                "archived": "Arkiverad"
             }
         }
     }

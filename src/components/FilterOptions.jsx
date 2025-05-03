@@ -1,7 +1,8 @@
 import "../css/filter.css";
 import zoom_out from "../assets/zoom_out.svg";
-import { useLanguage } from "./context/LanguageContext"; // Importera språk-kontexten
+import { useLanguage } from "./context/LanguageContext";
 import translations from "../utils/language/filter-options.json";
+import { statusOptions } from "../utils/constants";
 
 const FilterOptions = ({
     filterStatus,
@@ -12,7 +13,7 @@ const FilterOptions = ({
     setSearchValue,
 }) => {
     const { language } = useLanguage();
-    const t = translations[language].filterOptions; // Hämta översättningar för FilterOptions
+    const t = translations[language].filterOptions;
 
     return (
         <div className="filter-options">
@@ -22,13 +23,14 @@ const FilterOptions = ({
                     value={filterStatus}
                     onChange={(e) => setFilterStatus(e.target.value)}
                     className="filter-select"
-                    aria-label={t.statusLabel} // Lägg till aria-label för tillgänglighet
+                    aria-label={t.statusLabel}
                 >
                     <option value="">{t.statusOptions[""]}</option>
-                    <option value="Ansökt">{t.statusOptions["Ansökt"]}</option>
-                    <option value="Intervju">{t.statusOptions["Intervju"]}</option>
-                    <option value="Avslag">{t.statusOptions["Avslag"]}</option>
-                    <option value="Arkiverad">{t.statusOptions["Arkiverad"]}</option>
+                    {statusOptions.map((option, index) => (
+                        <option key={index} value={option.value}>
+                            {t.statusOptions[option.value]}
+                        </option>
+                    ))}
                 </select>
             </div>
 
@@ -38,7 +40,7 @@ const FilterOptions = ({
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value)}
                     className="filter-select"
-                    aria-label={t.sortLabel} // Lägg till aria-label för tillgänglighet
+                    aria-label={t.sortLabel}
                 >
                     <option value="newest">{t.sortOptions["newest"]}</option>
                     <option value="oldest">{t.sortOptions["oldest"]}</option>

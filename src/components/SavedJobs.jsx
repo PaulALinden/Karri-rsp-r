@@ -7,9 +7,9 @@ import inventory from "../assets/inventory.svg";
 import edit from "../assets/edit.svg";
 import trash from "../assets/trash.svg";
 import open_in_browser from "../assets/open_in_browser.svg";
-
 import { useLanguage } from "./context/LanguageContext";
 import translations from "../utils/language/saved-jobs.json";
+import { positionOptions, jobTypeOptions, statusOptions } from "../utils/constants";
 
 const SavedJobs = ({
     jobApplications,
@@ -33,14 +33,12 @@ const SavedJobs = ({
         return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
     });
 
-    // Filtrera jobben baserat på status (använd svenska värden för filtrering)
+    // Filtrera jobben baserat på status
     const statusFilteredJobs = sortedJobs.filter((job) => {
         if (filterStatus === "") {
             return job.status && !job.archived;
-        } else if (filterStatus === "Arkiverad") {
-            return job.archived;
         }
-        return job.status === filterStatus && !job.archived;
+        return job.status === filterStatus || (filterStatus === "Archived" && job.archived);
     });
 
     // Filtrera jobben baserat på sökvärde
@@ -74,24 +72,17 @@ const SavedJobs = ({
         setExpandedItemId(itemId === expandedItemId ? null : itemId);
     };
 
-    const getJobStatus = (status) => {
+    // Funktion för att hämta statusklass för CSS
+    const getJobStatusClass = (status) => {
         switch (status) {
-            case "Intervju":
+            case "Interview":
                 return "interview";
-            case "Avslag":
+            case "Rejected":
                 return "rejected";
             default:
                 return "applied";
         }
     };
-
-    // Funktioner för att översätta värden baserat på språk
-    const translatePosition = (position) =>
-        position ? t.positionTranslations[position] || position : "";
-    const translateJobType = (jobType) =>
-        jobType ? t.jobTypeTranslations[jobType] || jobType : "";
-    const translateStatus = (status) =>
-        status ? t.statusTranslations[status] || status : "";
 
     return (
         <div id="savedjobs">
@@ -114,8 +105,7 @@ const SavedJobs = ({
                 <ul id="savedjoblist">
                     {filteredJobs.map((job) => (
                         <li
-                            className={`savedjoblistitem ${job.id === expandedItemId ? "expand" : ""
-                                }`}
+                            className={`savedjoblistitem ${job.id === expandedItemId ? "expand" : ""}`}
                             key={job.id}
                             onClick={(event) => handleExpandListItem(job.id, event)}
                         >
@@ -130,11 +120,27 @@ const SavedJobs = ({
 
                                 <div className="saved-job-row-item-2">
                                     <strong>{t.positionLabel}</strong>
-                                    <p>{translatePosition(job.position)}</p>
+                                    <p>
+                                        {job.position
+                                            ? t.position[
+                                            positionOptions.find((opt) => opt.value === job.position)?.labelKey.split(
+                                                "."
+                                            )[1]
+                                            ] || job.position
+                                            : ""}
+                                    </p>
                                 </div>
                                 <div className="saved-job-row-item-2">
                                     <strong>{t.statusLabel}</strong>
-                                    <p>{translateStatus(job.status)}</p>
+                                    <p>
+                                        {job.status
+                                            ? t.status[
+                                            statusOptions.find((opt) => opt.value === job.status)?.labelKey.split(
+                                                "."
+                                            )[1]
+                                            ] || job.status
+                                            : ""}
+                                    </p>
                                 </div>
                             </div>
 
@@ -148,7 +154,15 @@ const SavedJobs = ({
 
                                         <div className="saved-job-row-item">
                                             <strong>{t.jobTypeLabel}</strong>
-                                            <p>{translateJobType(job.jobType)}</p>
+                                            <p>
+                                                {job.jobType
+                                                    ? t.jobType[
+                                                    jobTypeOptions.find((opt) => opt.value === job.jobType)?.labelKey.split(
+                                                        "."
+                                                    )[1]
+                                                    ] || job.jobType
+                                                    : ""}
+                                            </p>
                                         </div>
                                     </div>
 
@@ -201,7 +215,7 @@ const SavedJobs = ({
                                 </div>
                             </div>
 
-                            <div className={`status-color ${getJobStatus(job.status)}`} />
+                            <div className={`status-color ${getJobStatusClass(job.status)}`} />
                         </li>
                     ))}
                 </ul>

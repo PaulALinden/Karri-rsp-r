@@ -1,38 +1,38 @@
 {
     "en": {
         "filterOptions": {
-            "statusLabel": "Filter by Status",
+            "statusLabel": "Filter by status",
+            "sortLabel": "Sort order",
+            "searchPlaceholder": "Search by job title or company",
             "statusOptions": {
                 "": "All",
-                "Ansökt": "Applied",
-                "Intervju": "Interview",
-                "Avslag": "Rejected",
-                "Arkiverad": "Archived"
+                "Applied": "Applied",
+                "Interview": "Interview",
+                "Rejected": "Rejected",
+                "Archived": "Archived"
             },
-            "sortLabel": "Sort Order",
             "sortOptions": {
-                "newest": "Newest First",
-                "oldest": "Oldest First"
-            },
-            "searchPlaceholder": "Search..."
+                "newest": "Newest first",
+                "oldest": "Oldest first"
+            }
         }
     },
     "sv": {
         "filterOptions": {
-            "statusLabel": "Filtrera efter Status",
+            "statusLabel": "Filtrera efter status",
+            "sortLabel": "Sorteringsordning",
+            "searchPlaceholder": "Sök efter jobbtitel eller företag",
             "statusOptions": {
                 "": "Alla",
-                "Ansökt": "Ansökt",
-                "Intervju": "Intervju",
-                "Avslag": "Avslag",
-                "Arkiverad": "Arkiverad"
+                "Applied": "Ansökt",
+                "Interview": "Intervju",
+                "Rejected": "Avslag",
+                "Archived": "Arkiverad"
             },
-            "sortLabel": "Sorteringsordning",
             "sortOptions": {
                 "newest": "Nyast först",
                 "oldest": "Äldst först"
-            },
-            "searchPlaceholder": "Sök..."
+            }
         }
     }
 }

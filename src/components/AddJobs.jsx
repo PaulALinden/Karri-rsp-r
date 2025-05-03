@@ -1,6 +1,7 @@
 import "../css/addJob.css";
 import { useLanguage } from "./context/LanguageContext";
 import translations from "../utils/language/add-jobs.json";
+import { positionOptions, jobTypeOptions, statusOptions } from "../utils/constants";
 
 const AddJobs = ({
     jobTitle, setJobTitle,
@@ -77,9 +78,9 @@ const AddJobs = ({
                             className="addjobform-select"
                         >
                             <option value="">{t.positionPlaceholder}</option>
-                            {t.positionOptions.map((option, index) => (
+                            {positionOptions.map((option, index) => (
                                 <option key={index} value={option.value}>
-                                    {option.label}
+                                    {t.position[option.labelKey.split(".")[1]]}
                                 </option>
                             ))}
                         </select>
@@ -94,9 +95,9 @@ const AddJobs = ({
                             className="addjobform-select"
                         >
                             <option value="">{t.jobTypePlaceholder}</option>
-                            {t.jobTypeOptions.map((option, index) => (
+                            {jobTypeOptions.map((option, index) => (
                                 <option key={index} value={option.value}>
-                                    {option.label}
+                                    {t.jobType[option.labelKey.split(".")[1]]}
                                 </option>
                             ))}
                         </select>
@@ -111,9 +112,9 @@ const AddJobs = ({
                             className="addjobform-select"
                         >
                             <option value="">{t.statusPlaceholder}</option>
-                            {t.statusOptions.map((option, index) => (
+                            {statusOptions.map((option, index) => (
                                 <option key={index} value={option.value}>
-                                    {option.label}
+                                    {t.status[option.labelKey.split(".")[1]]}
                                 </option>
                             ))}
                         </select>
@@ -144,4 +145,3 @@ const AddJobs = ({
 };
 
 export default AddJobs;
-
