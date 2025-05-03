@@ -112,7 +112,7 @@ const AddJobs = ({
                             className="addjobform-select"
                         >
                             <option value="">{t.statusPlaceholder}</option>
-                            {statusOptions.map((option, index) => (
+                            {statusOptions.slice(0, -1).map((option, index) => (
                                 <option key={index} value={option.value}>
                                     {t.status[option.labelKey.split(".")[1]]}
                                 </option>
