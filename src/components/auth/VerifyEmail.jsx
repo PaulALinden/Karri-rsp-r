@@ -8,10 +8,10 @@ const VerifyEmail = ({ oobCode }) => {
     const handleVerifyEmail = async () => {
         try {
             await applyActionCode(auth, oobCode);
-            console.log("E-postverifiering lyckades!");
+            //console.log("E-postverifiering lyckades!");
             setMessage("E-postverifiering lyckades!");
         } catch (error) {
-            console.error("Fel vid verifiering av e-post:", error);
+            //console.error("Fel vid verifiering av e-post:", error);
             setMessage("Fel vid verifiering av e-post.");
         } finally {
             signOut(auth);

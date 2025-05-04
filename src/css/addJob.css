@@ -102,4 +102,9 @@
     .addJobform-parallel {
         display: block;
     }
+
+    .middle {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }

@@ -13,7 +13,7 @@ export const JobProvider = ({ user, children }) => {
     const userCollectionPath = user ? `users/${user.uid}/jobApplications` : null;
 
     useEffect(() => {
-        console.log("Hämtar i effect")
+        //console.log("Hämtar i effect")
         if (!userCollectionPath) {
             setLoading(false);
             return;

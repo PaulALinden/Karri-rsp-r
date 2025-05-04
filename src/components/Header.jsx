@@ -29,7 +29,7 @@ const Header = () => {
             await signOut(auth);
             navigate("/login");
         } catch (error) {
-            console.error(error);
+            //console.error(error);
         }
     };
 

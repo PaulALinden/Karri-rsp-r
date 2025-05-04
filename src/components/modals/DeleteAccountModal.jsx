@@ -26,45 +26,45 @@ const DeleteAccountModal = ({ isOpen, onClose }) => {
             await deleteUserAccount(user.uid); // Fortsätt med radering
         } catch (err) {
             setError(t.reauthFailed); // Visa felmeddelande om reautentisering misslyckas
-            console.error("Reautentisering misslyckades:", err);
+            //console.error("Reautentisering misslyckades:", err);
         }
     };
 
     const deleteUserAccount = async (userId) => {
         if (!userId) {
-            console.error("Ingen användar-ID angiven.");
+            //console.error("Ingen användar-ID angiven.");
             return;
         }
 
         try {
-            console.log(`Försöker radera Firestore-data för user: ${userId}`);
+            //console.log(`Försöker radera Firestore-data för user: ${userId}`);
 
             const termsCollection = collection(db, `users/${userId}/terms`);
             const termsDocs = await getDocs(termsCollection);
             for (const term of termsDocs.docs) {
                 await deleteDoc(doc(db, `users/${userId}/terms`, term.id));
             }
-            console.log("Alla terms-dokument raderade");
+            //console.log("Alla terms-dokument raderade");
 
             const jobAppsCollection = collection(db, `users/${userId}/jobApplications`);
             const jobAppsDocs = await getDocs(jobAppsCollection);
             for (const job of jobAppsDocs.docs) {
                 await deleteDoc(doc(db, `users/${userId}/jobApplications`, job.id));
             }
-            console.log("Alla jobApplications-dokument raderade");
+            //console.log("Alla jobApplications-dokument raderade");
 
             await deleteDoc(doc(db, `users/${userId}`));
-            console.log(`Firestore-data för användare ${userId} har raderats.`);
+            //console.log(`Firestore-data för användare ${userId} har raderats.`);
 
             await auth.currentUser.reload();
             await deleteUser(auth.currentUser);
-            console.log(`Användaren ${userId} har raderats från Firebase Auth.`);
+            //console.log(`Användaren ${userId} har raderats från Firebase Auth.`);
             onClose(); // Stäng modalen efter lyckad radering
         } catch (error) {
             if (error.code === "auth/requires-recent-login") {
                 setShowPasswordPrompt(true); // Visa lösenordsfält om reautentisering krävs
             } else {
-                console.error("Fel vid radering av användare:", error);
+                //console.error("Fel vid radering av användare:", error);
                 setError(t.deleteFailed); // Visa generellt felmeddelande
             }
         }

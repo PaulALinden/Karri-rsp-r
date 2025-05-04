@@ -68,8 +68,8 @@ const Register = () => {
                 }
 
                 await sendEmailVerification(user);
-                console.log("User ID:", userId);
-                console.log("Email verification sent.");
+                //console.log("User ID:", userId);
+                //console.log("Email verification sent.");
 
                 const userCollectionPath = `/users/${userId}/terms`;
                 const userCollectionRef = collection(db, userCollectionPath);
@@ -80,11 +80,11 @@ const Register = () => {
                 };
 
                 await addDoc(userCollectionRef, terms);
-                console.log("Terms document created successfully!");
+                //console.log("Terms document created successfully!");
                 setIsOpen(true);
             }
         } catch (err) {
-            console.log(err);
+            //console.log(err);
             const message = handleFirebaseAuthError(err);
             setError(message);
             setShowErrorBanner(true);

@@ -165,7 +165,7 @@ const Home = () => {
                         />
                     ) : null}
                     {!isSmallScreen ? <div className="spacer" /> : null}
-                    {!switchToAdd ? (
+                    {!isSmallScreen || !switchToAdd ? (
                         <SavedJobs
                             className={""}
                             jobApplications={jobApplications}
