@@ -57,12 +57,12 @@ const Home = () => {
         if (!userCollectionPath || !jobTitle || !company || !status) return alert("Fyll i alla fält.");
         try {
             const userCollection = collection(db, userCollectionPath);
-            const jobData = { jobTitle, company, url, location, position, jobType, status, createdAt: new Date(), comment };
+            const jobData = { jobTitle, company, url, location, position, jobType, status, comment };
             if (editJobId) {
                 await updateDoc(doc(db, userCollectionPath, editJobId), jobData);
                 setEditJobId(null);
             } else {
-                await addDoc(userCollection, jobData);
+                await addDoc(userCollection, { ...jobData, createdAt: new Date() });
             }
             cancelEdit();
             if (isSmallScreen) setSwitchToAdd(false);
