@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { getAuth, applyActionCode, signOut } from "firebase/auth";
+import LanguageDropdown from "../LanguageDropdown";
+import verifyEmailTranslations from "../../utils/language/verifyEmail.json";
+import { useLanguage } from "../context/LanguageContext";
 
 const VerifyEmail = ({ oobCode }) => {
     const auth = getAuth();
     const [message, setMessage] = useState("");
+    const { language } = useLanguage();
+    const t = verifyEmailTranslations[language].verifyEmail;
 
     const handleVerifyEmail = async () => {
         try {
             await applyActionCode(auth, oobCode);
-            //console.log("E-postverifiering lyckades!");
-            setMessage("E-postverifiering lyckades!");
+            setMessage(t.successMessage);
         } catch (error) {
-            //console.error("Fel vid verifiering av e-post:", error);
-            setMessage("Fel vid verifiering av e-post.");
+            setMessage(t.errorMessage);
         } finally {
             signOut(auth);
         }
@@ -20,13 +23,14 @@ const VerifyEmail = ({ oobCode }) => {
 
     return (
         <div>
+            <LanguageDropdown />
             {oobCode ? (
                 <>
-                    {!message && <button onClick={handleVerifyEmail}>Verifiera e-post</button>}
-                    {message && <p>{message}<a href="/"> Till start.</a></p>}
+                    {!message && <button onClick={handleVerifyEmail}>{t.verifyButton}</button>}
+                    {message && <p>{message}<a href="/"> {t.backToStart}</a></p>}
                 </>
             ) : (
-                <p>Något gick fel. <a href="/">Till start.</a></p>
+                <p>{t.invalidLinkError} <a href="/">{t.backToStart}</a></p>
             )}
         </div>
     );

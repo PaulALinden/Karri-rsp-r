@@ -1,0 +1,20 @@
+{
+    "en": {
+        "verifyEmail": {
+            "verifyButton": "Verify Email",
+            "successMessage": "Email verification successful!",
+            "errorMessage": "Error verifying email.",
+            "backToStart": "Back to start.",
+            "invalidLinkError": "Something went wrong."
+        }
+    },
+    "sv": {
+        "verifyEmail": {
+            "verifyButton": "Verifiera e-post",
+            "successMessage": "E-postverifiering lyckades!",
+            "errorMessage": "Fel vid verifiering av e-post.",
+            "backToStart": "Till start.",
+            "invalidLinkError": "Något gick fel."
+        }
+    }
+}
