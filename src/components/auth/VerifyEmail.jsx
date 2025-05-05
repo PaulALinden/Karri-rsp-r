@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getAuth, applyActionCode, signOut } from "firebase/auth";
 import LanguageDropdown from "../LanguageDropdown";
-import verifyEmailTranslations from "../../utils/language/verifyEmail.json";
+import verifyEmailTranslations from "../../utils/language/verify-email.json";
 import { useLanguage } from "../context/LanguageContext";
 
 const VerifyEmail = ({ oobCode }) => {
