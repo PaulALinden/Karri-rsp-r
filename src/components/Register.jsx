@@ -86,7 +86,7 @@ const Register = () => {
             }
         } catch (err) {
             //console.log(err);
-            const message = handleFirebaseAuthError(err);
+            const message = handleFirebaseAuthError(err, language);
             setError(message);
             setShowErrorBanner(true);
         } finally {

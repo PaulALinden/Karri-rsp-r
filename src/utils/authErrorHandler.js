@@ -1,5 +1,3 @@
-import { useLanguage } from '../components/context/LanguageContext'; // Importera useLanguage från din kontextfil
-
 export default function handleFirebaseAuthError(error, language = 'en') {
     const errorMap = {
         'auth/invalid-email': {

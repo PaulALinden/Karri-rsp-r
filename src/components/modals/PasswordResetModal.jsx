@@ -17,7 +17,7 @@ const PasswordResetModal = ({ isOpen, onClose, error, setError, handleFirebaseAu
             setMessage(t.successMessage);
             setError("");
         } catch (err) {
-            const message = handleFirebaseAuthError(err);
+            const message = handleFirebaseAuthError(err, language);
             setError(message);
             setMessage("");
         }

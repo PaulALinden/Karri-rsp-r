@@ -71,7 +71,7 @@ const Login = () => {
                 }
             }
         } catch (err) {
-            const message = handleFirebaseAuthError(err);
+            const message = handleFirebaseAuthError(err, language);
             setError(message);
             setShowErrorBanner(true);
         }
