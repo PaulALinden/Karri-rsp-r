@@ -20,6 +20,17 @@
             "loginLink": "Login here",
             "invalidEmailError": "Invalid email address",
             "termsNotAcceptedError": "You must accept the terms and privacy policy to register."
+        },
+        "resetPassword": {
+            "title": "Reset Password",
+            "newPasswordPlaceholder": "New Password",
+            "passwordRequirements": "The password must meet the following requirements:",
+            "submitButton": "Reset Password",
+            "invalidLinkError": "Invalid or expired reset link.",
+            "passwordValidationError": "The password must be at least 12 characters long and contain uppercase, lowercase, numbers, and special characters.",
+            "successMessage": "Password has been reset!",
+            "failureMessage": "Failed to reset password.",
+            "backToStart": "Back to start."
         }
     },
     "sv": {
@@ -43,6 +54,17 @@
             "loginLink": "Logga in här",
             "invalidEmailError": "Ogiltig e-postadress",
             "termsNotAcceptedError": "Du måste acceptera villkoren och sekretesspolicyn för att registrera dig."
+        },
+        "resetPassword": {
+            "title": "Återställ lösenord",
+            "newPasswordPlaceholder": "Nytt lösenord",
+            "passwordRequirements": "Lösenordet måste uppfylla följande krav:",
+            "submitButton": "Återställ lösenord",
+            "invalidLinkError": "Ogiltig eller föråldrad återställningslänk.",
+            "passwordValidationError": "Lösenordet måste vara minst 12 tecken långt och innehålla versaler, gemener, siffror och specialtecken.",
+            "successMessage": "Lösenordet har återställts!",
+            "failureMessage": "Misslyckades med att återställa lösenordet.",
+            "backToStart": "Till start."
         }
     }
 }

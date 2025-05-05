@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router"; // Ändrade till react-router-dom
+import { Link } from "react-router";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
@@ -10,9 +10,10 @@ import SuccessModal from "./modals/SuccesRegisterModal";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import logo from "../assets/logo.svg";
 import "../css/start.css";
-import { useLanguage } from "./context/LanguageContext"; // Importera språk-kontexten
-import registerTranslations from "../utils/language/register.json"; // Importera översättningar
+import { useLanguage } from "./context/LanguageContext";
+import registerTranslations from "../utils/language/register.json";
 import LanguageDropdown from "./LanguageDropdown";
+
 const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,7 +30,7 @@ const Register = () => {
     const [showErrorBanner, setShowErrorBanner] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const { language } = useLanguage();
-    const t = registerTranslations[language].register; // Hämta översättningar
+    const t = registerTranslations[language].register;
 
     const areAllPasswordValidationsTrue = () => {
         return (

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { getAuth, verifyPasswordResetCode, confirmPasswordReset } from "firebase/auth";
 import { sanitizeInput, validatePasswordChecks } from "../../utils/validators";
+import LanguageDropdown from "../LanguageDropdown"
+import registerTranslations from "../../utils/language/register.json";
+import { useLanguage } from "../context/LanguageContext";
 import "../../css/reset-password.css";
 
 const ResetPassword = ({ oobCode }) => {
@@ -15,6 +18,9 @@ const ResetPassword = ({ oobCode }) => {
         special: false,
     });
     const [statusMessage, setStatusMessage] = useState("");
+    const { language } = useLanguage();
+    const t = registerTranslations[language].resetPassword;
+    const tRegister = registerTranslations[language].register;
 
     useEffect(() => {
 
@@ -22,7 +28,7 @@ const ResetPassword = ({ oobCode }) => {
             verifyPasswordResetCode(auth, oobCode)
                 .then((email) => setEmail(email))
                 .catch(() => {
-                    setStatusMessage("Ogiltig eller föråldrad återställningslänk.");
+                    setStatusMessage(t.invalidLinkError);
                 });
         }
     }, [oobCode]);
@@ -31,13 +37,13 @@ const ResetPassword = ({ oobCode }) => {
         e.preventDefault();
 
         if (!areAllPasswordValidationsTrue()) {
-            setStatusMessage("Lösenordet måste vara minst 12 tecken långt och innehålla versaler, gemener, siffror och specialtecken.");
+            setStatusMessage(t.passwordValidationError);
             return;
         }
 
         confirmPasswordReset(auth, oobCode, newPassword)
-            .then(() => setStatusMessage("Lösenordet har återställts!"))
-            .catch(() => setStatusMessage("Misslyckades med att återställa lösenordet."));
+            .then(() => setStatusMessage(t.successMessage))
+            .catch(() => setStatusMessage(t.failureMessage));
     };
 
     const areAllPasswordValidationsTrue = () => {
@@ -52,15 +58,16 @@ const ResetPassword = ({ oobCode }) => {
 
     return (
         <div className="container">
+            <LanguageDropdown />
             {oobCode && !statusMessage ? (
                 <>
-                    <h2>Återställ lösenord</h2>
+                    <h2>{t.title}</h2>
                     <form className="password-reset-form">
                         <p>{email}</p>
 
                         <input
                             type="password"
-                            placeholder="Nytt lösenord"
+                            placeholder={t.newPasswordPlaceholder}
                             value={newPassword}
                             onChange={(e) => {
                                 const sanitizedValue = sanitizeInput(e.target.value);
@@ -70,22 +77,22 @@ const ResetPassword = ({ oobCode }) => {
                         />
 
                         <div className="password-requirements">
-                            <p>Lösenordet måste uppfylla följande krav:</p>
+                            <p>{t.passwordRequirements}</p>
                             <ul>
                                 <li className={passwordValidations.length ? "valid" : "invalid"}>
-                                    Minst 12 tecken långt
+                                    {tRegister.passwordValidations.length}
                                 </li>
                                 <li className={passwordValidations.lowercase ? "valid" : "invalid"}>
-                                    Minst en liten bokstav (a-z)
+                                    {tRegister.passwordValidations.lowercase}
                                 </li>
                                 <li className={passwordValidations.uppercase ? "valid" : "invalid"}>
-                                    Minst en stor bokstav (A-Z)
+                                    {tRegister.passwordValidations.uppercase}
                                 </li>
                                 <li className={passwordValidations.number ? "valid" : "invalid"}>
-                                    Minst en siffra (0-9)
+                                    {tRegister.passwordValidations.number}
                                 </li>
                                 <li className={passwordValidations.special ? "valid" : "invalid"}>
-                                    Minst ett specialtecken (!, @, #, $, %, &, etc.)
+                                    {tRegister.passwordValidations.special}
                                 </li>
                             </ul>
                         </div>
@@ -95,11 +102,11 @@ const ResetPassword = ({ oobCode }) => {
                             onClick={(e) => { handleResetPassword(e) }}
                             disabled={!areAllPasswordValidationsTrue()}
                         >
-                            Återställ lösenord
+                            {t.submitButton}
                         </button>
                     </form>
                 </>
-            ) : <p>{statusMessage} <a href="/">Till start.</a></p>}
+            ) : <p>{statusMessage} <a href="/">{t.backToStart}</a></p>}
         </div>
     );
 };
