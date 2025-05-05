@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAuth, verifyPasswordResetCode, confirmPasswordReset } from "firebase/auth";
 import { sanitizeInput, validatePasswordChecks } from "../../utils/validators";
-import LanguageDropdown from "../LanguageDropdown"
+import Header from "../Header";
 import registerTranslations from "../../utils/language/register.json";
 import { useLanguage } from "../context/LanguageContext";
 import "../../css/reset-password.css";
@@ -57,57 +57,60 @@ const ResetPassword = ({ oobCode }) => {
     };
 
     return (
-        <div className="container">
-            <LanguageDropdown />
-            {oobCode && !statusMessage ? (
-                <>
-                    <h2>{t.title}</h2>
-                    <form className="password-reset-form">
-                        <p>{email}</p>
+        <>
+            <Header />
+            <div className="container">
 
-                        <input
-                            type="password"
-                            placeholder={t.newPasswordPlaceholder}
-                            value={newPassword}
-                            onChange={(e) => {
-                                const sanitizedValue = sanitizeInput(e.target.value);
-                                setNewPassword(sanitizedValue);
-                                validatePasswordChecks(sanitizedValue, setPasswordValidations);
-                            }}
-                        />
+                {oobCode && !statusMessage ? (
+                    <>
+                        <h2>{t.title}</h2>
+                        <form className="password-reset-form">
+                            <p>{email}</p>
 
-                        <div className="password-requirements">
-                            <p>{t.passwordRequirements}</p>
-                            <ul>
-                                <li className={passwordValidations.length ? "valid" : "invalid"}>
-                                    {tRegister.passwordValidations.length}
-                                </li>
-                                <li className={passwordValidations.lowercase ? "valid" : "invalid"}>
-                                    {tRegister.passwordValidations.lowercase}
-                                </li>
-                                <li className={passwordValidations.uppercase ? "valid" : "invalid"}>
-                                    {tRegister.passwordValidations.uppercase}
-                                </li>
-                                <li className={passwordValidations.number ? "valid" : "invalid"}>
-                                    {tRegister.passwordValidations.number}
-                                </li>
-                                <li className={passwordValidations.special ? "valid" : "invalid"}>
-                                    {tRegister.passwordValidations.special}
-                                </li>
-                            </ul>
-                        </div>
+                            <input
+                                type="password"
+                                placeholder={t.newPasswordPlaceholder}
+                                value={newPassword}
+                                onChange={(e) => {
+                                    const sanitizedValue = sanitizeInput(e.target.value);
+                                    setNewPassword(sanitizedValue);
+                                    validatePasswordChecks(sanitizedValue, setPasswordValidations);
+                                }}
+                            />
 
-                        <button
-                            className={areAllPasswordValidationsTrue() ? "submit-button" : "disabled-button"}
-                            onClick={(e) => { handleResetPassword(e) }}
-                            disabled={!areAllPasswordValidationsTrue()}
-                        >
-                            {t.submitButton}
-                        </button>
-                    </form>
-                </>
-            ) : <p>{statusMessage} <a href="/">{t.backToStart}</a></p>}
-        </div>
+                            <div className="password-requirements">
+                                <p>{t.passwordRequirements}</p>
+                                <ul>
+                                    <li className={passwordValidations.length ? "valid" : "invalid"}>
+                                        {tRegister.passwordValidations.length}
+                                    </li>
+                                    <li className={passwordValidations.lowercase ? "valid" : "invalid"}>
+                                        {tRegister.passwordValidations.lowercase}
+                                    </li>
+                                    <li className={passwordValidations.uppercase ? "valid" : "invalid"}>
+                                        {tRegister.passwordValidations.uppercase}
+                                    </li>
+                                    <li className={passwordValidations.number ? "valid" : "invalid"}>
+                                        {tRegister.passwordValidations.number}
+                                    </li>
+                                    <li className={passwordValidations.special ? "valid" : "invalid"}>
+                                        {tRegister.passwordValidations.special}
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <button
+                                className={areAllPasswordValidationsTrue() ? "submit-button" : "disabled-button"}
+                                onClick={(e) => { handleResetPassword(e) }}
+                                disabled={!areAllPasswordValidationsTrue()}
+                            >
+                                {t.submitButton}
+                            </button>
+                        </form>
+                    </>
+                ) : <p>{statusMessage} <a href="/">{t.backToStart}</a></p>}
+            </div>
+        </>
     );
 };
 
